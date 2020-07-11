@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:rakit_komputer/core/values/failures.dart';
+import 'package:rakit_komputer/core/error/failures.dart';
 import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
-import 'package:rakit_komputer/features/auth/domain/repository/firebase_auth_repository.dart';
+import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 
 class LoginUseCase {
-  final FirebaseAuthRepository firebaseAuth;
+  final AuthRepository firebaseAuth;
 
   LoginUseCase(this.firebaseAuth);
 

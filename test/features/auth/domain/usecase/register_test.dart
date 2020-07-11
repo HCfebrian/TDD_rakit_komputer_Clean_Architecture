@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
-import 'package:rakit_komputer/features/auth/domain/repository/firebase_auth_repository.dart';
+import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/register.dart';
 
 class MockFirebaseAuthRepository extends Mock
-    implements FirebaseAuthRepository {}
+    implements AuthRepository {}
 
 void main() {
   MockFirebaseAuthRepository mockFirebaseAuthRepository;

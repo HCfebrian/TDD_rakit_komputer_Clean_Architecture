@@ -83,6 +83,7 @@ class BoardingScreenTemplate extends StatelessWidget {
 }
 
 class BoardingScreen1 extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return BoardingScreenTemplate(
