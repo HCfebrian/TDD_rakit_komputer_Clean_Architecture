@@ -6,12 +6,26 @@ import 'package:rakit_komputer/features/auth/data/datasources/auth_remote_dataso
 import 'package:rakit_komputer/features/auth/data/model/user_model.dart';
 
 class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance ;
   FirebaseUser firebaseUser;
   AuthResult authResult;
   GoogleSignIn googleSignIn = GoogleSignIn();
 
   FirebaseAuthRemoteDataSourceImpl({this.firebaseAuth, this.googleSignIn});
+
+  Future<UserModel> loginOrRegisterUsingGoogle() async {
+    try{
+      GoogleSignInAccount _signInAccount = await googleSignIn.signIn();
+      GoogleSignInAuthentication _signInAuth =
+          await _signInAccount.authentication;
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+          idToken: _signInAuth.idToken, accessToken: _signInAuth.accessToken);
+      firebaseUser = (await firebaseAuth.signInWithCredential(credential)).user;
+    return UserModel.fromFirebaseUser(firebaseUser);
+    }catch(e){
+    throw LoginErrorException();
+    }
+  }
 
   @override
   Future<UserModel> loginEmailAndPassword({
@@ -33,6 +47,7 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     @required String userName,
     @required String password}) async {
     try {
+      firebaseAuth.currentUser();
       authResult = await firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       firebaseUser = authResult.user;
@@ -51,31 +66,19 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel> loginGoogle() async {
-    try{
-      GoogleSignInAccount _signInAccount = await googleSignIn.signIn();
-      GoogleSignInAuthentication _signInAuth =
-      await _signInAccount.authentication;
-      final AuthCredential credential = GoogleAuthProvider.getCredential(
-          idToken: _signInAuth.idToken, accessToken: _signInAuth.accessToken);
-      firebaseUser = (await firebaseAuth.signInWithCredential(credential)).user;
-      return UserModel.fromFirebaseUser(firebaseUser);
-    }catch(e){
-      throw LoginErrorException();
-    }
-
-  }
-
-
-  @override
   Future<UserModel> registerFacebook() {
     // TODO: implement registerFacebook
     throw UnimplementedError();
   }
 
   @override
+  Future<UserModel> loginGoogle() async {
+    return loginOrRegisterUsingGoogle();
+
+  }
+
+  @override
   Future<UserModel> registerGoogle() {
-    // TODO: implement registerGoogle
-    throw UnimplementedError();
+    return loginOrRegisterUsingGoogle();
   }
 }

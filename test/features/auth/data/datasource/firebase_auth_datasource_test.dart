@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:matcher/matcher.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rakit_komputer/core/error/exception.dart';
 import 'package:rakit_komputer/features/auth/data/datasources/firebase_auth_datasource_impl.dart';
@@ -104,19 +103,19 @@ void main() {
       },
     );
     test(
-        "should return LoginException when Sign in with google is called from data source",
-        () async {
-          when(_mockFirebaseAuth.signInWithEmailAndPassword(
-              email: anyNamed("email"), password: anyNamed("password")))
-              .thenThrow(LoginErrorException());
-          //act
+      "should return LoginException when Sign in with google is called from data source",
+      () async {
+        when(_mockFirebaseAuth.signInWithEmailAndPassword(
+                email: anyNamed("email"), password: anyNamed("password")))
+            .thenThrow(LoginErrorException());
+        //act
 
-          final result = await dataSource.loginEmailAndPassword(
-              email: tEmail, password: tPassword);
-          //assert
-          expect(dataSource.loginGoogle(),throwsA(LoginErrorException()));
-        },
-      );
+        final result = dataSource.loginEmailAndPassword;
+        //assert
+        expect(result(email: tEmail, password: tPassword),
+            throwsA(TypeMatcher<LoginErrorException>()));
+      },
+    );
 
     test(
       "should return UserModel when sign in by using google form DataSource",
@@ -139,6 +138,19 @@ void main() {
     );
 
     test(
+      "should return LoginErrorException when login using google is called from data source",
+      () async {
+        //arrange
+        when(_mockFirebaseAuth.signInWithCredential(any))
+            .thenThrow(LoginErrorException());
+        //act
+        final call = dataSource.loginGoogle;
+        //assert
+        expect(call(), throwsA(TypeMatcher<LoginErrorException>()));
+      },
+    );
+
+    test(
       "should return UserModel when sign in by using Facebook form DataSource",
       () async {
         throw UnimplementedError();
@@ -146,14 +158,13 @@ void main() {
     );
   });
 
-  group("register", (){
-
+  group("register", () {
     test(
       "should return UserModel when register Using email password from Data source",
-          () async {
+      () async {
         //arrange
         when(_mockFirebaseAuth.createUserWithEmailAndPassword(
-            email: anyNamed("email"), password: anyNamed("password")))
+                email: anyNamed("email"), password: anyNamed("password")))
             .thenAnswer((realInvocation) async => _mockAuthResult);
         //act
         final result = await dataSource.registerEmailAndPassword(
@@ -167,19 +178,22 @@ void main() {
       },
     );
 
-
     test(
-        "should return Register Failure when register using email password is called from data source",
-        () async {
-          //arrange
-          when(_mockFirebaseAuth.createUserWithEmailAndPassword(
-              email: anyNamed("email"), password: anyNamed("password")))
-              .thenThrow(RegisterErrorException());
-          //act
-          final result =  dataSource.registerEmailAndPassword(password: tPassword, email: tEmail, userName: tUsername);
-          //assert
-          expect(result, RegisterErrorException());
-        },
-      );
+      "should return Register Failure when register using email password is called from data source",
+      () async {
+        //arrange
+        when(_mockFirebaseAuth.createUserWithEmailAndPassword(
+                email: anyNamed("email"), password: anyNamed("password")))
+            .thenThrow(Exception());
+        when(_mockFirebaseAuth.currentUser())
+            .thenThrow(RegisterErrorException());
+        //act
+        final call = dataSource.registerEmailAndPassword;
+        //assert
+        expect(
+            () => call(email: tEmail, password: tPassword, userName: tUsername),
+            throwsA(TypeMatcher<RegisterErrorException>()));
+      },
+    );
   });
 }

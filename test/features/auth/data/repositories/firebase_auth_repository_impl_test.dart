@@ -241,6 +241,8 @@ void main() {
             verify(mockAuthRemoteData.registerEmailAndPassword(
                 email: tEmail, userName: tUsername, password: tPassword));
             verifyNoMoreInteractions(mockAuthRemoteData);
+
+
           },
         );
       });

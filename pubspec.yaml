@@ -29,6 +29,7 @@ dependencies:
   equatable: ^1.2.0
   dartz: ^0.9.1
   data_connection_checker: ^0.3.4
+  flutter_bloc: ^5.0.1
 
 
 
