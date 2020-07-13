@@ -13,3 +13,9 @@ class LoginFailure extends Failure {}
 class RegisterFailure extends Failure {}
 
 class NetworkFailure extends Failure {}
+
+
+// validate
+class InvalidInputFailure extends Failure{}
+
+class EmptyInputFailure extends Failure{}

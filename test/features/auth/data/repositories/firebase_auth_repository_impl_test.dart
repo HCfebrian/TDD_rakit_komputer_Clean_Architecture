@@ -242,7 +242,6 @@ void main() {
                 email: tEmail, userName: tUsername, password: tPassword));
             verifyNoMoreInteractions(mockAuthRemoteData);
 
-
           },
         );
       });
