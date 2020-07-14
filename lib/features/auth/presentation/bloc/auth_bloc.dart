@@ -52,20 +52,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       });
     } else if (event is RegisterEmailPassword) {
       final inputEither = validateEmail.validate(event.email);
+      print("email validation"  + inputEither.toString());
       yield* inputEither.fold((failure) async* {
-        yield Error(
-          message: _mapFailureTpMessage(failure),
-        );
+        yield Error(message: _mapFailureTpMessage(failure));
       }, (email) async* {
         yield Loading();
-        final failureOrUserData =
-            await registerUseCase.registerEmailAndPassword(
+        final failureOrUserData = await registerUseCase.registerEmailAndPassword(
                 username: event.username,
                 email: event.email,
                 password: event.password);
-        failureOrUserData.fold((l) => null, (userData) => Loaded(user: userData));
+        print(failureOrUserData);
+        yield failureOrUserData.fold((failure) => Error(message: _mapFailureTpMessage(failure)), (userData) => Loaded(user: userData));
       });
-    } else if (event is LoginOrRegisterGoogle) {
+    } else if (event is LoginOrRegisterGoogle)  {
       yield Loading();
       final failureOrUserData = await loginUseCase.loginGoogle();
       yield failureOrUserData.fold(

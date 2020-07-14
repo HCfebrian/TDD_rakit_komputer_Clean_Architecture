@@ -53,11 +53,12 @@ void main() {
         .thenAnswer((realInvocation) async => toAnswer);
   }
 
-  void setRegisterEmailUseCase({@required Either<Failure, User> toAnswer}){
+  void setRegisterEmailUseCase({@required Either<Failure, User> toAnswer}) {
     when(mockRegisterUsecase.registerEmailAndPassword(
-        username: anyNamed("username"),
-        email: anyNamed("email"),
-        password: anyNamed("password"))).thenAnswer((realInvocation)async => toAnswer);
+            username: anyNamed("username"),
+            email: anyNamed("email"),
+            password: anyNamed("password")))
+        .thenAnswer((realInvocation) async => toAnswer);
   }
 
   group("login email ", () {
@@ -187,13 +188,13 @@ void main() {
     );
   });
 
-
   group("register email ", () {
     test(
       "should call validate email correctly",
       () async {
         //arrange
         setUpValidateEmail(toReturn: Right(tEmail));
+        setRegisterEmailUseCase(toAnswer: Right(tUser));
         //act
         bloc.add(RegisterEmailPassword(
             email: tEmail, password: tPassword, username: tUsername));
@@ -240,6 +241,7 @@ void main() {
       () async {
         //arrange
         setUpValidateEmail(toReturn: Right(tEmail));
+        setRegisterEmailUseCase(toAnswer: Right(tUser));
         //act
         bloc.add(RegisterEmailPassword(
             email: tEmail, password: tPassword, username: tUsername));
@@ -259,10 +261,7 @@ void main() {
       () async {
         //arrange
         setUpValidateEmail(toReturn: Right(tEmail));
-        when(mockRegisterUsecase.registerEmailAndPassword(
-            username: anyNamed("username"),
-            email: anyNamed("email"),
-            password: anyNamed("password"))).thenAnswer((realInvocation)async => Right(tUser));
+        setRegisterEmailUseCase(toAnswer: Right(tUser));
         //assert latter
         final expected = [
           Empty(),
@@ -272,9 +271,12 @@ void main() {
         expectLater(bloc, emitsInOrder(expected));
 
         //act
-        bloc.add(RegisterEmailPassword(email: tEmail, password: tPassword, username: tUsername));
+        bloc.add(RegisterEmailPassword(
+            email: tEmail, password: tPassword, username: tUsername));
         await untilCalled(mockRegisterUsecase.registerEmailAndPassword(
-            email: anyNamed("email"), password: anyNamed("password"), username: tUsername));
+            email: anyNamed("email"),
+            password: anyNamed("password"),
+            username: anyNamed("username")));
       },
     );
 
@@ -283,7 +285,11 @@ void main() {
       () async {
         //arrange
         setUpValidateEmail(toReturn: Right(tEmail));
-        setLoginEmailUseCase(toAnswer: Left(LoginFailure()));
+        when(mockRegisterUsecase.registerEmailAndPassword(
+            username: anyNamed("username"),
+            email: anyNamed("email"),
+            password: anyNamed("password")))
+            .thenAnswer((realInvocation) async => Left(LoginFailure()));
         //assert latter
         final expected = [
           Empty(),
@@ -293,9 +299,12 @@ void main() {
         expectLater(bloc, emitsInOrder(expected));
 
         //act
-        bloc.add(LoginEmailPassword(email: tEmail, password: tPassword));
-        await untilCalled(mockLoginUsecase.loginEmailAndPassword(
-            email: anyNamed("email"), password: anyNamed("password")));
+        bloc.add(RegisterEmailPassword(
+            email: tEmail, password: tPassword, username: tUsername));
+        await untilCalled(mockRegisterUsecase.registerEmailAndPassword(
+            email: anyNamed("email"),
+            password: anyNamed("password"),
+            username: anyNamed("username")));
       },
     );
 
@@ -304,7 +313,7 @@ void main() {
       () async {
         //arrange
         setUpValidateEmail(toReturn: Right(tEmail));
-        setLoginEmailUseCase(toAnswer: Left(NetworkFailure()));
+        setRegisterEmailUseCase(toAnswer: Left(NetworkFailure()));
         //assert latter
         final expected = [
           Empty(),
@@ -314,9 +323,9 @@ void main() {
 
         expectLater(bloc, emitsInOrder(expected));
         //act
-        bloc.add(LoginEmailPassword(email: tEmail, password: tPassword));
-        await untilCalled(mockLoginUsecase.loginEmailAndPassword(
-            email: anyNamed("email"), password: anyNamed("password")));
+        bloc.add(RegisterEmailPassword(email: tEmail, password: tPassword, username: tUsername));
+        await untilCalled(mockRegisterUsecase.registerEmailAndPassword(
+            email: anyNamed("email"), password: anyNamed("password"), username: anyNamed("username")));
       },
     );
   });
