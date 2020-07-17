@@ -33,27 +33,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
     switch (event.runtimeType) {
       case LoginEmailPassword:
-        final currentEvent = event as LoginEmailPassword;
-        final inputEither = validateEmail.validate(currentEvent.email);
-
-
-        yield* inputEither.fold((failure) async* {
-          if( failure is EmptyInputFailure){
+        final loginEvent = event as LoginEmailPassword;
+        final email = validateEmail.validate(loginEvent.email);
+        yield* email.fold((failure) async* {
+          if (failure is EmptyInputFailure) {
             yield Error(
               email: "",
               message: _mapFailureTpMessage(failure),
             );
-          }else if(failure is InvalidInputFailure){
+          } else if (failure is InvalidInputFailure) {
             yield Error(
               email: failure.email,
               message: _mapFailureTpMessage(failure),
             );
           }
-
         }, (email) async* {
           yield Loading();
           final failureOrUserData = await loginUseCase.loginEmailAndPassword(
-              email: currentEvent.email, password: currentEvent.password);
+              email: loginEvent.email, password: loginEvent.password);
           yield failureOrUserData.fold(
             (failure) => Error(message: _mapFailureTpMessage(failure)),
             (userData) => Loaded(user: userData),
@@ -61,28 +58,37 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         });
         break;
       case RegisterEmailPassword:
-        final currentEvent = event as RegisterEmailPassword;
-        final inputEither = validateEmail.validate(currentEvent.email);
+        final registerEvent = event as RegisterEmailPassword;
+        final email = validateEmail.validate(registerEvent.email);
         print(
-          "email validation" + inputEither.toString(),
+          "email validation" + email.toString(),
         );
-        yield* inputEither.fold(
-          (failure) async* {
-            yield Error(message: _mapFailureTpMessage(failure));
+        yield* email.fold(
+          (invalidEmail) async* {
+            yield Error(
+              message: _mapFailureTpMessage(invalidEmail),
+            );
           },
-          (email) async* {
+          (validEmail) async* {
+            print("valid");
             yield Loading();
-            final failureOrUserData =
-                await registerUseCase.registerEmailAndPassword(
-                    username: currentEvent.username,
-                    email: currentEvent.email,
-                    password: currentEvent.password);
-            print(failureOrUserData);
-            yield failureOrUserData.fold(
+            if (registerEvent.password != (registerEvent.confirmPassword)) {
+              print("not match");
+              yield Error(message: PASSWORD_DID_NOT_MATCH);
+            } else {
+              final failureOrUserData =
+                  await registerUseCase.registerEmailAndPassword(
+                      username: registerEvent.username,
+                      email: registerEvent.email,
+                      password: registerEvent.password);
+              print(failureOrUserData);
+              yield failureOrUserData.fold(
                 (failure) => Error(
-                      message: _mapFailureTpMessage(failure),
-                    ),
-                (userData) => Loaded(user: userData));
+                  message: _mapFailureTpMessage(failure),
+                ),
+                (userData) => Loaded(user: userData),
+              );
+            }
           },
         );
         break;
@@ -111,7 +117,12 @@ String _mapFailureTpMessage(Failure failure) {
     case InvalidInputFailure:
       print(INVALID_EMAIL_MESSAGE);
       return INVALID_EMAIL_MESSAGE;
+    case RegisterFailure:
+      return REGISTER_FAILURE_MESSAGE;
+    case EmailAlreadyExistFailure:
+      return Email_ALREADY_EXSIST_MESSAGE;
     default:
+      print(failure);
       print(UNEXPECTED_ERROR);
       return UNEXPECTED_ERROR;
   }

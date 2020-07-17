@@ -199,7 +199,7 @@ void main() {
         setRegisterEmailUseCase(toAnswer: Right(tUser));
         //act
         bloc.add(RegisterEmailPassword(
-            email: tEmail, password: tPassword, username: tUsername));
+            email: tEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
         await untilCalled(mockValidateEmail.validate(any));
         //assert
         verify(mockValidateEmail.validate(tEmail));
@@ -218,7 +218,7 @@ void main() {
         expectLater(bloc, emitsInOrder(expected));
         //act
         bloc.add(RegisterEmailPassword(
-            email: tInvalidEmail, password: tPassword, username: tUsername));
+            email: tInvalidEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
       },
     );
 
@@ -246,7 +246,7 @@ void main() {
         setRegisterEmailUseCase(toAnswer: Right(tUser));
         //act
         bloc.add(RegisterEmailPassword(
-            email: tEmail, password: tPassword, username: tUsername));
+            email: tEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
         await untilCalled(mockRegisterUsecase.registerEmailAndPassword(
             email: anyNamed("email"),
             password: anyNamed("password"),
@@ -274,7 +274,7 @@ void main() {
 
         //act
         bloc.add(RegisterEmailPassword(
-            email: tEmail, password: tPassword, username: tUsername));
+            email: tEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
         await untilCalled(mockRegisterUsecase.registerEmailAndPassword(
             email: anyNamed("email"),
             password: anyNamed("password"),
@@ -302,7 +302,7 @@ void main() {
 
         //act
         bloc.add(RegisterEmailPassword(
-            email: tEmail, password: tPassword, username: tUsername));
+            email: tEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
         await untilCalled(mockRegisterUsecase.registerEmailAndPassword(
             email: anyNamed("email"),
             password: anyNamed("password"),
@@ -325,7 +325,7 @@ void main() {
 
         expectLater(bloc, emitsInOrder(expected));
         //act
-        bloc.add(RegisterEmailPassword(email: tEmail, password: tPassword, username: tUsername));
+        bloc.add(RegisterEmailPassword(email: tEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
         await untilCalled(mockRegisterUsecase.registerEmailAndPassword(
             email: anyNamed("email"), password: anyNamed("password"), username: anyNamed("username")));
       },

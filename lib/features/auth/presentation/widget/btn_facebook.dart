@@ -1,35 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/radii.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 
-
-
-
-class CustomButton extends StatelessWidget {
-  final String text;
-  final Color colorBg, colorText;
+class FacebookButton extends StatelessWidget {
+  final textButton = "Continue With Facebook";
   final Function onPressed;
   final margin;
 
-  CustomButton(
-      {@required this.text,
-      @required this.colorBg,
-      this.colorText,
-      @required this.onPressed, this.margin});
+  const FacebookButton({Key key, @required this.onPressed, this.margin}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-
       margin: margin,
       child: RaisedButton(
         elevation: 5,
-        color: colorBg,
+        color: AppColors.accentElement,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Image.asset("assets/images/facebookIcon.png"),
+            SizedBox(width: 10),
             Text(
-              text,
+              textButton,
               style: AppStyle.textWhite14,
             ),
           ],

@@ -5,15 +5,16 @@ import 'package:rakit_komputer/core/presentation/widget/decoration.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:rakit_komputer/features/auth/presentation/page/register_page.dart';
+import 'package:rakit_komputer/features/auth/presentation/page/login_page.dart';
 import 'package:rakit_komputer/features/auth/presentation/widget/auth_status.dart';
 import 'package:rakit_komputer/features/auth/presentation/widget/btn_facebook.dart';
 import 'package:rakit_komputer/features/auth/presentation/widget/btn_google.dart';
-import 'package:rakit_komputer/features/auth/presentation/widget/btn_login.dart';
+import 'package:rakit_komputer/features/auth/presentation/widget/btn_register.dart';
 import 'package:rakit_komputer/features/auth/presentation/widget/form_login.dart';
-import 'package:rakit_komputer/injection_container.dart';
 
-class LoginPage extends StatelessWidget {
+import '../../../../injection_container.dart';
+
+class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,15 +23,17 @@ class LoginPage extends StatelessWidget {
           backgroundColor: AppColors.backgroundColor,
           body: BlocProvider(
             create: (BuildContext context) => sl<AuthBloc>(),
-            child: MyForm(),
+            child: RegisterForm(),
           )),
     );
   }
 }
 
-class MyForm extends StatelessWidget {
-  final emailController = new TextEditingController();
-  final passwordController = new TextEditingController();
+class RegisterForm extends StatelessWidget {
+  final tfEmailController = TextEditingController();
+  final tfPasswordController = TextEditingController();
+  final tfConfirmController = TextEditingController();
+  final tfUsernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +42,9 @@ class MyForm extends StatelessWidget {
         if (state is Loaded) {
           Scaffold.of(context).hideCurrentSnackBar();
         } else if (state is Loading) {
-          Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text("Validating..."),
-          ));
-        } else if (state is Error) {
+          Scaffold.of(context).showSnackBar(
+            SnackBar(content: Text("Validating..."),),);
+        } else if (state is Error){
           Scaffold.of(context).hideCurrentSnackBar();
         }
       },
@@ -50,20 +52,19 @@ class MyForm extends StatelessWidget {
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 24),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
                 margin: EdgeInsets.only(top: 28, bottom: 10),
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "Skip",
-                  style: AppStyle.textRedRegular14,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text("Skip", style: AppStyle.textRedRegular14),
                 ),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
-                alignment: Alignment.center,
                 child: Text(
-                  "Login",
+                  "Register",
                   style: AppStyle.textBlackSemiBold22,
                 ),
               ),
@@ -74,46 +75,53 @@ class MyForm extends StatelessWidget {
               OrDecoration(
                 margin: EdgeInsets.symmetric(vertical: 10),
               ),
+              CustomTextField(
+                controller: tfUsernameController,
+                margin: EdgeInsets.only(top: 10, bottom: 5),
+                hintText: "Username",
+              ),
               EmailInput(
-                controllerEmail: emailController,
+                controllerEmail: tfEmailController,
               ),
               CustomTextField(
-                  controller: passwordController,
-                  obSecure: true,
-                  hintText: "Password",
-                  margin: EdgeInsets.symmetric(vertical: 5)),
-              LoginButton(
-                emailController: emailController,
-                passwordController: passwordController,
+                controller: tfPasswordController,
+                obSecure: true,
+                margin: EdgeInsets.symmetric(vertical: 5),
+                hintText: "Password",
+              ),
+              CustomTextField(
+                controller: tfConfirmController,
+                obSecure: true,
+                margin: EdgeInsets.symmetric(vertical: 5),
+                hintText: "Confirm Password",
+              ),
+              RegisterButton(
+                emailController: tfEmailController,
+                passwordController: tfPasswordController,
+                confirmController: tfConfirmController,
+                usernameController: tfUsernameController,
               ),
               AuthStatus(),
               Container(
-                margin: EdgeInsets.only(top: 18),
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  "Lupa Password",
-                  style: AppStyle.textBlackLight14,
-                ),
-              ),
-              SizedBox(height: 10),
-              Container(
+                margin: EdgeInsets.only(top: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      "Belum punya akun?",
+                      "Sudah Punya Akun?",
                       style: AppStyle.textBlackLight14,
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => RegisterPage()));
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) =>
+                                LoginPage()));
                       },
                       child: Text(
-                        "Register",
+                        "Login",
                         style: AppStyle.textRedRegular14,
                       ),
-                    ),
+                    )
                   ],
                 ),
               )

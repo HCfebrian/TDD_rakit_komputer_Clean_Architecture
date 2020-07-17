@@ -18,11 +18,19 @@ class LoginOrRegisterGoogle extends AuthEvent {}
 
 class LoginOrRegisterFacebook extends AuthEvent {}
 
-class RegisterEmailPassword extends AuthEvent{
-  final String email, password, username;
+class RegisterEmailPassword extends AuthEvent {
+  final String email, password, username, confirmPassword;
 
-  RegisterEmailPassword({@required this.email,@required this.password,@required this.username});
+  RegisterEmailPassword(
+      {@required this.username,
+      @required this.email,
+      @required this.password,
+      @required this.confirmPassword});
+
   @override
   // TODO: implement props
-  List<Object> get props => [email,password, username];
+  List<Object> get props => [email, password, username, confirmPassword];
+
+
+
 }

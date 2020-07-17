@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rakit_komputer/core/values/constant.dart';
@@ -15,6 +16,10 @@ class LoginFailure extends Failure {}
 class RegisterFailure extends Failure {}
 
 class NetworkFailure extends Failure {}
+
+class EmailAlreadyExistFailure extends Failure{
+}
+
 
 class InvalidInputFailure extends Failure {
   final email;

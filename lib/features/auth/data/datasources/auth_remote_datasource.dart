@@ -1,6 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:rakit_komputer/features/auth/data/model/user_model.dart';
 import 'package:meta/meta.dart';
+import 'package:rakit_komputer/features/auth/data/model/user_model.dart';
 
 abstract class AuthRemoteDataSource{
   ///call googleSignIn method to sign in into google firebase.

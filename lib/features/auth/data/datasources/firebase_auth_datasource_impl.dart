@@ -1,7 +1,11 @@
+
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:rakit_komputer/core/error/excaption_handler.dart';
 import 'package:rakit_komputer/core/error/exception.dart';
+import 'package:rakit_komputer/core/values/constant.dart';
 import 'package:rakit_komputer/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:rakit_komputer/features/auth/data/model/user_model.dart';
 
@@ -9,28 +13,24 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   FirebaseAuth firebaseAuth;
   FirebaseUser firebaseUser;
   AuthResult authResult;
-  GoogleSignIn googleSignIn ;
-  FirebaseAuthRemoteDataSourceImpl({@required this.firebaseAuth, @required this.googleSignIn});
+  GoogleSignIn googleSignIn;
+
+  FirebaseAuthRemoteDataSourceImpl(
+      {@required this.firebaseAuth, @required this.googleSignIn});
 
   Future<UserModel> loginOrRegisterUsingGoogle() async {
-    try{
+    try {
       GoogleSignInAccount _signInAccount;
-      try{
-
       _signInAccount = await googleSignIn.signIn();
-      }catch (e){
-        print("eror pas sigin");
-        print(e);
-      }
       GoogleSignInAuthentication _signInAuth =
           await _signInAccount.authentication;
       final AuthCredential credential = GoogleAuthProvider.getCredential(
           idToken: _signInAuth.idToken, accessToken: _signInAuth.accessToken);
       firebaseUser = (await firebaseAuth.signInWithCredential(credential)).user;
-    return UserModel.fromFirebaseUser(firebaseUser);
-    }catch(e){
+      return UserModel.fromFirebaseUser(firebaseUser);
+    } catch (e) {
       print(e);
-    throw LoginErrorException();
+      throw LoginErrorException();
     }
   }
 
@@ -51,11 +51,11 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel> registerEmailAndPassword({@required String email,
-    @required String userName,
-    @required String password}) async {
+  Future<UserModel> registerEmailAndPassword(
+      {@required String email,
+      @required String userName,
+      @required String password}) async {
     try {
-      firebaseAuth.currentUser();
       authResult = await firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       firebaseUser = authResult.user;
@@ -64,7 +64,7 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       firebaseUser.updateProfile(updateInfo);
       return UserModel.fromFirebaseUser(firebaseUser);
     } catch (e) {
-      throw RegisterErrorException();
+      throw FirebaseAuthException.handle(e);
     }
   }
 
@@ -75,14 +75,12 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<UserModel> registerFacebook() {
-    // TODO: implement registerFacebook
     throw UnimplementedError();
   }
 
   @override
   Future<UserModel> loginGoogle() async {
     return loginOrRegisterUsingGoogle();
-
   }
 
   @override
@@ -90,3 +88,4 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return loginOrRegisterUsingGoogle();
   }
 }
+

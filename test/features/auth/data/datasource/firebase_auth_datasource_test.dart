@@ -66,9 +66,8 @@ void main() {
   MockAuthResult _mockAuthResult = MockAuthResult();
   MockGoogleSignIn _mockGoogleSignIn;
   MockGoogleSignInAccount _mockGoogleSignInAccount;
+
   MockGoogleSignInAuthentication _mockGoogleSignInAuthentication;
-  MockGoogleAuthProvider _mockGoogleAuthProvider;
-  MockAuthCredential _mockAuthCredential;
 
   final tEmail = _mockAuthResult.user.email;
   final tPassword = "20021997";
@@ -77,8 +76,6 @@ void main() {
     _mockGoogleSignIn = MockGoogleSignIn();
     _mockGoogleSignInAccount = MockGoogleSignInAccount();
     _mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
-    _mockGoogleAuthProvider = MockGoogleAuthProvider();
-    _mockAuthCredential = MockAuthCredential();
 
     dataSource = FirebaseAuthRemoteDataSourceImpl(
         firebaseAuth: _mockFirebaseAuth, googleSignIn: _mockGoogleSignIn);
@@ -150,12 +147,7 @@ void main() {
       },
     );
 
-    test(
-      "should return UserModel when sign in by using Facebook form DataSource",
-      () async {
-        throw UnimplementedError();
-      },
-    );
+
   });
 
   group("register", () {
@@ -179,21 +171,39 @@ void main() {
     );
 
     test(
-      "should return Register Failure when register using email password is called from data source",
+      "should return Undefine Exception when register using email password is called from data source",
       () async {
         //arrange
         when(_mockFirebaseAuth.createUserWithEmailAndPassword(
                 email: anyNamed("email"), password: anyNamed("password")))
-            .thenThrow(Exception());
-        when(_mockFirebaseAuth.currentUser())
-            .thenThrow(RegisterErrorException());
+            .thenThrow(UndefinedException());
+        
         //act
         final call = dataSource.registerEmailAndPassword;
         //assert
         expect(
             () => call(email: tEmail, password: tPassword, userName: tUsername),
-            throwsA(TypeMatcher<RegisterErrorException>()));
+            throwsA(TypeMatcher<UndefinedException>()));
       },
+    );
+
+    test(
+      "should return EmailAlreadyExists when register using email password is called from data source",
+          () async {
+        //arrange
+        when(_mockFirebaseAuth.createUserWithEmailAndPassword(
+            email: anyNamed("email"), password: anyNamed("password")))
+            .thenThrow(EmailAlreadyExistException());
+
+        //act
+        final call = dataSource.registerEmailAndPassword;
+        //assert
+        expect(
+                () => call(email: tEmail, password: tPassword, userName: tUsername),
+            throwsA(TypeMatcher<EmailAlreadyExistException>()));
+      },
+
+
     );
   });
 }

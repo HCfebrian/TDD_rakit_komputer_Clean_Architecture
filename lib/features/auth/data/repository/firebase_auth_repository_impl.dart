@@ -66,6 +66,8 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
             email: email, userName: userName, password: password));
       } on RegisterErrorException {
         return Left(RegisterFailure());
+      } on EmailAlreadyExistException{
+        return Left(EmailAlreadyExistFailure());
       }
     } else {
       return Left(NetworkFailure());
