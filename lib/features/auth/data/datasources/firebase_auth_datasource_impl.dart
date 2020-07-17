@@ -16,7 +16,7 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try{
       GoogleSignInAccount _signInAccount;
       try{
-        print(googleSignIn.signIn());
+
       _signInAccount = await googleSignIn.signIn();
       }catch (e){
         print("eror pas sigin");
