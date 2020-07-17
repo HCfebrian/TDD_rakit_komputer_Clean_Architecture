@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     mockFirebaseAuthRepository = MockFirebaseAuthRepository();
-    loginUseCase = LoginUseCase(mockFirebaseAuthRepository);
+    loginUseCase = LoginUseCase(firebaseAuthRepo: mockFirebaseAuthRepository);
   });
 
   final tUser = User(

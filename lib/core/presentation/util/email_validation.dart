@@ -5,12 +5,12 @@ import 'package:rakit_komputer/core/error/failures.dart';
 class ValidateEmail {
   Either<Failure, String> validate(String email) {
     try {
-      if (email == null) throw EmptyInputException();
+      if (email.isEmpty) throw EmptyInputException();
       return Right(_validateEmail(email));
     } on EmptyInputException {
-      return Left(EmptyInputFailure());
+      return Left(EmptyInputFailure(""));
     } on InvalidInputException {
-      return Left(InvalidInputFailure());
+      return Left(InvalidInputFailure(email: email));
     }
   }
 

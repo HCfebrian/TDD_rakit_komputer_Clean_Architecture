@@ -24,6 +24,13 @@ class AppStyle {
     fontFamily: "Inter"
   );
 
+  static const TextStyle textRedRegular12 = TextStyle(
+      color: AppColors.accentText,
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      fontFamily: "Inter"
+  );
+
   static const TextStyle textBlackSemiBold22 = TextStyle(
       color: AppColors.primaryText,
       fontSize: 22,

@@ -25,11 +25,14 @@ dependencies:
     sdk: flutter
   firebase_auth: ^0.16.1
   google_sign_in: ^4.5.1
-  flutter_facebook_login: ^3.0.0
   equatable: ^1.2.0
   dartz: ^0.9.1
   data_connection_checker: ^0.3.4
   flutter_bloc: ^5.0.1
+  get_it: ^4.0.2
+  flutter_plugin_android_lifecycle: ^1.0.8
+
+
 
 
 

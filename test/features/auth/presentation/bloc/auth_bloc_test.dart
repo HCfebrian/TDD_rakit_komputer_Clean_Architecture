@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rakit_komputer/core/error/failures.dart';
 import 'package:rakit_komputer/core/presentation/util/email_validation.dart';
+import 'package:rakit_komputer/core/values/constant.dart';
 import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/login.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/register.dart';
@@ -32,6 +33,7 @@ void main() {
   });
 
   final tEmail = "febriansyah.online@gmail.com";
+  final tInvalidEmail = "febriansyah.ogmail.com";
   final tPassword = "20021997";
   final tUid = "20021997";
   final tUrl = "facebook.com";
@@ -79,11 +81,11 @@ void main() {
       "should emit error Invalid email state when input is invalid",
       () async {
         //arrange
-        setUpValidateEmail(toReturn: Left(InvalidInputFailure()));
+        setUpValidateEmail(toReturn: Left(InvalidInputFailure(email: tInvalidEmail)));
         //assert later
         final expected = [
           Empty(),
-          Error(message: INVALID_EMAIL_MESSAGE),
+          Error(message: INVALID_EMAIL_MESSAGE, email: tInvalidEmail),
         ];
         expectLater(bloc, emitsInOrder(expected));
         //act
@@ -95,7 +97,7 @@ void main() {
       "should emit error Empty email state when input is invalid",
       () async {
         //arrange
-        setUpValidateEmail(toReturn: Left(EmptyInputFailure()));
+        setUpValidateEmail(toReturn: Left(EmptyInputFailure("")));
         //assert later
         final expected = [
           Empty(),
@@ -204,19 +206,19 @@ void main() {
       },
     );
     test(
-      "should emit error Invalid email state when input is invalid",
+      "should emit error Invalid email and return state when input is invalid",
       () async {
         //arrange
-        setUpValidateEmail(toReturn: Left(InvalidInputFailure()));
+        setUpValidateEmail(toReturn: Left(InvalidInputFailure(email: tInvalidEmail)));
         //assert later
         final expected = [
           Empty(),
-          Error(message: INVALID_EMAIL_MESSAGE),
+          Error(message: INVALID_EMAIL_MESSAGE, email: tInvalidEmail),
         ];
         expectLater(bloc, emitsInOrder(expected));
         //act
         bloc.add(RegisterEmailPassword(
-            email: tEmail, password: tPassword, username: tUsername));
+            email: tInvalidEmail, password: tPassword, username: tUsername));
       },
     );
 
@@ -224,7 +226,7 @@ void main() {
       "should emit error Empty email state when input is invalid",
       () async {
         //arrange
-        setUpValidateEmail(toReturn: Left(EmptyInputFailure()));
+        setUpValidateEmail(toReturn: Left(EmptyInputFailure("")));
         //assert later
         final expected = [
           Empty(),

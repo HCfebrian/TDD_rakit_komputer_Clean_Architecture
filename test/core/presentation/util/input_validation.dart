@@ -27,11 +27,11 @@ void main() {
       "should throw EmptyFailure when empty email is given",
       () async {
         //arrange
-        final tEmptyEmail = null;
+        final tEmptyEmail = "";
         //act
         final result = validateEmail.validate(tEmptyEmail);
         //assert
-        expect(result, Left(EmptyInputFailure()));
+        expect(result, Left(EmptyInputFailure("")));
       },
     );
 
@@ -43,7 +43,7 @@ void main() {
         //act
         final result = validateEmail.validate(tInvalidEmail);
         //assert
-        expect(result, Left(InvalidInputFailure()));
+        expect(result, Left(InvalidInputFailure(email: "jsjsjsj")));
       },
     );
   });

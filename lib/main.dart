@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rakit_komputer/features/auth/presentation/page/logo_page.dart';
+import 'injection_container.dart' as di;
 
 void main() {
+  di.init();
   runApp(MyApp());
 }
 

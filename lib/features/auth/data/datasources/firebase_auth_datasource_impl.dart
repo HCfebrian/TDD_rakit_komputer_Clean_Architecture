@@ -1,21 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rakit_komputer/core/error/exception.dart';
 import 'package:rakit_komputer/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:rakit_komputer/features/auth/data/model/user_model.dart';
 
 class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance ;
+  FirebaseAuth firebaseAuth;
   FirebaseUser firebaseUser;
   AuthResult authResult;
-  GoogleSignIn googleSignIn = GoogleSignIn();
-
-  FirebaseAuthRemoteDataSourceImpl({this.firebaseAuth, this.googleSignIn});
+  GoogleSignIn googleSignIn ;
+  FirebaseAuthRemoteDataSourceImpl({@required this.firebaseAuth, @required this.googleSignIn});
 
   Future<UserModel> loginOrRegisterUsingGoogle() async {
     try{
-      GoogleSignInAccount _signInAccount = await googleSignIn.signIn();
+      GoogleSignInAccount _signInAccount;
+      try{
+        print(googleSignIn.signIn());
+      _signInAccount = await googleSignIn.signIn();
+      }catch (e){
+        print("eror pas sigin");
+        print(e);
+      }
       GoogleSignInAuthentication _signInAuth =
           await _signInAccount.authentication;
       final AuthCredential credential = GoogleAuthProvider.getCredential(
@@ -23,6 +29,7 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       firebaseUser = (await firebaseAuth.signInWithCredential(credential)).user;
     return UserModel.fromFirebaseUser(firebaseUser);
     }catch(e){
+      print(e);
     throw LoginErrorException();
     }
   }
@@ -38,6 +45,7 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       firebaseUser = authResult.user;
       return UserModel.fromFirebaseUser(firebaseUser);
     } catch (e) {
+      print(e);
       throw LoginErrorException();
     }
   }

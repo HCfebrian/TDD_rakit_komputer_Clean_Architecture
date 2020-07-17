@@ -6,7 +6,7 @@ import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.d
 
 class RegisterUseCase {
   final AuthRepository firebaseAuthRepository;
-  RegisterUseCase(this.firebaseAuthRepository);
+  RegisterUseCase({@required this.firebaseAuthRepository});
 
   Future<Either<Failure, User>> registerEmailAndPassword(
       {@required String username,
