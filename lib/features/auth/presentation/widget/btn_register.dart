@@ -28,7 +28,7 @@ class RegisterButton extends StatelessWidget {
         BlocProvider.of<AuthBloc>(context).add(RegisterEmailPassword(
             password: passwordController.text,
             email: emailController.text,
-            username: confirmController.text,
+            username: usernameController.text,
             confirmPassword: confirmController.text));
       },
     );

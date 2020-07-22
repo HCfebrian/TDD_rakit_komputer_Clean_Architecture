@@ -99,20 +99,7 @@ void main() {
         expect(result, isA<UserModel>());
       },
     );
-    test(
-      "should return LoginException when Sign in with google is called from data source",
-      () async {
-        when(_mockFirebaseAuth.signInWithEmailAndPassword(
-                email: anyNamed("email"), password: anyNamed("password")))
-            .thenThrow(LoginErrorException());
-        //act
 
-        final result = dataSource.loginEmailAndPassword;
-        //assert
-        expect(result(email: tEmail, password: tPassword),
-            throwsA(TypeMatcher<LoginErrorException>()));
-      },
-    );
 
     test(
       "should return UserModel when sign in by using google form DataSource",
@@ -134,18 +121,7 @@ void main() {
       },
     );
 
-    test(
-      "should return LoginErrorException when login using google is called from data source",
-      () async {
-        //arrange
-        when(_mockFirebaseAuth.signInWithCredential(any))
-            .thenThrow(LoginErrorException());
-        //act
-        final call = dataSource.loginGoogle;
-        //assert
-        expect(call(), throwsA(TypeMatcher<LoginErrorException>()));
-      },
-    );
+   
 
 
   });

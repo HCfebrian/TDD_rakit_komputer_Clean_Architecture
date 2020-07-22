@@ -26,11 +26,16 @@ class Loaded  extends AuthState{
 }
 
 class Error extends AuthState{
+
   final String message,email;
 
-  Error({ this.email, @required this.message});
+  Error( { this.email,  this.message});
   @override
   // TODO: implement props
   List<Object> get props => [message];
 }
+
+class InvalidPasswordState extends AuthState{
+}
+
 

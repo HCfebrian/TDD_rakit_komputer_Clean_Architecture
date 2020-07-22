@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 import 'package:rakit_komputer/core/error/exception.dart';
+import 'package:rakit_komputer/core/error/failure_handler.dart';
 import 'package:rakit_komputer/core/error/failures.dart';
 import 'package:rakit_komputer/core/network/netword_info.dart';
 import 'package:rakit_komputer/features/auth/data/datasources/auth_remote_datasource.dart';
@@ -21,8 +22,10 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
       try {
         return Right(await authRemoteData.loginEmailAndPassword(
             email: email, password: password));
-      } on LoginErrorException {
-        return Left(LoginFailure());
+      } catch(e){
+        print(e);
+        return Left(FailureHandler.handle(e));
+
       }
     } else {
       return Left(NetworkFailure());
@@ -49,6 +52,8 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
         return Right(await authRemoteData.loginGoogle());
       } on LoginErrorException {
         return Left(LoginFailure());
+      } catch(e){
+        return Left(FailureHandler.handle(e));
       }
     } else {
       return Left(NetworkFailure());
@@ -64,10 +69,12 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
       try {
         return Right(await authRemoteData.registerEmailAndPassword(
             email: email, userName: userName, password: password));
-      } on RegisterErrorException {
-        return Left(RegisterFailure());
+      } on UndefinedException {
+        return Left(UndefinedFailure());
       } on EmailAlreadyExistException{
         return Left(EmailAlreadyExistFailure());
+      } catch(e){
+        return Left(FailureHandler.handle(e));
       }
     } else {
       return Left(NetworkFailure());
@@ -94,6 +101,8 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
         return Right(await authRemoteData.registerGoogle());
       } on RegisterErrorException {
         return Left(RegisterFailure());
+      } catch (e){
+        return Left(FailureHandler.handle(e));
       }
     } else {
       return Left(NetworkFailure());

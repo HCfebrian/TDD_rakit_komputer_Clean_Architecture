@@ -1,11 +1,8 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meta/meta.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:meta/meta.dart';
 import 'package:rakit_komputer/core/error/excaption_handler.dart';
 import 'package:rakit_komputer/core/error/exception.dart';
-import 'package:rakit_komputer/core/values/constant.dart';
 import 'package:rakit_komputer/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:rakit_komputer/features/auth/data/model/user_model.dart';
 
@@ -30,7 +27,7 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return UserModel.fromFirebaseUser(firebaseUser);
     } catch (e) {
       print(e);
-      throw LoginErrorException();
+      throw FirebaseAuthException.handle(e);
     }
   }
 
@@ -45,8 +42,9 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       firebaseUser = authResult.user;
       return UserModel.fromFirebaseUser(firebaseUser);
     } catch (e) {
+      print("eroornya disini nih");
       print(e);
-      throw LoginErrorException();
+      throw FirebaseAuthException.handle(e);
     }
   }
 
@@ -88,4 +86,3 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return loginOrRegisterUsingGoogle();
   }
 }
-

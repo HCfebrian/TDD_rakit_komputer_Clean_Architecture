@@ -18,7 +18,7 @@ class EmailInput extends StatelessWidget {
         builder: (context, state) {
           print("rebuild email");
           if (state is Error) {
-            if (state.message == EMPTY_FIELD_MESSAGE ||
+            if (state.message == EMPTY_EMAIL_FIELD_MESSAGE||
                 state.message == INVALID_EMAIL_MESSAGE)
               return Column(
                 children: <Widget>[
@@ -28,7 +28,6 @@ class EmailInput extends StatelessWidget {
                     Border.all(color: AppColors.secondaryElement, width: 1),
                     margin: EdgeInsets.only(top: 10, bottom: 5),
                     keyboardType: TextInputType.emailAddress,
-                    errorText: state.message,
                   ),
                   Text(
                     state.message,

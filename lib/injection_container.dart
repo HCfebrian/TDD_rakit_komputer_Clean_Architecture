@@ -4,6 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rakit_komputer/core/network/netword_info.dart';
 import 'package:rakit_komputer/core/presentation/util/email_validation.dart';
+import 'package:rakit_komputer/core/presentation/util/password_validation.dart';
+import 'package:rakit_komputer/core/presentation/util/username_validation.dart';
 import 'package:rakit_komputer/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:rakit_komputer/features/auth/data/datasources/firebase_auth_datasource_impl.dart';
 import 'package:rakit_komputer/features/auth/data/repository/firebase_auth_repository_impl.dart';
@@ -21,7 +23,9 @@ void init() {
   sl.registerFactory(() => AuthBloc(
         loginUseCase: sl(),
         validateEmail: sl(),
+        validatePassword: sl(),
         registerUseCase: sl(),
+        validateUsername: sl(),
       ));
 
   //usecase
@@ -38,15 +42,17 @@ void init() {
 
 // Core
   //presentation
-    //util
-    sl.registerLazySingleton(() => ValidateEmail());
+  //util
+  sl.registerLazySingleton(() => ValidateEmail());
+  sl.registerLazySingleton(() => ValidatePassword());
+  sl.registerLazySingleton(() => ValidateUsername());
   //network
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(dataConnectionChecker: sl()));
-
+  sl.registerLazySingleton<NetworkInfo>(
+      () => NetworkInfoImpl(dataConnectionChecker: sl()));
 
 // External dependency
 
   sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
-  sl.registerLazySingleton<GoogleSignIn>(() =>  GoogleSignIn());
+  sl.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn());
   sl.registerLazySingleton(() => DataConnectionChecker());
 }

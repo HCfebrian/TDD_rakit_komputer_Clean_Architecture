@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rakit_komputer/core/presentation/widget/custom_textfield.dart';
 import 'package:rakit_komputer/core/presentation/widget/decoration.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/style.dart';
@@ -10,7 +9,9 @@ import 'package:rakit_komputer/features/auth/presentation/widget/auth_status.dar
 import 'package:rakit_komputer/features/auth/presentation/widget/btn_facebook.dart';
 import 'package:rakit_komputer/features/auth/presentation/widget/btn_google.dart';
 import 'package:rakit_komputer/features/auth/presentation/widget/btn_register.dart';
-import 'package:rakit_komputer/features/auth/presentation/widget/form_login.dart';
+import 'package:rakit_komputer/features/auth/presentation/widget/form_email.dart';
+import 'package:rakit_komputer/features/auth/presentation/widget/form_password_register.dart';
+import 'package:rakit_komputer/features/auth/presentation/widget/form_username.dart';
 
 import '../../../../injection_container.dart';
 
@@ -75,26 +76,11 @@ class RegisterForm extends StatelessWidget {
               OrDecoration(
                 margin: EdgeInsets.symmetric(vertical: 10),
               ),
-              CustomTextField(
-                controller: tfUsernameController,
-                margin: EdgeInsets.only(top: 10, bottom: 5),
-                hintText: "Username",
-              ),
+              FormUsername(tfUsernameController: tfUsernameController),
               EmailInput(
                 controllerEmail: tfEmailController,
               ),
-              CustomTextField(
-                controller: tfPasswordController,
-                obSecure: true,
-                margin: EdgeInsets.symmetric(vertical: 5),
-                hintText: "Password",
-              ),
-              CustomTextField(
-                controller: tfConfirmController,
-                obSecure: true,
-                margin: EdgeInsets.symmetric(vertical: 5),
-                hintText: "Confirm Password",
-              ),
+              PasswordConfirm(tfPasswordController: tfPasswordController, tfConfirmController: tfConfirmController),
               RegisterButton(
                 emailController: tfEmailController,
                 passwordController: tfPasswordController,
@@ -132,3 +118,36 @@ class RegisterForm extends StatelessWidget {
     );
   }
 }
+
+
+//
+//class PasswordConfirm extends StatelessWidget {
+//  const PasswordConfirm({
+//    Key key,
+//    @required this.tfPasswordController,
+//    @required this.tfConfirmController,
+//  }) : super(key: key);
+//
+//  final TextEditingController tfPasswordController;
+//  final TextEditingController tfConfirmController;
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return Column(
+//      children: <Widget>[
+//        CustomTextField(
+//          controller: tfPasswordController,
+//          obSecure: true,
+//          margin: EdgeInsets.symmetric(vertical: 5),
+//          hintText: "Password",
+//        ),
+//        CustomTextField(
+//          controller: tfConfirmController,
+//          obSecure: true,
+//          margin: EdgeInsets.symmetric(vertical: 5),
+//          hintText: "Confirm Password",
+//        ),
+//      ],
+//    );
+//  }
+//}

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rakit_komputer/core/presentation/widget/custom_textfield.dart';
 import 'package:rakit_komputer/core/presentation/widget/decoration.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/style.dart';
@@ -10,7 +9,8 @@ import 'package:rakit_komputer/features/auth/presentation/widget/auth_status.dar
 import 'package:rakit_komputer/features/auth/presentation/widget/btn_facebook.dart';
 import 'package:rakit_komputer/features/auth/presentation/widget/btn_google.dart';
 import 'package:rakit_komputer/features/auth/presentation/widget/btn_login.dart';
-import 'package:rakit_komputer/features/auth/presentation/widget/form_login.dart';
+import 'package:rakit_komputer/features/auth/presentation/widget/form_email.dart';
+import 'package:rakit_komputer/features/auth/presentation/widget/form_password.dart';
 import 'package:rakit_komputer/injection_container.dart';
 
 class LoginPage extends StatelessWidget {
@@ -77,11 +77,7 @@ class MyForm extends StatelessWidget {
               EmailInput(
                 controllerEmail: emailController,
               ),
-              CustomTextField(
-                  controller: passwordController,
-                  obSecure: true,
-                  hintText: "Password",
-                  margin: EdgeInsets.symmetric(vertical: 5)),
+              PasswordField(passwordController: passwordController),
               LoginButton(
                 emailController: emailController,
                 passwordController: passwordController,

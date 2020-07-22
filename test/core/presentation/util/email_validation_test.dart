@@ -12,7 +12,7 @@ void main() {
 
   group("validate email", () {
     test(
-      "should return email when ValidateEmail is called",
+      "should return email when valid email is given",
       () async {
         //arrange
         final tEmailAddress = "febriansyah.online@gmail.com";
@@ -24,26 +24,26 @@ void main() {
     );
 
     test(
-      "should throw EmptyFailure when empty email is given",
+      "should return EmptyFailure when empty email is given",
       () async {
         //arrange
         final tEmptyEmail = "";
         //act
         final result = validateEmail.validate(tEmptyEmail);
         //assert
-        expect(result, Left(EmptyInputFailure("")));
+        expect(result, Left(EmptyEmailFailure("")));
       },
     );
 
     test(
-      "should throw InvalidInputFailure",
+      "should return InvalidInputFailure",
       () async {
         //arrange
         final tInvalidEmail = "HC Febrian";
         //act
         final result = validateEmail.validate(tInvalidEmail);
         //assert
-        expect(result, Left(InvalidInputFailure(email: "jsjsjsj")));
+        expect(result, Left(InvalidEmailFailure(email: tInvalidEmail)));
       },
     );
   });

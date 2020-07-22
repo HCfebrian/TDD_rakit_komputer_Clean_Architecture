@@ -126,23 +126,7 @@ void main() {
           },
         );
 
-        test(
-          "should return LoginFailure when call login email password auth is unsuccessful",
-          () async {
-            //arrange
-            when(mockAuthRemoteData.loginEmailAndPassword(
-                    email: anyNamed("email"), password: anyNamed("password")))
-                .thenThrow(LoginErrorException());
-            //act
-            final result = await authRepo.loginEmailAndPassword(
-                email: tEmail, password: tPassword);
-            //assert
-            expect(result, equals(Left(LoginFailure())));
-            verify(mockAuthRemoteData.loginEmailAndPassword(
-                email: tEmail, password: tPassword));
-            verifyNoMoreInteractions(mockAuthRemoteData);
-          },
-        );
+
       });
     });
 
@@ -225,25 +209,36 @@ void main() {
         );
 
         test(
-          "should return RegisterFailure when Facebook register is called from repository",
+          "should return UndefiUne failure when Facebook register is called from repository",
           () async {
             //arrange
             when(mockAuthRemoteData.registerEmailAndPassword(
                     email: anyNamed("email"),
                     userName: anyNamed("userName"),
                     password: anyNamed("password")))
-                .thenThrow(RegisterErrorException());
+                .thenThrow(UndefinedException());
             //act
             final result = await authRepo.registerEmailAndPassword(
                 email: tEmail, password: tPassword, userName: tUsername);
             //assert
-            expect(result, equals(Left(RegisterFailure())));
+            expect(result, equals(Left(UndefinedFailure())));
             verify(mockAuthRemoteData.registerEmailAndPassword(
                 email: tEmail, userName: tUsername, password: tPassword));
             verifyNoMoreInteractions(mockAuthRemoteData);
 
           },
         );
+
+        test(
+            "should return failure ",
+            () async {
+              //arrange
+
+              //act
+
+              //assert
+            },
+          );
       });
     });
   });

@@ -18,7 +18,20 @@ class EmptyInputException implements Exception{
 
 }
 
-class InvalidInputException implements Exception{
+class InvalidPasswordException implements Exception{
+    String code = "INVALID_PASSWORD_EXCEPTION";
+}
+
+class InvalidUsernameException implements Exception{
+    String code = "INVALID_USERNAME_EXCEPTION";
+}
+
+class PasswordDidNotMatchException implements Exception{
+    String code = "INVALID_PASSWORD_EXCEPTION";
+}
+
+
+class InvalidEmailException implements Exception{
     String code = "ERROR_INVALID_EMAIL";
 
 }

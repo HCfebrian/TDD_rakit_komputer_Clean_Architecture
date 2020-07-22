@@ -3,6 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rakit_komputer/core/error/failures.dart';
 import 'package:rakit_komputer/core/presentation/util/email_validation.dart';
+import 'package:rakit_komputer/core/presentation/util/password_validation.dart';
+import 'package:rakit_komputer/core/presentation/util/username_validation.dart';
 import 'package:rakit_komputer/core/values/constant.dart';
 import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/login.dart';
@@ -16,20 +18,30 @@ class MockRegisterUsecase extends Mock implements RegisterUseCase {}
 
 class MockValidateEmail extends Mock implements ValidateEmail {}
 
+class MockValidatePassword extends Mock implements ValidatePassword {}
+
+class MockValidateUsername extends Mock implements ValidateUsername {}
+
 void main() {
   AuthBloc bloc;
   MockLoginUsecase mockLoginUsecase;
   MockRegisterUsecase mockRegisterUsecase;
   MockValidateEmail mockValidateEmail;
+  MockValidatePassword mockValidatePassword;
+  MockValidateUsername mockValidateUsername;
 
   setUp(() {
     mockRegisterUsecase = MockRegisterUsecase();
     mockLoginUsecase = MockLoginUsecase();
     mockValidateEmail = MockValidateEmail();
+    mockValidatePassword = MockValidatePassword();
+    mockValidateUsername = MockValidateUsername();
     bloc = AuthBloc(
         loginUseCase: mockLoginUsecase,
         registerUseCase: mockRegisterUsecase,
-        validateEmail: mockValidateEmail);
+        validateEmail: mockValidateEmail,
+        validatePassword: mockValidatePassword,
+        validateUsername: mockValidateUsername);
   });
 
   final tEmail = "febriansyah.online@gmail.com";
@@ -81,7 +93,8 @@ void main() {
       "should emit error Invalid email state when input is invalid",
       () async {
         //arrange
-        setUpValidateEmail(toReturn: Left(InvalidInputFailure(email: tInvalidEmail)));
+        setUpValidateEmail(
+            toReturn: Left(InvalidEmailFailure(email: tInvalidEmail)));
         //assert later
         final expected = [
           Empty(),
@@ -97,11 +110,11 @@ void main() {
       "should emit error Empty email state when input is invalid",
       () async {
         //arrange
-        setUpValidateEmail(toReturn: Left(EmptyInputFailure("")));
+        setUpValidateEmail(toReturn: Left(EmptyEmailFailure("")));
         //assert later
         final expected = [
           Empty(),
-          Error(message: EMPTY_FIELD_MESSAGE),
+          Error(message: EMPTY_EMAIL_FIELD_MESSAGE),
         ];
         expectLater(bloc, emitsInOrder(expected));
         //act
@@ -199,7 +212,10 @@ void main() {
         setRegisterEmailUseCase(toAnswer: Right(tUser));
         //act
         bloc.add(RegisterEmailPassword(
-            email: tEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
+            email: tEmail,
+            password: tPassword,
+            username: tUsername,
+            confirmPassword: tPassword));
         await untilCalled(mockValidateEmail.validate(any));
         //assert
         verify(mockValidateEmail.validate(tEmail));
@@ -209,7 +225,8 @@ void main() {
       "should emit error Invalid email and return state when input is invalid",
       () async {
         //arrange
-        setUpValidateEmail(toReturn: Left(InvalidInputFailure(email: tInvalidEmail)));
+        setUpValidateEmail(
+            toReturn: Left(InvalidEmailFailure(email: tInvalidEmail)));
         //assert later
         final expected = [
           Empty(),
@@ -218,7 +235,10 @@ void main() {
         expectLater(bloc, emitsInOrder(expected));
         //act
         bloc.add(RegisterEmailPassword(
-            email: tInvalidEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
+            email: tInvalidEmail,
+            password: tPassword,
+            username: tUsername,
+            confirmPassword: tPassword));
       },
     );
 
@@ -226,11 +246,11 @@ void main() {
       "should emit error Empty email state when input is invalid",
       () async {
         //arrange
-        setUpValidateEmail(toReturn: Left(EmptyInputFailure("")));
+        setUpValidateEmail(toReturn: Left(EmptyEmailFailure("")));
         //assert later
         final expected = [
           Empty(),
-          Error(message: EMPTY_FIELD_MESSAGE),
+          Error(message: EMPTY_EMAIL_FIELD_MESSAGE),
         ];
         expectLater(bloc, emitsInOrder(expected));
         //act
@@ -246,7 +266,10 @@ void main() {
         setRegisterEmailUseCase(toAnswer: Right(tUser));
         //act
         bloc.add(RegisterEmailPassword(
-            email: tEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
+            email: tEmail,
+            password: tPassword,
+            username: tUsername,
+            confirmPassword: tPassword));
         await untilCalled(mockRegisterUsecase.registerEmailAndPassword(
             email: anyNamed("email"),
             password: anyNamed("password"),
@@ -274,7 +297,10 @@ void main() {
 
         //act
         bloc.add(RegisterEmailPassword(
-            email: tEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
+            email: tEmail,
+            password: tPassword,
+            username: tUsername,
+            confirmPassword: tPassword));
         await untilCalled(mockRegisterUsecase.registerEmailAndPassword(
             email: anyNamed("email"),
             password: anyNamed("password"),
@@ -288,9 +314,9 @@ void main() {
         //arrange
         setUpValidateEmail(toReturn: Right(tEmail));
         when(mockRegisterUsecase.registerEmailAndPassword(
-            username: anyNamed("username"),
-            email: anyNamed("email"),
-            password: anyNamed("password")))
+                username: anyNamed("username"),
+                email: anyNamed("email"),
+                password: anyNamed("password")))
             .thenAnswer((realInvocation) async => Left(LoginFailure()));
         //assert latter
         final expected = [
@@ -302,7 +328,10 @@ void main() {
 
         //act
         bloc.add(RegisterEmailPassword(
-            email: tEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
+            email: tEmail,
+            password: tPassword,
+            username: tUsername,
+            confirmPassword: tPassword));
         await untilCalled(mockRegisterUsecase.registerEmailAndPassword(
             email: anyNamed("email"),
             password: anyNamed("password"),
@@ -325,9 +354,15 @@ void main() {
 
         expectLater(bloc, emitsInOrder(expected));
         //act
-        bloc.add(RegisterEmailPassword(email: tEmail, password: tPassword, username: tUsername, confirmPassword: tPassword));
+        bloc.add(RegisterEmailPassword(
+            email: tEmail,
+            password: tPassword,
+            username: tUsername,
+            confirmPassword: tPassword));
         await untilCalled(mockRegisterUsecase.registerEmailAndPassword(
-            email: anyNamed("email"), password: anyNamed("password"), username: anyNamed("username")));
+            email: anyNamed("email"),
+            password: anyNamed("password"),
+            username: anyNamed("username")));
       },
     );
   });

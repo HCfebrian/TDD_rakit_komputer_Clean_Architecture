@@ -9,11 +9,11 @@ class AuthStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
       if (state is Error) {
-        if (state.message == LOGIN_FAILURE_MESSAGE ||
-            state.message == NETWORK_FAILURE_MESSAGE ||
-            state.message == PASSWORD_DID_NOT_MATCH ||
-            state.message == REGISTER_FAILURE_MESSAGE ||
-            state.message == Email_ALREADY_EXSIST_MESSAGE)
+        if (state.message != EMPTY_EMAIL_FIELD_MESSAGE ||
+        state.message != INVALID_EMAIL_MESSAGE ||
+        state.message != INVALID_PASSWORD_MESSAGE ||
+        state.message != INVALID_USERNAME_MESSAGE ||
+        state.message != PASSWORD_DID_NOT_MATCH)
           return Column(
             children: <Widget>[
               Text(

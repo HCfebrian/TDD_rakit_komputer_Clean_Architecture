@@ -8,9 +8,9 @@ class ValidateEmail {
       if (email.isEmpty) throw EmptyInputException();
       return Right(_validateEmail(email));
     } on EmptyInputException {
-      return Left(EmptyInputFailure(""));
-    } on InvalidInputException {
-      return Left(InvalidInputFailure(email: email));
+      return Left(EmptyEmailFailure(""));
+    } on InvalidEmailException {
+      return Left(InvalidEmailFailure(email: email));
     }
   }
 
@@ -20,7 +20,7 @@ class ValidateEmail {
     if (RegExp(emailRegex).hasMatch(email)) {
       return email;
     } else {
-      throw InvalidInputException();
+      throw InvalidEmailException();
     }
   }
 }
