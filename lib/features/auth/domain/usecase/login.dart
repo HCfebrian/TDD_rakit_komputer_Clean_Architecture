@@ -6,19 +6,24 @@ import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 
 class LoginUseCase {
-  final AuthRepository firebaseAuthRepo;
+  final AuthRepository authRepo;
 
-  LoginUseCase({@required this.firebaseAuthRepo});
+  LoginUseCase({@required this.authRepo});
 
   Future<Either<Failure, User>> loginGoogle() async {
-    return await firebaseAuthRepo.loginGoogle();
+    return await authRepo.loginGoogle();
   }
   Future<Either<Failure, User>> loginFacebook() async {
-    return await firebaseAuthRepo.loginFacebook();
+    return await authRepo.loginFacebook();
   }
   Future<Either<Failure, User>> loginEmailAndPassword({@required String email, @required String password}) async {
-    return await firebaseAuthRepo.loginEmailAndPassword(email: email, password: password);
+    return await authRepo.loginEmailAndPassword(email: email, password: password);
   }
 
+
+  //login Anonymously. mainly used if the user don't want to register at the moment.
+  Future<Either<Failure, bool>> loginAnonymously() async{
+    return await authRepo.loginAnonymously();
+  }
 
 }

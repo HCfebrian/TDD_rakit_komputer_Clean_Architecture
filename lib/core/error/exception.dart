@@ -67,3 +67,10 @@ class OperationNotAllowedException implements Exception{
 class UndefinedException implements Exception{
     String code = "UNDEFINE_ERROR";
 }
+
+class ServerException implements Exception{
+}
+
+class SomeException implements Exception{
+}
+

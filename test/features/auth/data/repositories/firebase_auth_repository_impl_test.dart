@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:rakit_komputer/core/error/exception.dart';
 import 'package:rakit_komputer/core/error/failures.dart';
 import 'package:rakit_komputer/core/network/netword_info.dart';
-import 'package:rakit_komputer/features/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:rakit_komputer/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:rakit_komputer/features/auth/data/model/user_model.dart';
 import 'package:rakit_komputer/features/auth/data/repository/firebase_auth_repository_impl.dart';
 
@@ -125,6 +125,20 @@ void main() {
             verifyNoMoreInteractions(mockAuthRemoteData);
           },
         );
+
+        test(
+            "should return bool true when login anonymously is success",
+            () async {
+              //arrange
+              when(mockAuthRemoteData.loginAnonymously()).thenAnswer((realInvocation) async => true);
+              //act
+              final result = await authRepo.loginAnonymously();
+              //assert
+              expect(result, equals(Right(true)));
+              verify(mockAuthRemoteData.loginAnonymously());
+              verifyNoMoreInteractions(mockAuthRemoteData);
+            },
+          );
 
 
       });
@@ -333,6 +347,9 @@ void main() {
           verifyNoMoreInteractions(mockAuthRemoteData);
         },
       );
+
+
+
     });
   });
 }

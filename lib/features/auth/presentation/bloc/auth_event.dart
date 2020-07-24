@@ -28,9 +28,9 @@ class RegisterEmailPassword extends AuthEvent {
       @required this.confirmPassword});
 
   @override
-  // TODO: implement props
   List<Object> get props => [email, password, username, confirmPassword];
+}
 
-
+class SkipAuth extends AuthEvent{
 
 }

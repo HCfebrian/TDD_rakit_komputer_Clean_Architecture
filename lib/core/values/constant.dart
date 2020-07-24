@@ -9,6 +9,7 @@ const String EMPTY_EMAIL_FIELD_MESSAGE = "Empty Field - field cannot be empty";
 const String UNEXPECTED_ERROR = "UNEXPECTED ERROR";
 const String PASSWORD_DID_NOT_MATCH = "password and confirm password did not match";
 const String EMAIL_ALREADY_EXIST_MESSAGE ="EMAIL ALREADY EXIST";
+const String SERVER_FAILURE_MESSAGE ="EMAIL ALREADY EXIST";
 
 
 const String WRONG_PASSWORD_MESSAGE ="Incorrect Email and Password Combination ";

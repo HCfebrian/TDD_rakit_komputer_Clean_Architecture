@@ -30,8 +30,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     @required this.loginUseCase,
     @required this.validateEmail,
     @required this.validateUsername,
-  })  :
-        assert(registerUseCase != null),
+  })  : assert(registerUseCase != null),
         assert(validatePassword != null),
         assert(loginUseCase != null),
         assert(validateEmail != null),
@@ -42,7 +41,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
     String validEmail, validPassword, validUsername;
 
-
     if (event is LoginEmailPassword) {
       final email = validateEmail.validate(event.email);
       final password = validatePassword.login(event.password);
@@ -51,8 +49,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         validPassword = null;
         if (failure is InvalidPasswordFailure) {
           yield Error(
-            email: "",
-            message: _mapFailureTpMessage(failure),
+            message: _mapFailureToMessage(failure),
           );
         }
       }, (password) async* {
@@ -63,13 +60,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         validEmail = null;
         if (failure is EmptyEmailFailure) {
           yield Error(
-            email: "",
-            message: _mapFailureTpMessage(failure),
+            message: _mapFailureToMessage(failure),
           );
         } else if (failure is InvalidEmailFailure) {
           yield Error(
-            email: failure.email,
-            message: _mapFailureTpMessage(failure),
+//            email: failure.email,
+            message: _mapFailureToMessage(failure),
           );
         }
       }, (email) async* {
@@ -81,7 +77,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final failureOrUserData = await loginUseCase.loginEmailAndPassword(
             email: validEmail, password: validPassword);
         yield failureOrUserData.fold(
-            (failure) => Error(message: _mapFailureTpMessage(failure)),
+            (failure) => Error(message: _mapFailureToMessage(failure)),
             (userdata) => Loaded(user: userdata));
       }
     }
@@ -99,8 +95,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (failure is InvalidPasswordFailure ||
             failure is PasswordDidNotMatchFailure) {
           yield Error(
-            email: "",
-            message: _mapFailureTpMessage(failure),
+            message: _mapFailureToMessage(failure),
           );
         }
       }, (password) async* {
@@ -111,13 +106,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         validUsername = null;
         if (failure is EmptyEmailFailure) {
           yield Error(
-            email: "",
-            message: _mapFailureTpMessage(failure),
+            message: _mapFailureToMessage(failure),
           );
         } else if (failure is InvalidEmailFailure) {
           yield Error(
-            email: failure.email,
-            message: _mapFailureTpMessage(failure),
+//            email: failure.email,
+            message: _mapFailureToMessage(failure),
           );
         }
       }, (email) async* {
@@ -128,7 +122,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         validUsername = null;
         print("username called");
         if (failure is InvalidUsernameFailure) {
-          yield Error(message: _mapFailureTpMessage(failure));
+          yield Error(message: _mapFailureToMessage(failure));
         }
       }, (username) async* {
         validUsername = username;
@@ -147,22 +141,31 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 password: validPassword,
                 username: event.username);
         yield failureOrUserData.fold(
-            (failure) => Error(message: _mapFailureTpMessage(failure)),
+            (failure) => Error(message: _mapFailureToMessage(failure)),
             (userdata) => Loaded(user: userdata));
       }
     }
 
-    if(event is LoginOrRegisterGoogle){
+    if (event is LoginOrRegisterGoogle) {
       yield Loading();
-        final failureOrUserData = await loginUseCase.loginGoogle();
-        yield failureOrUserData.fold(
-            (failure) => Error(message: _mapFailureTpMessage(failure)),
-            (userData) => Loaded(user: userData));
+      final failureOrUserData = await loginUseCase.loginGoogle();
+      yield failureOrUserData.fold(
+          (failure) => Error(message: _mapFailureToMessage(failure)),
+          (userData) => Loaded(user: userData));
+    }
+
+    if (event is SkipAuth) {
+      yield Loading();
+      final failureOrSkipAuth = await loginUseCase.loginAnonymously();
+      yield failureOrSkipAuth.fold(
+        (failure) => Error(message: _mapFailureToMessage(failure)),
+        (bool) => Loaded(),
+      );
     }
   }
 }
 
-String _mapFailureTpMessage(Failure failure) {
+String _mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
     case NetworkFailure:
       print(NETWORK_FAILURE_MESSAGE);

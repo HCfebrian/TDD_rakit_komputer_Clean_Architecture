@@ -6,8 +6,8 @@ import 'package:rakit_komputer/core/network/netword_info.dart';
 import 'package:rakit_komputer/core/presentation/util/email_validation.dart';
 import 'package:rakit_komputer/core/presentation/util/password_validation.dart';
 import 'package:rakit_komputer/core/presentation/util/username_validation.dart';
-import 'package:rakit_komputer/features/auth/data/datasources/auth_remote_datasource.dart';
-import 'package:rakit_komputer/features/auth/data/datasources/firebase_auth_datasource_impl.dart';
+import 'package:rakit_komputer/features/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:rakit_komputer/features/auth/data/data_sources/firebase_auth_datasource_impl.dart';
 import 'package:rakit_komputer/features/auth/data/repository/firebase_auth_repository_impl.dart';
 import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/login.dart';
@@ -29,8 +29,8 @@ void init() {
       ));
 
   //usecase
-  sl.registerLazySingleton(() => LoginUseCase(firebaseAuthRepo: sl()));
-  sl.registerLazySingleton(() => RegisterUseCase(firebaseAuthRepository: sl()));
+  sl.registerLazySingleton(() => LoginUseCase(authRepo: sl()));
+  sl.registerLazySingleton(() => RegisterUseCase(authRepository: sl()));
 
   //repo
   sl.registerLazySingleton<AuthRepository>(() =>

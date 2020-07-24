@@ -8,28 +8,28 @@ import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 
 class MockFirebaseUser extends Mock implements FirebaseUser {
   @override
-  // TODO: implement displayName
+  //  implement displayName
   String get displayName => "HC Febriansyah";
   @override
-  // TODO: implement email
+  //  implement email
   String get email => "febriansyah.online@gmail.com";
   @override
-  // TODO: implement uid
+  //  implement uid
   String get uid => "20021997";
   @override
-  // TODO: implement photoUrl
+  //  implement photoUrl
   String get photoUrl => "https://scontent.fsub2-3.fna.fbcdn.net/v/t31.0-8/18077144_10203215734311743_4795913670100787155_o.jpg?_nc_cat=101&_nc_sid=85a577&_nc_eui2=AeHs1sDz1509WYAAuQF1PDnXfw5AOJw6fo1_DkA4nDp-jTAWojdagRdJtKicnCVu9D8&_nc_oc=AQmj33TCZGG-XNmq1rP0CRIBcNegmM6WRMuKxuq4MxnlTGeGAROLDIalCOS5Tz8myFk&_nc_ht=scontent.fsub2-3.fna&oh=e0498544a9904155ba981cfca4dab2ea&oe=5F2DC34A";
   @override
-  // TODO: implement providerId
+  //  implement providerId
   String get providerId => "facebook";
   @override
-  // TODO: implement phoneNumber
+  //  implement phoneNumber
   String get phoneNumber => "085866349755";
   @override
-  // TODO: implement isAnonymous
+  //  implement isAnonymous
   bool get isAnonymous => false;
   @override
-  // TODO: implement isEmailVerified
+  //  implement isEmailVerified
   bool get isEmailVerified => true;
 }
 

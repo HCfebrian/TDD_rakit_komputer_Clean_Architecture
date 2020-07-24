@@ -7,13 +7,20 @@ import 'package:rakit_komputer/features/auth/presentation/bloc/auth_bloc.dart';
 class AuthStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final excludedMessage = [
+      EMPTY_EMAIL_FIELD_MESSAGE,
+      INVALID_EMAIL_MESSAGE,
+      INVALID_PASSWORD_MESSAGE,
+      INVALID_USERNAME_MESSAGE,
+      PASSWORD_DID_NOT_MATCH
+    ];
     return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
       if (state is Error) {
-        if (state.message != EMPTY_EMAIL_FIELD_MESSAGE ||
-        state.message != INVALID_EMAIL_MESSAGE ||
-        state.message != INVALID_PASSWORD_MESSAGE ||
-        state.message != INVALID_USERNAME_MESSAGE ||
-        state.message != PASSWORD_DID_NOT_MATCH)
+        print("ini loh broo");
+        print(state.message);
+        print(state.message != EMPTY_EMAIL_FIELD_MESSAGE);
+        if (!excludedMessage.contains(state.message)) {
+          print("if else jalan");
           return Column(
             children: <Widget>[
               Text(
@@ -25,6 +32,7 @@ class AuthStatus extends StatelessWidget {
               )
             ],
           );
+        }
       }
       return Container();
     });

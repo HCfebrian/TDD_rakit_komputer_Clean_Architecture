@@ -54,9 +54,14 @@ class MyForm extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(top: 28, bottom: 10),
                 alignment: Alignment.centerRight,
-                child: Text(
-                  "Skip",
-                  style: AppStyle.textRedRegular14,
+                child: GestureDetector(
+                  onTap: () {
+                    BlocProvider.of<AuthBloc>(context).add(SkipAuth());
+                  },
+                  child: Text(
+                    "Skip",
+                    style: AppStyle.textRedRegular14,
+                  ),
                 ),
               ),
               Container(

@@ -1,6 +1,6 @@
 import 'package:rakit_komputer/core/error/exception.dart';
 
-class FirebaseAuthException{
+class FirebaseException{
 
    static Exception handle(e){
 

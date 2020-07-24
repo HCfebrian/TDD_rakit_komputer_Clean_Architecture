@@ -5,22 +5,22 @@ import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 
 class RegisterUseCase {
-  final AuthRepository firebaseAuthRepository;
-  RegisterUseCase({@required this.firebaseAuthRepository});
+  final AuthRepository authRepository;
+  RegisterUseCase({@required this.authRepository});
 
   Future<Either<Failure, User>> registerEmailAndPassword(
       {@required String username,
       @required String email,
       @required String password}) async {
-    return await firebaseAuthRepository.registerEmailAndPassword(
+    return await authRepository.registerEmailAndPassword(
         email: email, password: password, userName: username);
   }
 
   Future<Either<Failure, User>> registerGoogle() async {
-    return await firebaseAuthRepository.registerGoogle();
+    return await authRepository.registerGoogle();
   }
 
   Future<Either<Failure, User>> registerFacebook() async {
-    return await firebaseAuthRepository.registerFacebook();
+    return await authRepository.registerFacebook();
   }
 }

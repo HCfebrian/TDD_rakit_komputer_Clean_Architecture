@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     mockFirebaseAuthRepository = MockFirebaseAuthRepository();
-    loginUseCase = LoginUseCase(firebaseAuthRepo: mockFirebaseAuthRepository);
+    loginUseCase = LoginUseCase(authRepo: mockFirebaseAuthRepository);
   });
 
   final tUser = User(
@@ -74,6 +74,22 @@ void main() {
         verifyNoMoreInteractions(mockFirebaseAuthRepository);
       },
     );
+
+    test(
+        "should return true if login anonymously is success",
+        () async {
+          //arrange
+          when(mockFirebaseAuthRepository.loginAnonymously()).thenAnswer((realInvocation) async => Right(true));
+          //act
+          final result =await loginUseCase.loginAnonymously();
+          //assert
+          expect(result, Right(true));
+          verify(mockFirebaseAuthRepository.loginAnonymously());
+          verifyNoMoreInteractions(mockFirebaseAuthRepository);
+        },
+      );
+
+
   });
 
 }

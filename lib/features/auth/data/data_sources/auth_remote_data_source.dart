@@ -22,6 +22,10 @@ abstract class AuthRemoteDataSource{
   ///call signInnWithEmailAndPassword method to sign in into google firebase.
   ///
   ///throw a [LoginErrorException] for all error codes.
+  Future<bool>loginAnonymously();
+  ///call signInnWithEmailAndPassword method to sign in into google firebase.
+  ///
+  ///throw a [LoginErrorException] for all error codes.
   Future<UserModel>registerFacebook();
   ///call signInnWithEmailAndPassword method to sign in into google firebase.
   ///

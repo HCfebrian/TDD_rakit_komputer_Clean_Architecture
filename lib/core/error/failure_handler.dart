@@ -1,7 +1,7 @@
 import 'package:rakit_komputer/core/error/exception.dart';
 import 'package:rakit_komputer/core/error/failures.dart';
 
-class FailureHandler{
+class ExceptionToFailure{
 
   static Failure handle(e){
 
@@ -40,6 +40,8 @@ class FailureHandler{
         print(" handled ERROR_EMAIL_ALREADY_IN_USE");
         return EmailAlreadyExistFailure();
 //        errorMessage = "An undefined Error happened.";
+      case ServerException:
+        return ServerFailure();
       default:
         print(" handled UNDEFINE_EXCEPTION");
         return UndefinedFailure();

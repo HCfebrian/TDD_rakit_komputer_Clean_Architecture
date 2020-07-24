@@ -30,7 +30,7 @@ dependencies:
   data_connection_checker: ^0.3.4
   flutter_bloc: ^5.0.1
   get_it: ^4.0.2
-#  flutter_plugin_android_lifecycle: ^1.0.8
+  cloud_firestore: ^0.13.7
 
 
 

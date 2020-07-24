@@ -1,11 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:rakit_komputer/core/error/exception.dart';
 import 'package:rakit_komputer/core/values/constant.dart';
 
 abstract class Failure extends Equatable {
   @override
-  // TODO: implement props
   List<Object> get props => [];
 
   Failure([List properties = const <dynamic>[]]);
@@ -16,7 +13,6 @@ class LoginFailure extends Failure {
 
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }
 
@@ -24,7 +20,6 @@ class RegisterFailure extends Failure {
   final message = REGISTER_FAILURE_MESSAGE;
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }
 
@@ -33,7 +28,6 @@ class NetworkFailure extends Failure {
 
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 
 }
@@ -41,7 +35,6 @@ class NetworkFailure extends Failure {
 class EmailAlreadyExistFailure extends Failure {
   final message = EMAIL_ALREADY_EXIST_MESSAGE;
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }
 
@@ -50,7 +43,6 @@ class UndefinedFailure extends Failure {
 
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 
 }
@@ -63,7 +55,6 @@ class InvalidEmailFailure extends Failure {
 
 
   @override
-  // TODO: implement props
   List<Object> get props => [email, message];
 }
 
@@ -74,7 +65,6 @@ class InvalidPasswordFailure extends Failure {
   InvalidPasswordFailure({ this.password});
 
   @override
-  // TODO: implement props
   List<Object> get props => [password, message];
 }
 
@@ -82,7 +72,6 @@ class InvalidUsernameFailure extends Failure {
   final message = INVALID_USERNAME_MESSAGE;
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }
 
@@ -90,7 +79,6 @@ class PasswordDidNotMatchFailure extends Failure {
   final message = PASSWORD_DID_NOT_MATCH;
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }
 
@@ -101,7 +89,6 @@ class EmptyEmailFailure extends Failure {
   EmptyEmailFailure(this.email);
 
   @override
-  // TODO: implement props
   List<Object> get props => [email,message];
 }
 
@@ -110,7 +97,6 @@ class OperationNotAllowedFailure extends Failure {
 
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }
 
@@ -119,7 +105,6 @@ class TooManyRequestFailure extends Failure {
 
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }
 
@@ -128,7 +113,6 @@ class UserDisabledFailure extends Failure {
 
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }
 
@@ -137,7 +121,6 @@ class UserNotFoundFailure extends Failure {
 
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }
 class WrongPasswordFailure extends Failure {
@@ -145,6 +128,12 @@ class WrongPasswordFailure extends Failure {
 
 
   @override
-  // TODO: implement props
+  List<Object> get props => [message];
+}
+class ServerFailure extends Failure {
+  final message = SERVER_FAILURE_MESSAGE;
+
+
+  @override
   List<Object> get props => [message];
 }

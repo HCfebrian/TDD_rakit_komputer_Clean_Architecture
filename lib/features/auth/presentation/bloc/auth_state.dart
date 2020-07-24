@@ -18,20 +18,18 @@ class Loading extends AuthState{
 class Loaded  extends AuthState{
   final User user;
 
-  Loaded({@required this.user});
+  Loaded({ this.user});
 
   @override
-  // TODO: implement props
   List<Object> get props => [user];
 }
 
 class Error extends AuthState{
 
-  final String message,email;
+  final String message;
 
-  Error( { this.email,  this.message});
+  Error( { this.message});
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }
 

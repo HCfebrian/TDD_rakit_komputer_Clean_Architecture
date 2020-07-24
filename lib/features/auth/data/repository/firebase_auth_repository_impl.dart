@@ -4,7 +4,7 @@ import 'package:rakit_komputer/core/error/exception.dart';
 import 'package:rakit_komputer/core/error/failure_handler.dart';
 import 'package:rakit_komputer/core/error/failures.dart';
 import 'package:rakit_komputer/core/network/netword_info.dart';
-import 'package:rakit_komputer/features/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:rakit_komputer/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 
@@ -24,7 +24,7 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
             email: email, password: password));
       } catch(e){
         print(e);
-        return Left(FailureHandler.handle(e));
+        return Left(ExceptionToFailure.handle(e));
 
       }
     } else {
@@ -53,7 +53,7 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
       } on LoginErrorException {
         return Left(LoginFailure());
       } catch(e){
-        return Left(FailureHandler.handle(e));
+        return Left(ExceptionToFailure.handle(e));
       }
     } else {
       return Left(NetworkFailure());
@@ -74,7 +74,7 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
       } on EmailAlreadyExistException{
         return Left(EmailAlreadyExistFailure());
       } catch(e){
-        return Left(FailureHandler.handle(e));
+        return Left(ExceptionToFailure.handle(e));
       }
     } else {
       return Left(NetworkFailure());
@@ -102,10 +102,23 @@ class FirebaseAuthRepositoryImpl implements AuthRepository {
       } on RegisterErrorException {
         return Left(RegisterFailure());
       } catch (e){
-        return Left(FailureHandler.handle(e));
+        return Left(ExceptionToFailure.handle(e));
       }
     } else {
       return Left(NetworkFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> loginAnonymously() async{
+    if(await networkInfo.isConnected){
+    try{
+      return Right(await authRemoteData.loginAnonymously());
+    }catch (e){
+      return Left(ExceptionToFailure.handle(e));
+    }
+    }else{
+      return left(NetworkFailure());
     }
   }
 }
