@@ -45,7 +45,8 @@ dev_dependencies:
     sdk: flutter
   mockito: ^4.1.1
   rxdart:
-  firebase_auth_mocks: ^0.2.0
+#  firebase_auth_mocks: ^0.2.0
+  cloud_firestore_mocks: ^0.4.5
 
 
 

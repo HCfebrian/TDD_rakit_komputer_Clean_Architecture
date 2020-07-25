@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:matcher/matcher.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rakit_komputer/core/error/exception.dart';
+import 'package:rakit_komputer/core/error/auth/exception.dart';
 import 'package:rakit_komputer/features/auth/data/data_sources/firebase_auth_datasource_impl.dart';
 import 'package:rakit_komputer/features/auth/data/model/user_model.dart';
 

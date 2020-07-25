@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
-import 'package:rakit_komputer/core/error/exception_handler.dart';
-import 'package:rakit_komputer/core/error/exception.dart';
+import 'package:rakit_komputer/core/error/auth/exception_handler.dart';
+import 'package:rakit_komputer/core/error/auth/exception.dart';
 import 'package:rakit_komputer/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:rakit_komputer/features/auth/data/model/user_model.dart';
 

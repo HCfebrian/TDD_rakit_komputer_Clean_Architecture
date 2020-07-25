@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rakit_komputer/core/error/failures.dart';
+import 'package:rakit_komputer/core/error/auth/failures.dart';
 import 'package:rakit_komputer/core/presentation/util/username_validation.dart';
 
 void main() {

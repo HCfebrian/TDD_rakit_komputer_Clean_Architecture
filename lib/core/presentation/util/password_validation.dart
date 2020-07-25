@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:rakit_komputer/core/error/exception.dart';
-import 'package:rakit_komputer/core/error/failures.dart';
+import 'package:rakit_komputer/core/error/auth/exception.dart';
+import 'package:rakit_komputer/core/error/auth/failures.dart';
+import 'package:rakit_komputer/core/error/failure.dart';
 import 'package:meta/meta.dart';
 
 class ValidatePassword {

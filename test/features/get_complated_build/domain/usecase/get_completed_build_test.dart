@@ -11,7 +11,7 @@ class MockBuildRepository extends Mock implements BuildRepoAbst{}
 void main(){
   MockBuildRepository mockBuildRepository;
   BuildUsecase buildUsecase;
-  final BuildEntity singleBuild = BuildEntity(buildId: "123", title: "BUILD 1", price: "2000", picURL: "facebook.com");
+  final BuildEntity singleBuild = BuildEntity(buildId: "123", title: "BUILD 1", overallPrice: "2000", picURL: "facebook.com");
   final List<BuildEntity> tListBuild = [singleBuild,singleBuild,singleBuild,singleBuild];
   setUp((){
     mockBuildRepository = MockBuildRepository();

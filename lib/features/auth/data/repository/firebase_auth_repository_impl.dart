@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
-import 'package:rakit_komputer/core/error/exception.dart';
-import 'package:rakit_komputer/core/error/failure_handler.dart';
-import 'package:rakit_komputer/core/error/failures.dart';
+import 'package:rakit_komputer/core/error/auth/exception.dart';
+import 'package:rakit_komputer/core/error/auth/failure_handler.dart';
+import 'package:rakit_komputer/core/error/auth/failures.dart';
+import 'package:rakit_komputer/core/error/failure.dart';
 import 'package:rakit_komputer/core/network/netword_info.dart';
 import 'package:rakit_komputer/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:rakit_komputer/features/auth/domain/entity/user.dart';

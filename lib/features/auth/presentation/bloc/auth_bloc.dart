@@ -4,7 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:rakit_komputer/core/error/failures.dart';
+import 'package:rakit_komputer/core/error/auth/failures.dart';
+import 'package:rakit_komputer/core/error/failure.dart';
 import 'package:rakit_komputer/core/presentation/util/email_validation.dart';
 import 'package:rakit_komputer/core/presentation/util/password_validation.dart';
 import 'package:rakit_komputer/core/presentation/util/username_validation.dart';
@@ -14,7 +15,6 @@ import 'package:rakit_komputer/features/auth/domain/usecase/login.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/register.dart';
 
 part 'auth_event.dart';
-
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {

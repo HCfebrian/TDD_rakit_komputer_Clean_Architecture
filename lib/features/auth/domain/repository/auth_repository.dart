@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:rakit_komputer/core/error/failures.dart';
+import 'package:rakit_komputer/core/error/failure.dart';
 import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 
 abstract class AuthRepository{

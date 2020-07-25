@@ -2,16 +2,16 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 class BuildEntity extends Equatable {
-  final String buildId, title, price, picURL;
+  final String buildId, title, overallPrice, picURL;
 
   BuildEntity({
     @required this.buildId,
     @required this.title,
-    @required this.price,
+    @required this.overallPrice,
     @required this.picURL,
   });
 
   @override
-  List<Object> get props => [buildId, title, price, picURL];
+  List<Object> get props => [buildId, title, overallPrice, picURL];
 
 }

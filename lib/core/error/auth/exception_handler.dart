@@ -1,50 +1,45 @@
-import 'package:rakit_komputer/core/error/exception.dart';
-import 'package:rakit_komputer/core/error/failures.dart';
+import 'package:rakit_komputer/core/error/auth/exception.dart';
 
-class ExceptionToFailure{
-
-  static Failure handle(e){
-
-    switch(e.runtimeType){
-      case InvalidEmailException:
+class FirebaseException {
+  static Exception handle(e) {
+    switch (e.code) {
+      case "ERROR_INVALID_EMAIL":
         print(" handled ERROR_INVALID_EMAIL");
-        return InvalidEmailFailure();
+        return InvalidEmailException();
         //        errorMessage = "Your email address appears to be malformed.";
         break;
-      case WrongPasswordException:
-        print("failurehandler  ERROR_WRONG_PASSWORD");
-        return WrongPasswordFailure();
+      case "ERROR_WRONG_PASSWORD":
+        print(" handled ERROR_WRONG_PASSWORD");
+        return WrongPasswordException();
 //        errorMessage = "Your password is wrong.";
         break;
-      case UserNotFoundException:
+      case "ERROR_USER_NOT_FOUND":
         print(" handled ERROR_USER_NOT_FOUND");
-        return UserNotFoundFailure();
+        return UserNotFoundException();
 //        errorMessage = "User with this email doesn't exist.";
         break;
-      case UserDisabledException:
+      case "ERROR_USER_DISABLED":
         print(" handled ERROR_USER_DISABLED");
-        return UserDisabledFailure();
+        return UserDisabledException();
 //        errorMessage = "User with this email has been disabled.";
         break;
-      case TooManyRequestException:
+      case "ERROR_TOO_MANY_REQUESTS":
         print(" handled ERROR_TOO_MANY_REQUESTS");
-        return TooManyRequestFailure();
+        return TooManyRequestException();
 //        errorMessage = "Too many requests. Try again later.";
         break;
-      case OperationNotAllowedException:
+      case "ERROR_OPERATION_NOT_ALLOWED":
         print(" handled ERROR_OPERATION_NOT_ALLOWED");
-        return OperationNotAllowedFailure();
+        return OperationNotAllowedException();
 //        errorMessage = "Signing in with Email and Password is not enabled.";
         break;
-      case EmailAlreadyExistException:
+      case "ERROR_EMAIL_ALREADY_IN_USE":
         print(" handled ERROR_EMAIL_ALREADY_IN_USE");
-        return EmailAlreadyExistFailure();
+        return EmailAlreadyExistException();
 //        errorMessage = "An undefined Error happened.";
-      case ServerException:
-        return ServerFailure();
       default:
         print(" handled UNDEFINE_EXCEPTION");
-        return UndefinedFailure();
+        return UndefinedException();
     }
   }
 }
