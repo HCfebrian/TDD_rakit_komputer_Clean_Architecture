@@ -72,5 +72,6 @@ class ServerException implements Exception{
 }
 
 class SomeException implements Exception{
+    String code = "UNDEFINE_ERROR";
 }
 

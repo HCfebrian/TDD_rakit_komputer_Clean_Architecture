@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rakit_komputer/features/get_completed_build/domain/entity/build_entity.dart';
-import 'package:rakit_komputer/features/get_completed_build/domain/repository/build_repository.dart';
-import 'package:rakit_komputer/features/get_completed_build/domain/usecase/get_completed_build.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/repository/build_repository.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/usecase/get_completed_build.dart';
 
 class MockBuildRepository extends Mock implements BuildRepoAbst{}
 

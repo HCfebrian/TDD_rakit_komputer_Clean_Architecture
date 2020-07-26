@@ -118,36 +118,3 @@ class RegisterForm extends StatelessWidget {
     );
   }
 }
-
-
-//
-//class PasswordConfirm extends StatelessWidget {
-//  const PasswordConfirm({
-//    Key key,
-//    @required this.tfPasswordController,
-//    @required this.tfConfirmController,
-//  }) : super(key: key);
-//
-//  final TextEditingController tfPasswordController;
-//  final TextEditingController tfConfirmController;
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return Column(
-//      children: <Widget>[
-//        CustomTextField(
-//          controller: tfPasswordController,
-//          obSecure: true,
-//          margin: EdgeInsets.symmetric(vertical: 5),
-//          hintText: "Password",
-//        ),
-//        CustomTextField(
-//          controller: tfConfirmController,
-//          obSecure: true,
-//          margin: EdgeInsets.symmetric(vertical: 5),
-//          hintText: "Confirm Password",
-//        ),
-//      ],
-//    );
-//  }
-//}

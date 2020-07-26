@@ -17,10 +17,11 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   Future<UserModel> loginOrRegisterUsingGoogle() async {
     try {
-      GoogleSignInAccount _signInAccount;
-      _signInAccount = await googleSignIn.signIn();
+      GoogleSignInAccount _signInAccount = await googleSignIn.signIn();
+
       GoogleSignInAuthentication _signInAuth =
           await _signInAccount.authentication;
+
       final AuthCredential credential = GoogleAuthProvider.getCredential(
           idToken: _signInAuth.idToken, accessToken: _signInAuth.accessToken);
       firebaseUser = (await firebaseAuth.signInWithCredential(credential)).user;
@@ -86,16 +87,16 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<bool> loginAnonymously() async{
-     try{
-       final result = await firebaseAuth.signInAnonymously();
-       print("detail user");
-       print(result.user.displayName  );
-       return true;
-     }catch(e){
-       print("error data source");
-       print(e);
-       throw ServerException();
-     }
+  Future<bool> loginAnonymously() async {
+    try {
+      final result = await firebaseAuth.signInAnonymously();
+      print("detail user");
+      print(result.user.displayName);
+      return true;
+    } catch (e) {
+      print("error data source");
+      print(e);
+      throw ServerException();
+    }
   }
 }

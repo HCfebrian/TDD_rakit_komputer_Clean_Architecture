@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rakit_komputer/features/get_completed_build/domain/entity/build_entity.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
 import 'package:meta/meta.dart';
 
 class BuildModel extends BuildEntity {
