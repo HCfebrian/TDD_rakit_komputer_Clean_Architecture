@@ -76,5 +76,6 @@ class RemoteDataSourceException implements Exception {
 }
 
 class SomeException implements Exception{
+    String code = "SOME_EXCEPTION";
 }
 

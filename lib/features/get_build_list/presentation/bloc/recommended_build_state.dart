@@ -9,10 +9,21 @@ abstract class RecommendedBuildState extends Equatable {
 
 class Empty extends RecommendedBuildState {}
 
-class Loading extends RecommendedBuildBloc{}
+class Loading extends RecommendedBuildState{}
 
-class Loaded extends RecommendedBuildBloc{}
+class Loaded extends RecommendedBuildState{
+  final List<BuildEntity> recommendedBuild;
 
-class Error extends RecommendedBuildBloc{}
+  Loaded({@required this.recommendedBuild});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [recommendedBuild];
+}
+
+class Error extends RecommendedBuildState{
+  final String message;
+  Error({@required this.message});
+}
 
 

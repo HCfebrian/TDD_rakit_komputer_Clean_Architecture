@@ -6,4 +6,4 @@ abstract class RecommendedBuildEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetRecommendedList extends RecommendedBuildBloc{}
+class GetRecommendedList extends RecommendedBuildEvent{}

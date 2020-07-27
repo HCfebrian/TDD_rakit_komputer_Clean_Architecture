@@ -30,7 +30,7 @@ class GoogleButton extends StatelessWidget {
             ),
           ],
         ),
-        shape: RoundedRectangleBorder(borderRadius: Radii.appBorderRadius),
+        shape: RoundedRectangleBorder(borderRadius: Radii.appFormRadius),
         onPressed: (){
           BlocProvider.of<AuthBloc>(context)
               .add(LoginOrRegisterGoogle());

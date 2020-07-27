@@ -37,6 +37,14 @@ class AppStyle {
       fontWeight: FontWeight.bold,
       fontFamily: "Inter-SemiBold"
   );
+
+  static const TextStyle textBlackSemiBold16 = TextStyle(
+      color: AppColors.primaryText,
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      fontFamily: "Inter-SemiBold"
+  );
+
   static const TextStyle textBlackLight14 = TextStyle(
       color: AppColors.primaryText,
       fontSize: 14,

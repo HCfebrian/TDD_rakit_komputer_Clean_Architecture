@@ -9,7 +9,7 @@ class ValidateEmail {
       if (email.isEmpty) throw EmptyInputException();
       return Right(_validateEmail(email));
     } on EmptyInputException {
-      return Left(EmptyEmailFailure(""));
+      return Left(EmptyEmailFailure());
     } on InvalidEmailException {
       return Left(InvalidEmailFailure(email: email));
     }

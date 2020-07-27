@@ -31,7 +31,7 @@ void main() {
         //act
         final result = validateEmail.validate(tEmptyEmail);
         //assert
-        expect(result, Left(EmptyEmailFailure("")));
+        expect(result, Left(EmptyEmailFailure()));
       },
     );
 

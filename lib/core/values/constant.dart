@@ -17,3 +17,5 @@ const String USER_NOT_FOUND_MESSAGE ="Incorrect Email and Password Combination "
 const String USER_DISABLE_MESSAGE ="Your Account is Disabled";
 const String TOO_MANY_REQUEST_MESSAGE ="Too Many Auth Attempt";
 const String OPERATION_NOT_ALLOWED_MESSAGE ="Operation Not Allowed";
+
+const String SOME_FAILURE_MESSAGE = "Failure for testing purpose";

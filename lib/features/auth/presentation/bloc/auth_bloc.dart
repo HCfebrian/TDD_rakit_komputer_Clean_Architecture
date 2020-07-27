@@ -5,11 +5,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:rakit_komputer/core/error/auth/failures.dart';
-import 'package:rakit_komputer/core/error/failure.dart';
 import 'package:rakit_komputer/core/presentation/util/email_validation.dart';
 import 'package:rakit_komputer/core/presentation/util/password_validation.dart';
 import 'package:rakit_komputer/core/presentation/util/username_validation.dart';
-import 'package:rakit_komputer/core/values/constant.dart';
 import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/login.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/register.dart';
@@ -49,7 +47,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         validPassword = null;
         if (failure is InvalidPasswordFailure) {
           yield Error(
-            message: _mapFailureToMessage(failure),
+            message: failure.message,
           );
         }
       }, (password) async* {
@@ -60,12 +58,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         validEmail = null;
         if (failure is EmptyEmailFailure) {
           yield Error(
-            message: _mapFailureToMessage(failure),
+            message: failure.message,
           );
         } else if (failure is InvalidEmailFailure) {
           yield Error(
-//            email: failure.email,
-            message: _mapFailureToMessage(failure),
+            message: failure.message,
           );
         }
       }, (email) async* {
@@ -77,7 +74,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final failureOrUserData = await loginUseCase.loginEmailAndPassword(
             email: validEmail, password: validPassword);
         yield failureOrUserData.fold(
-            (failure) => Error(message: _mapFailureToMessage(failure)),
+            (failure) => Error(message: failure.message),
             (userdata) => Loaded(user: userdata));
       }
     }
@@ -95,7 +92,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (failure is InvalidPasswordFailure ||
             failure is PasswordDidNotMatchFailure) {
           yield Error(
-            message: _mapFailureToMessage(failure),
+            message: failure.message,
           );
         }
       }, (password) async* {
@@ -106,12 +103,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         validUsername = null;
         if (failure is EmptyEmailFailure) {
           yield Error(
-            message: _mapFailureToMessage(failure),
+            message: failure.message,
           );
         } else if (failure is InvalidEmailFailure) {
           yield Error(
 //            email: failure.email,
-            message: _mapFailureToMessage(failure),
+            message: failure.message,
           );
         }
       }, (email) async* {
@@ -122,7 +119,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         validUsername = null;
         print("username called");
         if (failure is InvalidUsernameFailure) {
-          yield Error(message: _mapFailureToMessage(failure));
+          yield Error(message: failure.message);
         }
       }, (username) async* {
         validUsername = username;
@@ -141,7 +138,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 password: validPassword,
                 username: event.username);
         yield failureOrUserData.fold(
-            (failure) => Error(message: _mapFailureToMessage(failure)),
+            (failure) => Error(message: failure.message),
             (userdata) => Loaded(user: userdata));
       }
     }
@@ -150,7 +147,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield Loading();
       final failureOrUserData = await loginUseCase.loginGoogle();
       yield failureOrUserData.fold(
-          (failure) => Error(message: _mapFailureToMessage(failure)),
+          (failure) => Error(message: failure.message),
           (userData) => Loaded(user: userData));
     }
 
@@ -158,59 +155,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield Loading();
       final failureOrSkipAuth = await loginUseCase.loginAnonymously();
       yield failureOrSkipAuth.fold(
-        (failure) => Error(message: _mapFailureToMessage(failure)),
+        (failure) => Error(message: failure.message),
         (bool) => Loaded(),
       );
     }
   }
 }
 
-String _mapFailureToMessage(Failure failure) {
-  switch (failure.runtimeType) {
-    case NetworkFailure:
-      print(NETWORK_FAILURE_MESSAGE);
-      return NETWORK_FAILURE_MESSAGE;
-    case LoginFailure:
-      print(LOGIN_FAILURE_MESSAGE);
-      return LOGIN_FAILURE_MESSAGE;
-    case EmptyEmailFailure:
-      print(EMPTY_EMAIL_FIELD_MESSAGE);
-      return EMPTY_EMAIL_FIELD_MESSAGE;
-    case InvalidEmailFailure:
-      print(INVALID_EMAIL_MESSAGE);
-      return INVALID_EMAIL_MESSAGE;
-    case InvalidPasswordFailure:
-      print(INVALID_PASSWORD_MESSAGE);
-      return INVALID_PASSWORD_MESSAGE;
-    case PasswordDidNotMatchFailure:
-      print(PASSWORD_DID_NOT_MATCH);
-      return PASSWORD_DID_NOT_MATCH;
-    case RegisterFailure:
-      print(REGISTER_FAILURE_MESSAGE);
-      return REGISTER_FAILURE_MESSAGE;
-    case EmailAlreadyExistFailure:
-      print(EMAIL_ALREADY_EXIST_MESSAGE);
-      return EMAIL_ALREADY_EXIST_MESSAGE;
-    case InvalidUsernameFailure:
-      print(INVALID_USERNAME_MESSAGE);
-      return INVALID_USERNAME_MESSAGE;
-    case WrongPasswordFailure:
-      print(WRONG_PASSWORD_MESSAGE);
-      return WRONG_PASSWORD_MESSAGE;
-    case UserNotFoundFailure:
-      print(USER_NOT_FOUND_MESSAGE);
-      return USER_NOT_FOUND_MESSAGE;
-    case UserDisabledFailure:
-      print(USER_DISABLE_MESSAGE);
-      return USER_DISABLE_MESSAGE;
-    case TooManyRequestFailure:
-      print(TOO_MANY_REQUEST_MESSAGE);
-      return TOO_MANY_REQUEST_MESSAGE;
-    case OperationNotAllowedFailure:
-      print(OPERATION_NOT_ALLOWED_MESSAGE);
-      return OPERATION_NOT_ALLOWED_MESSAGE;
-    default:
-      print(UNEXPECTED_ERROR);
-      return UNEXPECTED_ERROR;
-  }
-}

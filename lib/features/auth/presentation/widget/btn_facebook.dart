@@ -28,7 +28,7 @@ class FacebookButton extends StatelessWidget {
             ),
           ],
         ),
-        shape: RoundedRectangleBorder(borderRadius: Radii.appBorderRadius),
+        shape: RoundedRectangleBorder(borderRadius: Radii.appFormRadius),
         onPressed: onPressed,
       ),
     );

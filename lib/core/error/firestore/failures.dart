@@ -1,123 +1,79 @@
+import 'package:rakit_komputer/core/values/constant.dart';
+
 import '../failure.dart';
 
 class AbortedFailure extends Failure {
-  final String message = "ABORTED";
-
-  @override
-  List<Object> get props => [message];
+  AbortedFailure() : super("ABORTED");
 }
 
 class AlreadyExistFailure extends Failure {
-  final String message = "ALREADY_EXISTS";
-
-  @override
-  List<Object> get props => [message];
+  AlreadyExistFailure() : super("ALREADY_EXISTS");
 }
 
 class CancelledFailure extends Failure {
-  final String message = "CANCELLED";
-
-  @override
-  List<Object> get props => [message];
+  CancelledFailure() : super("CANCELLED");
 }
 
 class DataLossFailure extends Failure {
-  final String message = "DATA_LOSS";
-
-  @override
-  List<Object> get props => [message];
+  DataLossFailure() : super("DATA_LOSS");
 }
 
 class DeadlineExceededFailure extends Failure {
-  final String message = "DEADLINE_EXCEEDED";
-
-  @override
-  List<Object> get props => [message];
+  DeadlineExceededFailure() : super("DEADLINE_EXCEEDED");
 }
 
 class FailedPreconditionFailure extends Failure {
-  final String message = "FAILED_PRECONDITION";
-
-  @override
-  List<Object> get props => [message];
+  FailedPreconditionFailure() : super("FAILED_PRECONDITION");
 }
 
 class InternalFailure extends Failure {
-  final String message = "INTERNAL";
-
-  @override
-  List<Object> get props => [message];
+  InternalFailure() : super("INTERNAL");
 }
 
 class InvalidArgumentFailure extends Failure {
-  final String message = "INVALID_ARGUMENT";
-
-  @override
-  List<Object> get props => [message];
+  InvalidArgumentFailure() : super("INVALID_ARGUMENT");
 }
 
 class NotFoundFailure extends Failure {
-  final String message = "NOT_FOUND";
-
-  @override
-  List<Object> get props => [message];
+  NotFoundFailure() : super("NOT_FOUND");
 }
 
 class OutOfRangeFailure extends Failure {
-  final String message = "OUT_OF_RANGE";
-
-  @override
-  List<Object> get props => [message];
+  OutOfRangeFailure() : super("OUT_OF_RANGE");
 }
 
 class PermissionDeniedFailure extends Failure {
-  final String message = "PERMISSION_DENIED";
-
-  @override
-  List<Object> get props => [message];
+  PermissionDeniedFailure() : super("PERMISSION_DENIED");
 }
 
 class ResourceExhaustedFailure extends Failure {
-  final String message = "RESOURCE_EXHAUSTED";
-
-  @override
-  List<Object> get props => [message];
+  ResourceExhaustedFailure() : super("RESOURCE_EXHAUSTED");
 }
 
 class UnauthenticatedFailure extends Failure {
-  final String message = "UNAUTHENTICATED";
-
-  @override
-  List<Object> get props => [message];
+  UnauthenticatedFailure() : super("UNAUTHENTICATED");
 }
 
 class UnavailableFailure extends Failure {
-  final String message = "UNAVAILABLE";
-
-  @override
-  List<Object> get props => [message];
+  UnavailableFailure() : super("UNAVAILABLE");
 }
 
 class UnimplementedFailure extends Failure {
-  final String message = "UNIMPLEMENTED";
-
-  @override
-  List<Object> get props => [message];
+  UnimplementedFailure() : super("UNIMPLEMENTED");
 }
 
 class UndefinedFailure extends Failure {
-  final String message = "UNKNOWN";
-
-  @override
-  List<Object> get props => [message];
+  UndefinedFailure() : super("UNKNOWN");
 }
 
 // IDEALLY FOR TEST ONLY
 class RemoteDataSourceFailure extends Failure {
-  final String message = "REMOTE_DATA_SOURCE_Failure";
+  RemoteDataSourceFailure() : super("REMOTE_DATA_SOURCE_FAILURE");
 
   @override
   List<Object> get props => [message];
 }
 
-class SomeFailure extends Failure {}
+class SomeFailure extends Failure {
+  SomeFailure() : super(SOME_FAILURE_MESSAGE);
+}

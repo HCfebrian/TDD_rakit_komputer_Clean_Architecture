@@ -123,7 +123,6 @@ void main() {
           Empty(),
           Error(
             message: INVALID_EMAIL_MESSAGE,
-//            email: tInvalidEmail,
           ),
         ];
         expectLater(bloc, emitsInOrder(expected));
@@ -137,7 +136,7 @@ void main() {
       "should emit error Empty email state when invalid email is given",
       () async {
         //arrange
-        setUpValidateEmail(toReturn: Left(EmptyEmailFailure("")));
+        setUpValidateEmail(toReturn: Left(EmptyEmailFailure()));
         setUpValidatePasswordLogin(toReturn: Right(tPassword));
         //assert later
         final expected = [
@@ -306,7 +305,7 @@ void main() {
       "should emit error Empty email state when input is invalid",
       () async {
         //arrange
-        setUpValidateEmail(toReturn: Left(EmptyEmailFailure("")));
+        setUpValidateEmail(toReturn: Left(EmptyEmailFailure()));
         setUpValidateUsername(toReturn: Right(tUsername));
         setUpValidatePasswordRegister(toReturn: Right(tPassword));
         //assert later

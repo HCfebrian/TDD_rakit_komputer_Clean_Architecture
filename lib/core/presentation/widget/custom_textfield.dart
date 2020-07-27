@@ -32,10 +32,10 @@ class CustomTextField extends StatelessWidget {
       decoration: BoxDecoration(
         border: border,
         color: AppColors.primaryElement,
+        borderRadius: Radii.appFormRadius,
         boxShadow: [
           Shadows.primaryShadow,
         ],
-        borderRadius: Radii.appBorderRadius,
       ),
       child: Row(
         children: <Widget>[
@@ -53,7 +53,7 @@ class CustomTextField extends StatelessWidget {
                 color: AppColors.primaryText,
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w400,
-                fontSize: 12,
+                fontSize: 14,
               ),
 
               maxLines: 1,
