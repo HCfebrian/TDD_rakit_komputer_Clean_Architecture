@@ -14,7 +14,7 @@ class RecommendedBuildBloc
     extends Bloc<RecommendedBuildEvent, RecommendedBuildState> {
   final BuildUsecase buildUsecase;
 
-  RecommendedBuildBloc({this.buildUsecase})
+  RecommendedBuildBloc({@required this.buildUsecase})
       : assert(BuildUsecase != null),
         super(Empty());
 
@@ -28,7 +28,6 @@ class RecommendedBuildBloc
       yield failureOrBuildList.fold(
           (failure) => Error(message: failure.message),
           (buildList) => Loaded(recommendedBuild: buildList));
-
     }
   }
 }

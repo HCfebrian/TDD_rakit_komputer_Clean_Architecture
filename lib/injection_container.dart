@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
@@ -13,6 +14,12 @@ import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.d
 import 'package:rakit_komputer/features/auth/domain/usecase/login.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/register.dart';
 import 'package:rakit_komputer/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:rakit_komputer/features/get_build_list/data/data_source/build_remote_data_source_abstract.dart';
+import 'package:rakit_komputer/features/get_build_list/data/data_source/build_remote_data_source_impl.dart';
+import 'package:rakit_komputer/features/get_build_list/data/repository/build_repo_impl.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/repository/build_repository.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/usecase/get_completed_build.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build_bloc.dart';
 
 //service locator
 final sl = GetIt.instance;
@@ -28,18 +35,22 @@ void init() {
         validateUsername: sl(),
       ));
 
+  sl.registerFactory(() => RecommendedBuildBloc(buildUsecase: sl()));
   //usecase
   sl.registerLazySingleton(() => LoginUseCase(authRepo: sl()));
   sl.registerLazySingleton(() => RegisterUseCase(authRepository: sl()));
+  sl.registerLazySingleton(() => BuildUsecase(buildRepository: sl()));
 
   //repo
   sl.registerLazySingleton<AuthRepository>(() =>
       FirebaseAuthRepositoryImpl(networkInfo: sl(), authRemoteData: sl()));
 
+  sl.registerLazySingleton<BuildRepoAbst>(() => BuildRepoImpl(remoteDataSource: sl()));
   //data
   sl.registerLazySingleton<AuthRemoteDataSource>(() =>
       FirebaseAuthRemoteDataSourceImpl(firebaseAuth: sl(), googleSignIn: sl()));
 
+  sl.registerLazySingleton<BuildRemoteDataSourceAbstc>(() => BuildRemoteDataSourceImpl(firetoreInstance: sl()));
 // Core
   //presentation
   //util
@@ -55,4 +66,5 @@ void init() {
   sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   sl.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn());
   sl.registerLazySingleton(() => DataConnectionChecker());
+  sl.registerLazySingleton<Firestore>(() => Firestore.instance);
 }

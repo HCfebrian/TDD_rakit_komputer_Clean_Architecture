@@ -16,6 +16,8 @@ class BuildRepoImpl implements BuildRepoAbst {
     try {
       return Right(await remoteDataSource.getRecommendedBuildList());
     } catch (e) {
+      print("inidia erornya");
+      print(e);
       return Left(ExceptionToFailure.handle(e));
     }
   }

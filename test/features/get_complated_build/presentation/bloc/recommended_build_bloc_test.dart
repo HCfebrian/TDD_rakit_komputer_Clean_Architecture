@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rakit_komputer/core/error/auth/failures.dart';
-import 'package:rakit_komputer/core/error/firestore/exception.dart';
 import 'package:rakit_komputer/core/error/firestore/failures.dart';
 import 'package:rakit_komputer/core/values/constant.dart';
 import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
@@ -61,10 +59,7 @@ void main() {
       ];
       expectLater(bloc, emitsInOrder(expected));
       //act
-
       bloc.add(GetRecommendedList());
-      await untilCalled(usecase.getRecommendedBuild());
-
     },
   );
 }

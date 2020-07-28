@@ -130,7 +130,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           validUsername != null) {
         print(
             "execute bos. password $validPassword email $validEmail username $validUsername");
-
         yield Loading();
         final failureOrUserData =
             await registerUseCase.registerEmailAndPassword(

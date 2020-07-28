@@ -16,7 +16,11 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
     final docRecommendedRef = firetoreInstance.collection("recommended_build");
     try {
       docRecommendedRef.getDocuments().then(
-          (value) => value.documents.forEach((ds) {
+              (value) =>
+              value.documents.forEach((ds) {
+                print(ds.documentID);
+                print("kalau true salah");
+                print(BuildModel.from(ds)==null);
                 result.add(BuildModel.from(ds));
               }), onError: (e) {
         print("value error happened");
