@@ -16,18 +16,32 @@ class RecommendedBuildBloc
 
   RecommendedBuildBloc({@required this.buildUsecase})
       : assert(BuildUsecase != null),
-        super(Empty());
+        super(RecommendedEmpty());
 
   @override
   Stream<RecommendedBuildState> mapEventToState(
     RecommendedBuildEvent event,
   ) async* {
     if (event is GetRecommendedList) {
-      yield Loading();
+      yield RecommendedLoading();
+      print("sedang loading");
       final failureOrBuildList = await buildUsecase.getRecommendedBuild();
+      print("selesai await");
+      yield failureOrBuildList.fold((failure) {
+        print(("sedang failure"));
+        return RecommendedError(message: failure.message);
+      }, (buildList) {
+        print("Sedang loaded");
+        return RecommendedLoaded(recommendedBuild: buildList);
+      });
+    }
+    if (event is GetCompletedBuildList) {
+      yield CompletedBuildLoading();
+      final failureOrBuildList = await buildUsecase.getCompletedBuild();
       yield failureOrBuildList.fold(
-          (failure) => Error(message: failure.message),
-          (buildList) => Loaded(recommendedBuild: buildList));
+          (failure) => CompletedBuildError(message: failure.message),
+          (completedBuildList) =>
+              CompletedBuildLoaded(completedBuild: completedBuildList));
     }
   }
 }

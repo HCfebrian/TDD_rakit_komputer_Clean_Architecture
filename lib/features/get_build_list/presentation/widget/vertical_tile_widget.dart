@@ -8,7 +8,8 @@ class VerticalTile extends StatelessWidget {
   final BuildEntity buildList;
 
   const VerticalTile({
-    Key key, @required this.buildList,
+    Key key,
+    @required this.buildList,
   }) : super(key: key);
 
   @override
@@ -32,7 +33,7 @@ class VerticalTile extends StatelessWidget {
             Container(
               height: 104,
               width: 104,
-              child: Image.asset("assets/images/image20.png"),
+              child: Image.network(buildList.picURL, fit: BoxFit.fill,),
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 6),

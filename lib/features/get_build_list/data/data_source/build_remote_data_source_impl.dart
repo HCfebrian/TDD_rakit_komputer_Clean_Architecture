@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rakit_komputer/core/error/auth/exception_handler.dart';
-import 'package:rakit_komputer/core/error/firestore/exception_handler.dart';
-import 'package:rakit_komputer/features/get_build_list/data/model/computer_build_model.dart';
 import 'package:meta/meta.dart';
+import 'package:rakit_komputer/core/error/auth/exception_handler.dart';
+import 'package:rakit_komputer/features/get_build_list/data/model/computer_build_model.dart';
+
 import 'build_remote_data_source_abstract.dart';
 
 class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
@@ -12,26 +12,40 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
 
   @override
   Future<List<BuildModel>> getRecommendedBuildList() async {
-    List<BuildModel> result = List();
-    final docRecommendedRef = firetoreInstance.collection("recommended_build");
     try {
-      docRecommendedRef.getDocuments().then(
-              (value) =>
-              value.documents.forEach((ds) {
-                print(ds.documentID);
+      List<BuildModel> result = List();
+      final docRecommendedRef =
+          firetoreInstance.collection("recommended_build");
+      await docRecommendedRef.getDocuments().then(
+          (value) => value.documents.forEach((ds) {
+                print(ds.data["title"]);
                 print("kalau true salah");
-                print(BuildModel.from(ds)==null);
+                print(BuildModel.from(ds) == null);
                 result.add(BuildModel.from(ds));
               }), onError: (e) {
-        print("value error happened");
-        print(e);
-        throw FirestoreException.handle(e);
+        throw FirebaseException.handle(e);
       });
+      return result;
     } catch (e) {
-      print(e);
       throw FirebaseException.handle(e);
     }
+  }
 
-    return result;
+  @override
+  Future<List<BuildModel>> getCompletedBuildList() async {
+    try {
+      List<BuildModel> result = List();
+      final docRecommendedRef = firetoreInstance.collection("completed_build");
+      await docRecommendedRef.getDocuments().then(
+          (value) => value.documents.forEach((ds) {
+                print(BuildModel.from(ds) == null);
+                result.add(BuildModel.from(ds));
+              }), onError: (e) {
+        throw FirebaseException.handle(e);
+      });
+      return result;
+    } catch (e) {
+      throw FirebaseException.handle(e);
+    }
   }
 }

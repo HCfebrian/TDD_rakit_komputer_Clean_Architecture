@@ -21,7 +21,6 @@ class FirebaseAuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       GoogleSignInAuthentication _signInAuth =
           await _signInAccount.authentication;
-
       final AuthCredential credential = GoogleAuthProvider.getCredential(
           idToken: _signInAuth.idToken, accessToken: _signInAuth.accessToken);
       firebaseUser = (await firebaseAuth.signInWithCredential(credential)).user;

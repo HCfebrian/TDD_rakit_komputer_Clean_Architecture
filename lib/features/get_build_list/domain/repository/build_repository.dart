@@ -4,4 +4,5 @@ import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entit
 
 abstract class BuildRepoAbst {
   Future<Either<Failure, List<BuildEntity>>> getRecommendedBuild();
+  Future<Either<Failure, List<BuildEntity>>> getCompletedBuild();
 }

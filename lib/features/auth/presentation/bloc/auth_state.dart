@@ -33,7 +33,5 @@ class Error extends AuthState{
   List<Object> get props => [message];
 }
 
-class InvalidPasswordState extends AuthState{
-}
 
 

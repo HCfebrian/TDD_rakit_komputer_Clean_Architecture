@@ -18,48 +18,89 @@ void main() {
       title: "Pc Dewa",
       overallPrice: "20000000",
       picURL: "facebook.com");
-  final List<BuildEntity> tRecommendedBuildList = [tBuildEntity, tBuildEntity];
+  final List<BuildEntity> tBuildList = [tBuildEntity, tBuildEntity];
 
   setUp(() {
     usecase = MockBuildUsecase();
     bloc = RecommendedBuildBloc(buildUsecase: usecase);
   });
 
-  test(
-    "should emmit [Loading, Loaded] when getRecommendedList is succeed",
-    () async {
-      //arrange
-      when(usecase.getRecommendedBuild())
-          .thenAnswer((realInvocation) async => Right(tRecommendedBuildList));
+  group("recommended build list", () {
+    test(
+      "should emmit [Loading, Loaded] when getRecommendedList is succeed",
+      () async {
+        //arrange
+        when(usecase.getRecommendedBuild())
+            .thenAnswer((realInvocation) async => Right(tBuildList));
+        //assert later
+        final expected = [
+          RecommendedEmpty(),
+          RecommendedLoading(),
+          RecommendedLoaded(recommendedBuild: tBuildList),
+        ];
+        expectLater(bloc, emitsInOrder(expected));
+        //act
+        bloc.add(GetRecommendedList());
+        await untilCalled(usecase.getRecommendedBuild());
+      },
+    );
 
-      //assert later
-      final expected = [
-        Empty(),
-        Loading(),
-        Loaded(recommendedBuild: tRecommendedBuildList),
-      ];
-      expectLater(bloc, emitsInOrder(expected));
-      //act
-      bloc.add(GetRecommendedList());
-      await untilCalled(usecase.getRecommendedBuild());
-    },
-  );
+    test(
+      "should emil [Loading, Error] when getRecommendedList is failed",
+      () async {
+        //arrange
+        when(usecase.getRecommendedBuild())
+            .thenAnswer((realInvocation) async => Left(SomeFailure()));
+        //assert later
+        final expected = [
+          RecommendedEmpty(),
+          RecommendedLoading(),
+          RecommendedError(message: SOME_FAILURE_MESSAGE),
+        ];
+        expectLater(bloc, emitsInOrder(expected));
+        //act
+        bloc.add(GetRecommendedList());
+      },
+    );
+  });
 
-  test(
-    "should emil [Loading, Error] when getRecommendedList is failed",
-    () async {
-      //arrange
-      when(usecase.getRecommendedBuild())
-          .thenAnswer((realInvocation) async => Left(SomeFailure()));
-      //assert later
-      final expected = [
-        Empty(),
-        Loading(),
-        Error(message: SOME_FAILURE_MESSAGE),
-      ];
-      expectLater(bloc, emitsInOrder(expected));
-      //act
-      bloc.add(GetRecommendedList());
-    },
-  );
+
+
+  group("completed build list", () {
+    test(
+      "should emmit [Loading, Loaded] when getRecommendedList is succeed",
+      () async {
+        //arrange
+        when(usecase.getCompletedBuild())
+            .thenAnswer((realInvocation) async => Right(tBuildList));
+        //assert later
+        final expected = [
+          RecommendedEmpty(),
+          CompletedBuildLoading(),
+          CompletedBuildLoaded(completedBuild: tBuildList),
+        ];
+        expectLater(bloc, emitsInOrder(expected));
+        //act
+        bloc.add(GetCompletedBuildList());
+      },
+    );
+
+    test(
+      "should emil [Loading, Error] when getRecommendedList is failed",
+      () async {
+        //arrange
+        when(usecase.getCompletedBuild())
+            .thenAnswer((realInvocation) async => Left(SomeFailure()));
+        //assert later
+        final expected = [
+          RecommendedEmpty(),
+          CompletedBuildLoading(),
+          CompletedBuildError(message: SOME_FAILURE_MESSAGE),
+        ];
+        expectLater(bloc, emitsInOrder(expected));
+        //act
+        bloc.add(GetCompletedBuildList());
+      },
+    );
+  });
 }

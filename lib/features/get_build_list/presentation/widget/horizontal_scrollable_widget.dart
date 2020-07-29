@@ -27,46 +27,63 @@ class HorizontalScrollableSection extends StatelessWidget {
                   style: AppStyle.textBlackSemiBold16,
                   textAlign: TextAlign.left,
                 ),
-                Text(
-                  "See Others",
-                  style: AppStyle.textRedRegular14,
-                  textAlign: TextAlign.left,
+                GestureDetector(
+                  onTap: (){
+                  },
+                  child: Text(
+                    "See Others",
+                    style: AppStyle.textRedRegular14,
+                    textAlign: TextAlign.left,
+                  ),
                 ),
               ],
             ),
           ),
           SizedBox(height: 10),
+          BlocBuilder<RecommendedBuildBloc, RecommendedBuildState>(
+            buildWhen: (p ,n ) => true,
+              builder: (context, state) {
+                if(state is RecommendedLoading){
+                  print("loading");
+                  return Text("Loading");
+                }
 
-          BlocBuilder<RecommendedBuildBloc,RecommendedBuildState>(builder: (context, state){
-            if(state is Loaded){
-              print("if true berarti salah karena build list empty");
-              print(state.recommendedBuild.isNotEmpty);
-              return SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: <Widget>[
-                    SizedBox(width: 18),
-                    Container(),
-                    SizedBox(width: 14),
-                  ],
-                ),
-              );
-            }
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: <Widget>[
-                  SizedBox(width: 18),
-                  Container(),
-                  Container(),
-                  Container(),
-                  Container(),
-                  SizedBox(width: 14),
-                ],
-              ),
-            );
+                if(state is RecommendedEmpty){
+                  print("empty");
+                  return Text("empty");
+                }
+                
+                if(state is RecommendedLoaded){
+                  print("Loaded");
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: <Widget>[
+                        SizedBox(width: 18),
+                        VerticalTile(buildList: state.recommendedBuild[0],),
+                        VerticalTile(buildList: state.recommendedBuild[1],),
+                        VerticalTile(buildList: state.recommendedBuild[2],),
+                        VerticalTile(buildList: state.recommendedBuild[3],),
+                        VerticalTile(buildList: state.recommendedBuild[4],),
+                        SizedBox(width: 14),
+                      ],
+                    ),
+                  );
+                }
+                else{
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: <Widget>[
+                        SizedBox(width: 18),
+                        Container(),
+                        Container(),
+                        SizedBox(width: 14),
+                      ],
+                    ),
+                  );
+                }
           }),
-
         ],
       ),
     );

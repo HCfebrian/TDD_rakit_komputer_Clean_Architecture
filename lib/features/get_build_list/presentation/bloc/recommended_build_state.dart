@@ -1,29 +1,59 @@
 part of 'recommended_build_bloc.dart';
 
 abstract class RecommendedBuildState extends Equatable {
-  const RecommendedBuildState();
   @override
   // TODO: implement props
   List<Object> get props => [];
 }
+class RecommendedEmpty extends RecommendedBuildState {}
 
-class Empty extends RecommendedBuildState {}
 
-class Loading extends RecommendedBuildState{}
 
-class Loaded extends RecommendedBuildState{
+// home recommended  build list
+
+
+class RecommendedLoading extends RecommendedBuildState{}
+
+class RecommendedError extends RecommendedBuildState {
+  final String message;
+
+  RecommendedError({@required this.message});
+}
+
+
+class RecommendedLoaded extends RecommendedBuildState{
   final List<BuildEntity> recommendedBuild;
 
-  Loaded({@required this.recommendedBuild});
+  RecommendedLoaded({@required this.recommendedBuild});
 
   @override
   // TODO: implement props
   List<Object> get props => [recommendedBuild];
 }
 
-class Error extends RecommendedBuildState{
+
+
+// home completed build list
+
+
+class CompletedBuildLoading extends RecommendedBuildState{}
+
+class CompletedBuildError extends RecommendedBuildState {
   final String message;
-  Error({@required this.message});
+
+  CompletedBuildError({@required this.message});
+
+}
+
+class CompletedBuildLoaded extends RecommendedBuildState{
+  final List<BuildEntity> completedBuild;
+
+  CompletedBuildLoaded({@required this.completedBuild});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [completedBuild];
+
 }
 
 

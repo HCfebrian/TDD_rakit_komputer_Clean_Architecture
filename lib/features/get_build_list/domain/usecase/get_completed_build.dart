@@ -12,4 +12,9 @@ class BuildUsecase {
     return await buildRepository.getRecommendedBuild();
   }
 
+  Future<Either<Failure, List<BuildEntity>>> getCompletedBuild() async{
+
+    return await buildRepository.getCompletedBuild();
+  }
+
 }

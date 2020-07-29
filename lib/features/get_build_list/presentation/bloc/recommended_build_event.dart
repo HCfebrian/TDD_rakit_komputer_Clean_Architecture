@@ -7,3 +7,5 @@ abstract class RecommendedBuildEvent extends Equatable {
 }
 
 class GetRecommendedList extends RecommendedBuildEvent{}
+
+class GetCompletedBuildList extends RecommendedBuildEvent{}
