@@ -12,8 +12,8 @@ class MockBuildRepository extends Mock implements BuildRepoAbst{}
 void main(){
   MockBuildRepository mockBuildRepository;
   BuildUsecase buildUsecase;
-  final BuildEntity singleBuild = BuildEntity(buildId: "123", title: "BUILD 1", overallPrice: "2000", picURL: "facebook.com");
-  final List<BuildEntity> tListBuild = [singleBuild,singleBuild,singleBuild,singleBuild];
+  final BuildEntity tPcBuild = BuildEntity(buildId: "123", title: "BUILD 1", overallPrice: "2000", picURL: "facebook.com", owner: "febri");
+  final List<BuildEntity> tListBuild = [tPcBuild,tPcBuild,tPcBuild,tPcBuild];
   setUp((){
     mockBuildRepository = MockBuildRepository();
     buildUsecase = BuildUsecase(buildRepository: mockBuildRepository);
@@ -66,5 +66,17 @@ void main(){
       expect(result, Left(SomeFailure()));
     },
   );
+
+  test(
+      "should get Featured BuildId",
+      () async {
+        //arrange
+        when(mockBuildRepository.getFeaturedBuild()).thenAnswer((realInvocation) async => Right(tPcBuild));
+        //act
+        final result = await buildUsecase.getFeaturedBuild();
+        //assert
+        expect(result, Right(tPcBuild));
+      },
+    );
 
 }

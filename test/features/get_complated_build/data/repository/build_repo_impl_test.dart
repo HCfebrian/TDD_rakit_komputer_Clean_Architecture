@@ -4,28 +4,29 @@ import 'package:matcher/matcher.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rakit_komputer/core/error/auth/exception.dart';
 import 'package:rakit_komputer/core/error/auth/failures.dart';
+import 'package:rakit_komputer/features/get_build_list/data/data_source/build_remote_data_source_abstract.dart';
 import 'package:rakit_komputer/features/get_build_list/data/data_source/build_remote_data_source_impl.dart';
 import 'package:rakit_komputer/features/get_build_list/data/model/computer_build_model.dart';
 import 'package:rakit_komputer/features/get_build_list/data/repository/build_repo_impl.dart';
 
-class MockBuildRemoteDataSourceImpl extends Mock implements BuildRemoteDataSourceImpl{}
+class MockBuildRemoteDataSource extends Mock implements BuildRemoteDataSourceAbstc{}
 
 main(){
-  MockBuildRemoteDataSourceImpl mockBuildRemoteDataSourceImpl;
+  MockBuildRemoteDataSource mockBuildRemoteDataSource;
   BuildRepoImpl buildRepoImpl;
-  final BuildModel tBuild = BuildModel(buildId: "1234", title: "test build", overallPrice: "2000", picURL: "facebook.com");
+  final BuildModel tBuild = BuildModel(buildId: "1234", title: "test build", overallPrice: "2000", picURL: "facebook.com", owner: "mamat");
   final List<BuildModel>tBuildList = [tBuild,tBuild,tBuild];
 
   setUp((){
-    mockBuildRemoteDataSourceImpl = MockBuildRemoteDataSourceImpl();
-    buildRepoImpl = BuildRepoImpl(remoteDataSource: mockBuildRemoteDataSourceImpl);
+    mockBuildRemoteDataSource = MockBuildRemoteDataSource();
+    buildRepoImpl = BuildRepoImpl(remoteDataSource: mockBuildRemoteDataSource);
   });
 
   test(
       "should return listBuildEntity when succeed",
       () async {
         //arrange
-        when(mockBuildRemoteDataSourceImpl.getRecommendedBuildList()).thenAnswer((realInvocation) async => tBuildList);
+        when(mockBuildRemoteDataSource.getRecommendedBuildList()).thenAnswer((realInvocation) async => tBuildList);
         //act
         final result =  await buildRepoImpl.getRecommendedBuild();
         //assert
@@ -39,7 +40,7 @@ main(){
       "should return failure when some exception happened on data source",
       () async {
         //arrange
-        when(mockBuildRemoteDataSourceImpl.getRecommendedBuildList()).thenThrow(SomeException());
+        when(mockBuildRemoteDataSource.getRecommendedBuildList()).thenThrow(SomeException());
         //act
         final result = await buildRepoImpl.getRecommendedBuild();
         //assert
@@ -51,7 +52,7 @@ main(){
     "should return list Completed Build Entity when succeed",
         () async {
       //arrange
-      when(mockBuildRemoteDataSourceImpl.getCompletedBuildList()).thenAnswer((realInvocation) async => tBuildList);
+      when(mockBuildRemoteDataSource.getCompletedBuildList()).thenAnswer((realInvocation) async => tBuildList);
       //act
       final result =  await buildRepoImpl.getCompletedBuild();
       //assert
@@ -64,12 +65,38 @@ main(){
     "should return failure when some exception happened on data source",
         () async {
       //arrange
-      when(mockBuildRemoteDataSourceImpl.getCompletedBuildList()).thenThrow(SomeException());
+      when(mockBuildRemoteDataSource.getCompletedBuildList()).thenThrow(SomeException());
       //act
       final result = await buildRepoImpl.getCompletedBuild();
       //assert
       expect(result, Left(UndefinedFailure()));
     },
   );
+  
+  test(
+      "should should get fetured Build",
+      () async {
+        //arrange
+        when(mockBuildRemoteDataSource.getFeaturedBuild()).thenAnswer((realInvocation) async => tBuild);
+        //act
+        final result = await buildRepoImpl.getFeaturedBuild();
+        //assert
+        expect(result, Right(tBuild));
+      },
+    );
+
+  //TODO: change exception to something  concrete
+  test(
+    "should return failure when some exception happened on data source",
+        () async {
+      //arrange
+      when(mockBuildRemoteDataSource.getFeaturedBuild()).thenThrow(SomeException());
+      //act
+      final result = await buildRepoImpl.getFeaturedBuild();
+      //assert
+      expect(result, Left(UndefinedFailure()));
+    },
+  );
+
 
 }

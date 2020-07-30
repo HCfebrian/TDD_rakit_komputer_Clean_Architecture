@@ -7,7 +7,6 @@ import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entit
 import 'package:rakit_komputer/features/get_build_list/domain/usecase/get_completed_build.dart';
 
 part 'recommended_build_event.dart';
-
 part 'recommended_build_state.dart';
 
 class RecommendedBuildBloc
@@ -35,13 +34,6 @@ class RecommendedBuildBloc
         return RecommendedLoaded(recommendedBuild: buildList);
       });
     }
-    if (event is GetCompletedBuildList) {
-      yield CompletedBuildLoading();
-      final failureOrBuildList = await buildUsecase.getCompletedBuild();
-      yield failureOrBuildList.fold(
-          (failure) => CompletedBuildError(message: failure.message),
-          (completedBuildList) =>
-              CompletedBuildLoaded(completedBuild: completedBuildList));
-    }
+
   }
 }

@@ -17,4 +17,9 @@ class BuildUsecase {
     return await buildRepository.getCompletedBuild();
   }
 
+  Future<Either<Failure, BuildEntity>> getFeaturedBuild() async{
+
+    return await buildRepository.getFeaturedBuild();
+  }
+
 }

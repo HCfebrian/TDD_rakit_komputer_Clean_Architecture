@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rakit_komputer/core/presentation/widget/custom_textfield.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/style.dart';
-import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/bloc/completed_build/completed_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build/recommended_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/widget/horizontal_scrollable_widget.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/widget/vertical_section_widget.dart';
 
@@ -18,12 +19,17 @@ class HomePage extends StatelessWidget {
         floatingActionButton:
             Container(margin: EdgeInsets.only(bottom: 60), child: AppFAB()),
         backgroundColor: AppColors.backgroundColor,
-        body: BlocProvider(
-          create: (BuildContext context) => sl<RecommendedBuildBloc>(),
-          child: HomeContent(),
+        body: MultiBlocProvider(
+          providers: [
+            BlocProvider<RecommendedBuildBloc>(
+            create: (BuildContext context) => sl<RecommendedBuildBloc>()),
+            BlocProvider<CompletedBuildBloc>(
+            create: (BuildContext context) => sl<CompletedBuildBloc>()),
+          ],
+            child: HomeContent(),
+          ),
         ),
-      ),
-    );
+      );
   }
 }
 
@@ -35,6 +41,7 @@ class HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<RecommendedBuildBloc>(context).add(GetRecommendedList());
+    BlocProvider.of<CompletedBuildBloc>(context).add(GetCompletedBuildList());
     return Container(
       child: Column(
         children: <Widget>[

@@ -4,14 +4,14 @@ import 'package:mockito/mockito.dart';
 import 'package:rakit_komputer/core/error/firestore/failures.dart';
 import 'package:rakit_komputer/core/values/constant.dart';
 import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
-import 'package:rakit_komputer/features/get_build_list/domain/usecase/get_completed_build.dart';
-import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build/recommended_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/bloc/completed_build/completed_build_bloc.dart';
 
-class MockBuildUsecase extends Mock implements BuildUsecase {}
+import 'recommended_build_bloc_test.dart';
 
-void main() {
+void main(){
+
   MockBuildUsecase usecase;
-  RecommendedBuildBloc bloc;
+  CompletedBuildBloc bloc;
 
   final BuildEntity tBuildEntity = BuildEntity(
       buildId: "abc",
@@ -22,48 +22,44 @@ void main() {
 
   setUp(() {
     usecase = MockBuildUsecase();
-    bloc = RecommendedBuildBloc(buildUsecase: usecase);
+    bloc = CompletedBuildBloc(buildUsecase: usecase);
   });
-
-  group("recommended build list", () {
+  group("completed build list", () {
     test(
       "should emmit [Loading, Loaded] when getRecommendedList is succeed",
-      () async {
+          () async {
         //arrange
-        when(usecase.getRecommendedBuild())
+        when(usecase.getCompletedBuild())
             .thenAnswer((realInvocation) async => Right(tBuildList));
         //assert later
         final expected = [
-          RecommendedEmpty(),
-          RecommendedLoading(),
-          RecommendedLoaded(recommendedBuild: tBuildList),
+          CompletedBuildEmpty(),
+          CompletedBuildLoading(),
+          CompletedBuildLoaded(completedBuild: tBuildList),
         ];
         expectLater(bloc, emitsInOrder(expected));
         //act
-        bloc.add(GetRecommendedList());
-        await untilCalled(usecase.getRecommendedBuild());
+        bloc.add(GetCompletedBuildList());
       },
     );
 
     test(
       "should emil [Loading, Error] when getRecommendedList is failed",
-      () async {
+          () async {
         //arrange
-        when(usecase.getRecommendedBuild())
+        when(usecase.getCompletedBuild())
             .thenAnswer((realInvocation) async => Left(SomeFailure()));
         //assert later
         final expected = [
-          RecommendedEmpty(),
-          RecommendedLoading(),
-          RecommendedError(message: SOME_FAILURE_MESSAGE),
+          CompletedBuildEmpty(),
+          CompletedBuildLoading(),
+          CompletedBuildError(message: SOME_FAILURE_MESSAGE),
         ];
         expectLater(bloc, emitsInOrder(expected));
         //act
-        bloc.add(GetRecommendedList());
+        bloc.add(GetCompletedBuildList());
       },
     );
   });
-
-
 
 }

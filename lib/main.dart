@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rakit_komputer/features/auth/presentation/page/logo_page.dart';
+import 'package:rakit_komputer/core/data/admin_util/firestore_util.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/pages/home_page.dart';
 
 import 'injection_container.dart' as di;
+import 'injection_container.dart';
 
 void main() {
   di.init();
@@ -17,7 +18,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    //todo: change to LogoPage()
+//    MaintainFirestore maintainFirestore = MaintainFirestore(firestore: sl());
+//    maintainFirestore.moveDocuments(
+//      "completed_build",
+//      "completed_build/completed_build/completed_build",
+//    );
+
     return MaterialApp(home: HomePage());
   }
 }

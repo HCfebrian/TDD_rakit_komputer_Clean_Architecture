@@ -26,10 +26,10 @@ class HorizontalTile extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Container(
+              child: Image.network(buildList.picURL, fit: BoxFit.cover,),
               height: 80,
               width: 80,
               decoration: BoxDecoration(
-                color: Colors.black,
                 borderRadius: Radii.appTileRadius,
                 boxShadow: [
                   Shadows.primaryShadow,
@@ -44,14 +44,14 @@ class HorizontalTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Joko Sumarrgo",
+                      buildList.owner,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppStyle.textBlackLight14,
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      "Pc Gaming AMD Ryzen 7 +2080ti kkkkllllllllllllk",
+                      buildList.title.toUpperCase(),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppStyle.textBlackSemiBold14,
@@ -61,10 +61,14 @@ class HorizontalTile extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text(
-                          "RP 20.000.000",
-                          style: AppStyle.textBlackBold14,
+                        Expanded(
+                          child: Text(
+                            buildList.overallPrice,
+                            style: AppStyle.textBlackBold14,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
+                        SizedBox(width: 5),
                         Row(
                           children: <Widget>[
                             Text(

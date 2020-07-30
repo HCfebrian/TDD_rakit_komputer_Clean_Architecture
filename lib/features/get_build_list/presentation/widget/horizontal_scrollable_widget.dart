@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rakit_komputer/core/values/style.dart';
-import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build/recommended_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/widget/vertical_tile_widget.dart';
 
 class HorizontalScrollableSection extends StatelessWidget {

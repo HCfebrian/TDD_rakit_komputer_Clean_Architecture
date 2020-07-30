@@ -40,7 +40,7 @@ class VerticalTile extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Text(
-                    buildList.title,
+                    buildList.title.toUpperCase(),
                     style: AppStyle.textBlackSemiBold14,
                     maxLines: 2,
                     textAlign: TextAlign.center,

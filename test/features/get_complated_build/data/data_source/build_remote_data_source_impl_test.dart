@@ -119,6 +119,19 @@ void main() {
         expect(() => call(), throwsA(TypeMatcher<UndefinedException>()));
       },
     );
+
+    test(
+        "should should get Featured Build when data called",
+        () async {
+          //arrange
+          when(mockFirestore.collection(any)).thenReturn(mockCollectionRef);
+          when(mockCollectionRef.getDocuments()).thenAnswer((realInvocation) async => mockQuerySnap);
+          //act
+          final result = await buildRemoteDataSourceImpl.getFeaturedBuild();
+          //assert
+          expect(result, isA<BuildModel>());
+        },
+      );
   });
 
 

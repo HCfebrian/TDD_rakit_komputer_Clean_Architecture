@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rakit_komputer/core/values/style.dart';
-import 'package:rakit_komputer/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/bloc/completed_build/completed_build_bloc.dart';
 
 import 'horizontal_tile_widget.dart';
 
@@ -38,8 +37,10 @@ class VerticalSection extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-          BlocBuilder(
-            builder: (BuildContext context, state) {
+
+          BlocBuilder<CompletedBuildBloc, CompletedBuildState>(
+            buildWhen: (p,n) => true,
+            builder: ( context, state) {
               if(state is CompletedBuildLoading){
                 return Column(
                   children: <Widget>[
@@ -62,10 +63,11 @@ class VerticalSection extends StatelessWidget {
                 return Column(
                   children: <Widget>[
                     SizedBox(width: 14),
-                    HorizontalTile(),
-                    HorizontalTile(),
-                    HorizontalTile(),
-                    HorizontalTile(),
+                    HorizontalTile(buildList: state.completedBuild[0],),
+                    HorizontalTile(buildList: state.completedBuild[1],),
+                    HorizontalTile(buildList: state.completedBuild[2],),
+                    HorizontalTile(buildList: state.completedBuild[3],),
+                    HorizontalTile(buildList: state.completedBuild[4],),
                     SizedBox(width: 14),
                   ],
                 );
