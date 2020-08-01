@@ -4,7 +4,9 @@ import 'package:rakit_komputer/core/presentation/widget/custom_textfield.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/bloc/completed_build/completed_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/bloc/featured_build/get_featured_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build/recommended_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/widget/app_fab.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/widget/horizontal_scrollable_widget.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/widget/vertical_section_widget.dart';
 
@@ -25,6 +27,9 @@ class HomePage extends StatelessWidget {
             create: (BuildContext context) => sl<RecommendedBuildBloc>()),
             BlocProvider<CompletedBuildBloc>(
             create: (BuildContext context) => sl<CompletedBuildBloc>()),
+            BlocProvider<FeaturedBuildBloc>(
+              create: (BuildContext context) => sl<FeaturedBuildBloc>()
+            )
           ],
             child: HomeContent(),
           ),
@@ -95,21 +100,7 @@ class HomeContent extends StatelessWidget {
   }
 }
 
-class AppFAB extends StatelessWidget {
-  const AppFAB({
-    Key key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(
-      elevation: 5,
-      backgroundColor: AppColors.secondaryElement,
-      child: Icon(Icons.add),
-      onPressed: () {},
-    );
-  }
-}
 
 class CustomBottomNavigation extends StatelessWidget {
   const CustomBottomNavigation({

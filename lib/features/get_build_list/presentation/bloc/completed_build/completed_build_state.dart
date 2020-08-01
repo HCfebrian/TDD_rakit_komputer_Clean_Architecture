@@ -15,12 +15,17 @@ class CompletedBuildError extends CompletedBuildState {
   final String message;
 
   CompletedBuildError({@required this.message});
+  @override
+  // TODO: implement props
+  List<Object> get props => [message];
 }
 
 class CompletedBuildLoaded extends CompletedBuildState {
   final List<BuildEntity> completedBuild;
 
-  CompletedBuildLoaded({@required this.completedBuild});
+  CompletedBuildLoaded({
+    @required this.completedBuild,
+  });
 
   @override
   List<Object> get props => [completedBuild];

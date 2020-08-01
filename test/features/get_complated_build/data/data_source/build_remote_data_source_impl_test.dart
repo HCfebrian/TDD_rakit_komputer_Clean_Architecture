@@ -22,6 +22,8 @@ class MockDocumentSnapshot extends Mock implements DocumentSnapshot {
       };
 }
 
+class MockDocumentRef extends Mock implements DocumentReference{}
+
 class MockQuerySnapshot extends Mock implements QuerySnapshot {
   static MockDocumentSnapshot dock = MockDocumentSnapshot();
   final List<DocumentSnapshot> documentList = [dock, dock, dock];
@@ -43,15 +45,19 @@ void main() {
 
 
   ///////////////////////////////////////
-
+  MockDocumentRef mockDocumentRef;
   MockFirestore mockFirestore;
   MockCollectionRef mockCollectionRef;
   MockQuerySnap mockQuerySnap;
+  MockDocumentSnapshot mockDocumentSnapshot;
 
   setUp(() {
+    mockDocumentRef = MockDocumentRef();
     mockFirestore = MockFirestore();
     mockCollectionRef = MockCollectionRef();
     mockQuerySnap = MockQuerySnap();
+    mockDocumentSnapshot =MockDocumentSnapshot();
+
 
     buildRemoteDataSourceImpl =
         BuildRemoteDataSourceImpl(firetoreInstance: mockFirestore);
@@ -125,6 +131,8 @@ void main() {
         () async {
           //arrange
           when(mockFirestore.collection(any)).thenReturn(mockCollectionRef);
+          when(mockCollectionRef.document(any)).thenReturn(mockDocumentRef);
+          when(mockDocumentRef.get()).thenAnswer((realInvocation) async => mockDocumentSnapshot);
           when(mockCollectionRef.getDocuments()).thenAnswer((realInvocation) async => mockQuerySnap);
           //act
           final result = await buildRemoteDataSourceImpl.getFeaturedBuild();

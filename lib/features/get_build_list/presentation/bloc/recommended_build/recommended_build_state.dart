@@ -2,12 +2,9 @@ part of 'recommended_build_bloc.dart';
 
 abstract class RecommendedBuildState extends Equatable {
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
 class RecommendedEmpty extends RecommendedBuildState {}
-
-
 
 class RecommendedLoading extends RecommendedBuildState{}
 
@@ -24,7 +21,6 @@ class RecommendedLoaded extends RecommendedBuildState{
   RecommendedLoaded( {@required this.recommendedBuild,this.featuredBuild,});
 
   @override
-  // TODO: implement props
   List<Object> get props => [recommendedBuild, featuredBuild];
 }
 

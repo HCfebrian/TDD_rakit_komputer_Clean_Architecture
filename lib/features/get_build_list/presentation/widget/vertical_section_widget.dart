@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/bloc/completed_build/completed_build_bloc.dart';
 
+import 'featured_tile_widget.dart';
 import 'horizontal_tile_widget.dart';
 
 class VerticalSection extends StatelessWidget {
@@ -63,6 +64,7 @@ class VerticalSection extends StatelessWidget {
                 return Column(
                   children: <Widget>[
                     SizedBox(width: 14),
+                    FeaturedBuild(),
                     HorizontalTile(buildList: state.completedBuild[0],),
                     HorizontalTile(buildList: state.completedBuild[1],),
                     HorizontalTile(buildList: state.completedBuild[2],),

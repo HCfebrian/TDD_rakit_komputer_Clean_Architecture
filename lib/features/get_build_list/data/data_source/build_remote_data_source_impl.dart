@@ -36,7 +36,8 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
   Future<List<BuildModel>> getCompletedBuildList() async {
     try {
       List<BuildModel> result = List();
-      final docRecommendedRef = firetoreInstance.collection("completed_build/completed_build/completed_build");
+      final docRecommendedRef = firetoreInstance
+          .collection("completed_build/completed_build/completed_build");
       await docRecommendedRef.getDocuments().then(
           (value) => value.documents.forEach((ds) {
                 print(BuildModel.from(ds) == null);
@@ -51,23 +52,33 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
   }
 
   @override
-  Future<BuildEntity> getCompletedBuild(String buildID) {
-    // TODO: implement getCompletedBuild
-    throw UnimplementedError();
+  Future<BuildEntity> getCompletedBuild(String buildID) async {
+    try {
+      final docCompletedBuild = await firetoreInstance
+          .collection("completed_build/completed_build/completed_build")
+          .document(buildID)
+          .get();
+      return BuildModel.from(docCompletedBuild);
+    } catch (e) {
+      print("error getcompletedBuild");
+      print(e);
+    }
   }
 
   @override
-  Future<BuildEntity> getFeaturedBuild() async{
-    try{
-      final docFeatureBuildRef = firetoreInstance.collection("completed_build").document("featured_build");
-      final docCompletedBuild = firetoreInstance.collection("completed_build");
-      await docFeatureBuildRef.get();
-    }catch(e){
+  Future<BuildEntity> getFeaturedBuild() async {
+    try {
+      final featuredBuild = await firetoreInstance
+          .collection("completed_build")
+          .document("fetured_build").get();
+      print("apakah featured build null?");
+      print(featuredBuild.data == null);
+      final featureBuildId = featuredBuild.data["build_id"];
+      return getCompletedBuild(featureBuildId);
+    } catch (e) {
+      print("datasource error ");
+      print(e);
       throw FirebaseException.handle(e);
     }
-
   }
-
-
-
 }

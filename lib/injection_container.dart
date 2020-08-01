@@ -20,6 +20,7 @@ import 'package:rakit_komputer/features/get_build_list/data/repository/build_rep
 import 'package:rakit_komputer/features/get_build_list/domain/repository/build_repository.dart';
 import 'package:rakit_komputer/features/get_build_list/domain/usecase/get_completed_build.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/bloc/completed_build/completed_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/bloc/featured_build/get_featured_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build/recommended_build_bloc.dart';
 
 //service locator
@@ -37,6 +38,7 @@ void init() {
 
   sl.registerFactory(() => RecommendedBuildBloc(buildUsecase: sl()));
   sl.registerFactory(() => CompletedBuildBloc(buildUsecase: sl()));
+  sl.registerFactory(() => FeaturedBuildBloc(buildUsecase: sl()));
   //usecase
   sl.registerLazySingleton(() => LoginUseCase(authRepo: sl()));
   sl.registerLazySingleton(() => RegisterUseCase(authRepository: sl()));

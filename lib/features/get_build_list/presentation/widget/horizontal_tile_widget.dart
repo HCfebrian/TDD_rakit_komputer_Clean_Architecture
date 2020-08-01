@@ -26,7 +26,9 @@ class HorizontalTile extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Container(
-              child: Image.network(buildList.picURL, fit: BoxFit.cover,),
+              child: ClipRRect(
+                  borderRadius: Radii.appTileRadius,
+                  child: Image.network(buildList.picURL, fit: BoxFit.cover,)),
               height: 80,
               width: 80,
               decoration: BoxDecoration(
@@ -35,6 +37,7 @@ class HorizontalTile extends StatelessWidget {
                   Shadows.primaryShadow,
                 ],
               ),
+
             ),
             Expanded(
               child: Container(
