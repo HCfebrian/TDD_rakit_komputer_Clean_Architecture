@@ -24,7 +24,7 @@ class FacebookButton extends StatelessWidget {
             SizedBox(width: 10),
             Text(
               textButton,
-              style: AppStyle.textWhite14,
+              style: AppStyle.textWhiteBold14,
             ),
           ],
         ),

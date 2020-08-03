@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build/recommended_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/pages/build_list_page.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/widget/vertical_tile_widget.dart';
 
 class HorizontalScrollableSection extends StatelessWidget {
@@ -28,7 +29,15 @@ class HorizontalScrollableSection extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => BuildListPage(
+                          isRecommendedBuild: true,
+                        ),
+                      ),
+                    );
                   },
                   child: Text(
                     "See Others",
@@ -41,36 +50,45 @@ class HorizontalScrollableSection extends StatelessWidget {
           ),
           SizedBox(height: 10),
           BlocBuilder<RecommendedBuildBloc, RecommendedBuildState>(
-            buildWhen: (p ,n ) => true,
+              buildWhen: (p, n) => true,
               builder: (context, state) {
-                if(state is RecommendedLoading){
+                if (state is RecommendedLoading) {
                   print("loading");
                   return Text("Loading");
                 }
 
-                if(state is RecommendedEmpty){
+                if (state is RecommendedEmpty) {
                   print("empty");
                   return Text("empty");
                 }
-                
-                if(state is RecommendedLoaded){
+
+                if (state is RecommendedLoaded) {
                   print("Loaded");
                   return SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: <Widget>[
                         SizedBox(width: 18),
-                        VerticalTile(buildList: state.recommendedBuild[0],),
-                        VerticalTile(buildList: state.recommendedBuild[1],),
-                        VerticalTile(buildList: state.recommendedBuild[2],),
-                        VerticalTile(buildList: state.recommendedBuild[3],),
-                        VerticalTile(buildList: state.recommendedBuild[4],),
+                        VerticalTile(
+                          buildEntity: state.recommendedBuild[0],
+                        ),
+                        VerticalTile(
+                          buildEntity: state.recommendedBuild[1],
+                        ),
+                        VerticalTile(
+                          buildEntity: state.recommendedBuild[2],
+                        ),
+                        VerticalTile(
+                          buildEntity: state.recommendedBuild[3],
+                        ),
+                        VerticalTile(
+                          buildEntity: state.recommendedBuild[4],
+                        ),
                         SizedBox(width: 14),
                       ],
                     ),
                   );
-                }
-                else{
+                } else {
                   return SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -83,7 +101,7 @@ class HorizontalScrollableSection extends StatelessWidget {
                     ),
                   );
                 }
-          }),
+              }),
         ],
       ),
     );

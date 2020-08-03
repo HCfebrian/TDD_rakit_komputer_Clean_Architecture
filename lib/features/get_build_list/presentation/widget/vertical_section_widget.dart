@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/bloc/completed_build/completed_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/pages/build_list_page.dart';
 
 import 'featured_tile_widget.dart';
 import 'horizontal_tile_widget.dart';
@@ -29,20 +30,31 @@ class VerticalSection extends StatelessWidget {
                   style: AppStyle.textBlackSemiBold16,
                   textAlign: TextAlign.left,
                 ),
-                Text(
-                  "See Others",
-                  style: AppStyle.textRedRegular14,
-                  textAlign: TextAlign.left,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => BuildListPage(
+                          isRecommendedBuild: false,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "See Others",
+                    style: AppStyle.textRedRegular14,
+                    textAlign: TextAlign.left,
+                  ),
                 ),
               ],
             ),
           ),
           SizedBox(height: 10),
-
           BlocBuilder<CompletedBuildBloc, CompletedBuildState>(
-            buildWhen: (p,n) => true,
-            builder: ( context, state) {
-              if(state is CompletedBuildLoading){
+            buildWhen: (p, n) => true,
+            builder: (context, state) {
+              if (state is CompletedBuildLoading) {
                 return Column(
                   children: <Widget>[
                     SizedBox(width: 14),
@@ -51,7 +63,7 @@ class VerticalSection extends StatelessWidget {
                   ],
                 );
               }
-              if(state is CompletedBuildError){
+              if (state is CompletedBuildError) {
                 return Column(
                   children: <Widget>[
                     SizedBox(width: 14),
@@ -65,17 +77,26 @@ class VerticalSection extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(width: 14),
                     FeaturedBuild(),
-                    HorizontalTile(buildList: state.completedBuild[0],),
-                    HorizontalTile(buildList: state.completedBuild[1],),
-                    HorizontalTile(buildList: state.completedBuild[2],),
-                    HorizontalTile(buildList: state.completedBuild[3],),
-                    HorizontalTile(buildList: state.completedBuild[4],),
+                    HorizontalTile(
+                      buildList: state.completedBuild[0],
+                    ),
+                    HorizontalTile(
+                      buildList: state.completedBuild[1],
+                    ),
+                    HorizontalTile(
+                      buildList: state.completedBuild[2],
+                    ),
+                    HorizontalTile(
+                      buildList: state.completedBuild[3],
+                    ),
+                    HorizontalTile(
+                      buildList: state.completedBuild[4],
+                    ),
                     SizedBox(width: 14),
                   ],
                 );
-              }
-              else{
-               return Column(
+              } else {
+                return Column(
                   children: <Widget>[
                     SizedBox(width: 14),
                     Text("Empty"),

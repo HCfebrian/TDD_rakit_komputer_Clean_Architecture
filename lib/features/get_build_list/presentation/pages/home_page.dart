@@ -7,6 +7,7 @@ import 'package:rakit_komputer/features/get_build_list/presentation/bloc/complet
 import 'package:rakit_komputer/features/get_build_list/presentation/bloc/featured_build/get_featured_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build/recommended_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/widget/app_fab.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/widget/custom_bottom_navigation.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/widget/horizontal_scrollable_widget.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/widget/vertical_section_widget.dart';
 
@@ -45,6 +46,7 @@ class HomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<FeaturedBuildBloc>(context).add(GetFeaturedBuild());
     BlocProvider.of<RecommendedBuildBloc>(context).add(GetRecommendedList());
     BlocProvider.of<CompletedBuildBloc>(context).add(GetCompletedBuildList());
     return Container(
@@ -100,35 +102,3 @@ class HomeContent extends StatelessWidget {
   }
 }
 
-
-
-class CustomBottomNavigation extends StatelessWidget {
-  const CustomBottomNavigation({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 54,
-      decoration: BoxDecoration(color: AppColors.secondaryElement),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Image.asset(
-            "assets/images/IconNotif.png",
-            color: Colors.white,
-          ),
-          Image.asset(
-            "assets/images/IconHomeSelected.png",
-            color: Colors.white,
-          ),
-          Image.asset(
-            "assets/images/IconProfile.png",
-            color: Colors.white,
-          )
-        ],
-      ),
-    );
-  }
-}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/pages/home_page.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/pages/build_list_page.dart';
 
 import 'injection_container.dart' as di;
 
@@ -22,6 +23,6 @@ class _MyAppState extends State<MyApp> {
 //      "completed_build/completed_build/completed_build",
 //    );
 
-    return MaterialApp(home: HomePage(), debugShowCheckedModeBanner: false,);
+    return MaterialApp(home: HomePage(),);
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rakit_komputer/core/values/radii.dart';
 import 'package:rakit_komputer/core/values/shadows.dart';
 import 'package:rakit_komputer/core/values/style.dart';
-import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
+import 'package:rakit_komputer/core/domain/entity/build_entity.dart';
 class HorizontalTile extends StatelessWidget {
   final BuildEntity buildList;
   const HorizontalTile({
@@ -18,7 +18,7 @@ class HorizontalTile extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: Radii.appTileRadius,
+          borderRadius: Radii.appTileRadius8,
           boxShadow: [
             Shadows.primaryShadow,
           ],
@@ -27,17 +27,16 @@ class HorizontalTile extends StatelessWidget {
           children: <Widget>[
             Container(
               child: ClipRRect(
-                  borderRadius: Radii.appTileRadius,
-                  child: Image.network(buildList.picURL, fit: BoxFit.cover,)),
+                  borderRadius: Radii.appTileRadius8,
+                  child: Image.network(buildList.picURL, fit: BoxFit.fill,)),
               height: 80,
               width: 80,
               decoration: BoxDecoration(
-                borderRadius: Radii.appTileRadius,
+                borderRadius: Radii.appTileRadius8,
                 boxShadow: [
                   Shadows.primaryShadow,
                 ],
               ),
-
             ),
             Expanded(
               child: Container(

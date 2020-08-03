@@ -10,7 +10,6 @@ import 'package:rakit_komputer/features/get_build_list/presentation/bloc/feature
 class FeaturedBuild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<FeaturedBuildBloc>(context).add(GetFeaturedBuild());
     return BlocBuilder<FeaturedBuildBloc, FeaturedBuildState>(
         builder: (context, state) {
       if (state is LoadingFeatured) {
@@ -21,7 +20,7 @@ class FeaturedBuild extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 24),
           decoration: BoxDecoration(
             color: AppColors.secondaryElement,
-            borderRadius: Radii.appTileRadius,
+            borderRadius: Radii.appTileRadius8,
             boxShadow: [
               Shadows.primaryShadow,
             ],
@@ -34,7 +33,7 @@ class FeaturedBuild extends StatelessWidget {
                     height: 40,
                     decoration: BoxDecoration(
                       color: AppColors.secondaryElement,
-                      borderRadius: Radii.topLeftRightRadius,
+                      borderRadius: Radii.topLeftRightRadius20,
                       boxShadow: [
                         Shadows.primaryShadow,
                       ],
@@ -45,7 +44,7 @@ class FeaturedBuild extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       "Featured Build",
-                      style: AppStyle.textWhite14,
+                      style: AppStyle.textWhiteBold14,
                       textAlign: TextAlign.center,
                     ),
                   )
@@ -55,7 +54,7 @@ class FeaturedBuild extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 children: <Widget>[
                   ClipRRect(
-                      borderRadius: Radii.bottomLeftRightRadius,
+                      borderRadius: Radii.bottomLeftRightRadius20,
                       child: Container(
                         height: 200,
                         decoration: BoxDecoration(
@@ -68,7 +67,7 @@ class FeaturedBuild extends StatelessWidget {
                   Container(
                     height: 100,
                     decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: Radii.appTileRadius),
+                        color: Colors.white, borderRadius: Radii.appTileRadius8),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[

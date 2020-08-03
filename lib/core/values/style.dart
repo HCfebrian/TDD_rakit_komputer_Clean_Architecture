@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
 
 class AppStyle {
-  static const TextStyle textWhite14 = TextStyle(
+  static const TextStyle textWhiteBold14 = TextStyle(
     color: Color.fromARGB(255, 255, 255, 255),
     fontWeight: FontWeight.w600,
     fontSize: 14,
     fontFamily: "Inter"
-
   );
+  static const TextStyle textWhite12 = TextStyle(
+      color: Color.fromARGB(255, 255, 255, 255),
+      fontWeight: FontWeight.w400,
+      fontSize: 12,
+      fontFamily: "Inter"
+  );
+  
   static const TextStyle textWhite28 = TextStyle(
     color: Color.fromARGB(255, 255, 255, 255),
     fontWeight: FontWeight.w600,
