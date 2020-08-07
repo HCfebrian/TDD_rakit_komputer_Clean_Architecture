@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/string.dart';
 import 'package:rakit_komputer/core/values/style.dart';
-import 'package:rakit_komputer/core/domain/entity/build_entity.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/entity/computer_part_entity.dart';
 
 class FinishedBuildDetailPage extends StatelessWidget {
   final BuildEntity buildEntity;
@@ -11,61 +12,67 @@ class FinishedBuildDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Stack(
-          children: <Widget>[
-            Container(
-              height: 360,
-              child: Image.network(buildEntity.picURL),
-            ),
-            Icon(Icons.arrow_back_ios),
-            Center(child: Text(buildEntity.title)),
-            Positioned(
-              //description
-              top: 355,
-              child: Container(
-                color: AppColors.backgroundColor,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
+    return MaterialApp(
+      home: Scaffold(
+          backgroundColor: AppColors.backgroundColor,
+          body: Stack(
+            children: <Widget>[
+              Container(
+                color: Colors.black,
+                child: Image.network(
+                  buildEntity.picURL,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+              Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(top: 24),
+                    child: Container(
+                      color: AppColors.secondaryElement,
+                      child: Stack(
                         children: <Widget>[
-                          Text("Description", style: AppStyle.textBlackSemiBold14,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Icon(Icons.arrow_upward),
-                              Text("200")
-                            ],
+                          Icon(Icons.arrow_back_ios),
+                          Align(
+                            child: Text(
+                              buildEntity.title.toUpperCase(),
+                              style: AppStyle.textBlackSemiBold22,
+                            ),
                           )
                         ],
                       ),
                     ),
-                    Text(CustomString.loremIpsum),
-                    Text("PC Part", style: AppStyle.textBlackLight14,),
-                    ListView.builder(itemBuilder: (BuildContext context, int index){
-                      return ComputerPartTile(partEntity: buildEntity.partList[index]);
-                    })
-                  ],
-                ),
+                  )
+                ],
               ),
-            )
-          ],
-        )
-      ],
+            ],
+          )),
     );
   }
 }
 
 class ComputerPartTile extends StatelessWidget {
- final partEntity;
+  final ComputerPartEntity partEntity;
 
-  const ComputerPartTile({Key key, @required this.partEntity}) : super(key: key);
+  const ComputerPartTile({Key key, @required this.partEntity})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Row(
+        children: <Widget>[
+          Image.network(partEntity.photoUrl),
+          Column(
+            children: <Widget>[
+              Text(partEntity.partType),
+              Text(partEntity.name),
+              Text(partEntity.rating),
+              Text(partEntity.avgPrice)
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
-

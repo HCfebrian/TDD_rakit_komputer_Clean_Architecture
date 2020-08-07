@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rakit_komputer/core/data/admin_util/firestore_util.dart';
 import 'package:rakit_komputer/core/presentation/widget/custom_textfield.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/style.dart';
@@ -25,17 +26,16 @@ class HomePage extends StatelessWidget {
         body: MultiBlocProvider(
           providers: [
             BlocProvider<RecommendedBuildBloc>(
-            create: (BuildContext context) => sl<RecommendedBuildBloc>()),
+                create: (BuildContext context) => sl<RecommendedBuildBloc>()),
             BlocProvider<CompletedBuildBloc>(
-            create: (BuildContext context) => sl<CompletedBuildBloc>()),
+                create: (BuildContext context) => sl<CompletedBuildBloc>()),
             BlocProvider<FeaturedBuildBloc>(
-              create: (BuildContext context) => sl<FeaturedBuildBloc>()
-            )
+                create: (BuildContext context) => sl<FeaturedBuildBloc>())
           ],
-            child: HomeContent(),
-          ),
+          child: HomeContent(),
         ),
-      );
+      ),
+    );
   }
 }
 
@@ -46,16 +46,19 @@ class HomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // for test
+    MaintainFirestore maintainFirestore = MaintainFirestore(firestore: sl());
+    //
     BlocProvider.of<FeaturedBuildBloc>(context).add(GetFeaturedBuild());
     BlocProvider.of<RecommendedBuildBloc>(context).add(GetRecommendedList());
     BlocProvider.of<CompletedBuildBloc>(context).add(GetCompletedBuildList());
     return Container(
       child: Column(
         children: <Widget>[
+
           Container(
               alignment: Alignment.centerLeft,
-              margin:
-                  EdgeInsets.only(left: 24, right: 24, top: 26, bottom: 5),
+              margin: EdgeInsets.only(left: 24, right: 24, top: 26, bottom: 5),
               child: Text(
                 "hi, Username",
                 style: AppStyle.textBlackLight14,
@@ -74,6 +77,19 @@ class HomeContent extends StatelessWidget {
               hintText: "Search",
             ),
           ),
+          Center(
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                child: GestureDetector(
+                  child: Text("updateHere"),
+                  onTap: () {
+                    maintainFirestore.copyCollection(
+                        "/completed_build/completed_build/completed_build/5QnD4BtqFpDzQIzbuRib/partList",
+                        "/completed_build/completed_build/completed_build/x5YhwZ7aFuoVlydXb8v4/partList");
+                    print(" firestore management executed");
+                  },
+                ),
+              )),
           SizedBox(
             height: 16,
           ),
@@ -101,4 +117,3 @@ class HomeContent extends StatelessWidget {
     );
   }
 }
-

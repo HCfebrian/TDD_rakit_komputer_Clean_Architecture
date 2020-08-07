@@ -1,5 +1,5 @@
 import 'package:rakit_komputer/features/get_build_list/data/model/computer_build_model.dart';
-import 'package:rakit_komputer/core/domain/entity/build_entity.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
 
 abstract class BuildRemoteDataSourceAbstc {
   ///get multiple Recommended Build from Remote

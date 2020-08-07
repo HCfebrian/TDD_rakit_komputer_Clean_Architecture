@@ -2,6 +2,8 @@ import 'package:rakit_komputer/core/error/auth/exception.dart';
 
 class FirebaseException {
   static Exception handle(e) {
+    print("error before no suchmethod");
+    print(e);
     switch (e.code) {
       case "ERROR_INVALID_EMAIL":
         print(" handled ERROR_INVALID_EMAIL");

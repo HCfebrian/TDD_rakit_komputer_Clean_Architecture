@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rakit_komputer/core/values/radii.dart';
 import 'package:rakit_komputer/core/values/shadows.dart';
 import 'package:rakit_komputer/core/values/style.dart';
-import 'package:rakit_komputer/core/domain/entity/build_entity.dart';
+import 'package:rakit_komputer/features/build_detail/presentation/pages/finished_build_detail_page.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
 
 class VerticalTile extends StatelessWidget {
   final BuildEntity buildEntity;
@@ -15,7 +16,14 @@ class VerticalTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => FinishedBuildDetailPage(
+                      buildEntity: buildEntity,
+                    )));
+      },
       child: Padding(
         padding: EdgeInsets.all(5),
         child: Container(
@@ -33,7 +41,12 @@ class VerticalTile extends StatelessWidget {
               Container(
                 height: 126,
                 width: MediaQuery.of(context).size.width,
-                child: ClipRRect(borderRadius: Radii.topLeftRightRadius8,child: Image.network(buildEntity.picURL, fit: BoxFit.cover,)),
+                child: ClipRRect(
+                    borderRadius: Radii.topLeftRightRadius8,
+                    child: Image.network(
+                      buildEntity.picURL,
+                      fit: BoxFit.cover,
+                    )),
               ),
               Expanded(
                 child: Container(
@@ -58,7 +71,9 @@ class VerticalTile extends StatelessWidget {
                   style: AppStyle.textBlackBold14,
                 ),
               ),
-              SizedBox(height: 8,)
+              SizedBox(
+                height: 8,
+              )
             ],
           ),
         ),

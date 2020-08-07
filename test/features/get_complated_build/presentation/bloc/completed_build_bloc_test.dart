@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rakit_komputer/core/error/firestore/failures.dart';
 import 'package:rakit_komputer/core/values/constant.dart';
-import 'package:rakit_komputer/core/domain/entity/build_entity.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/bloc/completed_build/completed_build_bloc.dart';
 
 import 'recommended_build_bloc_test.dart';

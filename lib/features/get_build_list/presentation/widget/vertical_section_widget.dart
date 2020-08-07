@@ -78,19 +78,19 @@ class VerticalSection extends StatelessWidget {
                     SizedBox(width: 14),
                     FeaturedBuild(),
                     HorizontalTile(
-                      buildList: state.completedBuild[0],
+                      buildEntity: state.completedBuild[0],
                     ),
                     HorizontalTile(
-                      buildList: state.completedBuild[1],
+                      buildEntity: state.completedBuild[1],
                     ),
                     HorizontalTile(
-                      buildList: state.completedBuild[2],
+                      buildEntity: state.completedBuild[2],
                     ),
                     HorizontalTile(
-                      buildList: state.completedBuild[3],
+                      buildEntity: state.completedBuild[3],
                     ),
                     HorizontalTile(
-                      buildList: state.completedBuild[4],
+                      buildEntity: state.completedBuild[4],
                     ),
                     SizedBox(width: 14),
                   ],

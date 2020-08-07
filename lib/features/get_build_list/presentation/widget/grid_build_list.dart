@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rakit_komputer/core/domain/entity/build_entity.dart';
+import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/widget/vertical_tile_widget.dart';
 
 class GridBuildList extends StatelessWidget {
