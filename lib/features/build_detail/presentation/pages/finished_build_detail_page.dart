@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
-import 'package:rakit_komputer/core/values/string.dart';
+import 'package:rakit_komputer/core/values/radii.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
 import 'package:rakit_komputer/features/get_build_list/domain/entity/computer_part_entity.dart';
@@ -14,39 +14,30 @@ class FinishedBuildDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          backgroundColor: AppColors.backgroundColor,
-          body: Stack(
-            children: <Widget>[
-              Container(
-                color: Colors.black,
-                child: Image.network(
-                  buildEntity.picURL,
-                  fit: BoxFit.fitWidth,
+        backgroundColor: AppColors.backgroundColor,
+        body: Column(
+          children: <Widget>[
+            Image.network(buildEntity.picURL),
+            Container(
+              color: Colors.white,
+              decoration: BoxDecoration(
+                borderRadius: Radii.topLeftRightRadius8,
+              ),
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[Text("Description"),
+                  Row(children: <Widget>[
+                    Icon(Icons.arrow_upward),
+                    Text("200")
+                  ],)],
                 ),
               ),
-              Column(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 24),
-                    child: Container(
-                      color: AppColors.secondaryElement,
-                      child: Stack(
-                        children: <Widget>[
-                          Icon(Icons.arrow_back_ios),
-                          Align(
-                            child: Text(
-                              buildEntity.title.toUpperCase(),
-                              style: AppStyle.textBlackSemiBold22,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ],
-          )),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
