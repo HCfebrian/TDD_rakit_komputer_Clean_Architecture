@@ -18,7 +18,7 @@ class BuildModel extends BuildEntity {
             overallPrice: overallPrice,
             picURL: picURL,
             owner: owner,
-//            partList: null,
+//            partList: partList,
   );
 
   factory BuildModel.from(DocumentSnapshot ds) {
@@ -28,15 +28,13 @@ class BuildModel extends BuildEntity {
         overallPrice: ds.data["overall_price"],
         picURL: ds.data["picURL"],
         owner: ds.data["owner"],
-//        partList: ComputerPartOverviewModel.from(ds.data["partList"])
+//        partList: partList
         );
   }
-
-
 }
 
-class ComputerPartOverviewModel extends ComputerPartEntity {
-  ComputerPartOverviewModel({
+class BuildPartModel extends ComputerPartEntity {
+  BuildPartModel({
     @required String partId,
     @required String name,
     @required String partType,
@@ -52,8 +50,8 @@ class ComputerPartOverviewModel extends ComputerPartEntity {
           photoUrl: partType,
         );
 
-  factory ComputerPartOverviewModel.from(Map<String,dynamic> map) {
-    return ComputerPartOverviewModel(
+  factory BuildPartModel.from(Map<String,dynamic> map) {
+    return BuildPartModel(
       partId: map["partId"],
       name: map["name"],
       partType: map["partType"],

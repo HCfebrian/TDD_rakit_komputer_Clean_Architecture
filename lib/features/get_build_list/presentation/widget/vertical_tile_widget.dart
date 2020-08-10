@@ -20,7 +20,7 @@ class VerticalTile extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => FinishedBuildDetailPage(
+                builder: (BuildContext context) => BuildDetailPage(
                       buildEntity: buildEntity,
                     )));
       },

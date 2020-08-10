@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:rakit_komputer/core/error/auth/exception_handler.dart';
 import 'package:rakit_komputer/features/get_build_list/data/model/computer_build_model.dart';
@@ -15,17 +16,15 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
   Future<List<BuildModel>> getRecommendedBuildList() async {
     try {
       List<BuildModel> result = List();
-      final docRecommendedRef =
-          firetoreInstance.collection("recommended_build");
-      await docRecommendedRef.getDocuments().then(
-          (value) => value.documents.forEach((ds) {
-                print(ds.data["title"]);
-                print("kalau true salah");
-                print(BuildModel.from(ds) == null);
+      final dRBuildOverview = firetoreInstance.collection("recommended_build");
+      await dRBuildOverview.getDocuments().then(
+          (value) => value.documents.forEach((ds)  {
                 result.add(BuildModel.from(ds));
               }), onError: (e) {
         throw FirebaseException.handle(e);
       });
+      print("jumlah result ${result.length}");
+
       return result;
     } catch (e) {
       throw FirebaseException.handle(e);
@@ -36,12 +35,11 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
   Future<List<BuildModel>> getCompletedBuildList() async {
     try {
       List<BuildModel> result = List();
-      final docRecommendedRef = firetoreInstance
+      final dRBuildOverview = firetoreInstance
           .collection("completed_build/completed_build/completed_build");
-      await docRecommendedRef.getDocuments().then(
-          (value) => value.documents.forEach((ds) {
-                print(BuildModel.from(ds) == null);
-                result.add(BuildModel.from(ds));
+      await dRBuildOverview.getDocuments().then(
+          (value) => value.documents.forEach((ds)  {
+                            result.add(BuildModel.from(ds));
               }), onError: (e) {
         throw FirebaseException.handle(e);
       });
@@ -54,14 +52,23 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
   @override
   Future<BuildEntity> getCompletedBuild(String buildID) async {
     try {
-      final docCompletedBuild = await firetoreInstance
-          .collection("completed_build/completed_build/completed_build")
+      final docCompletedBuild = firetoreInstance
+          .collection("completed_build/completed_build/completed_build");
+
+      final result = await docCompletedBuild.document(buildID).get();
+      List partList = List();
+      await docCompletedBuild
           .document(buildID)
-          .get();
-      return BuildModel.from(docCompletedBuild);
+          .collection("partList")
+          .getDocuments()
+          .then((value) => value.documents.forEach((part) {
+                partList.add(BuildPartModel.from(part.data));
+              }));
+      return BuildModel.from(result);
     } catch (e) {
       print("error getcompletedBuild");
       print(e);
+      throw FirebaseException.handle(e);
     }
   }
 
@@ -70,7 +77,8 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
     try {
       final featuredBuild = await firetoreInstance
           .collection("completed_build")
-          .document("fetured_build").get();
+          .document("fetured_build")
+          .get();
       print("apakah featured build null?");
       print(featuredBuild.data == null);
       final featureBuildId = featuredBuild.data["build_id"];
@@ -81,4 +89,27 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
       throw FirebaseException.handle(e);
     }
   }
+//
+//  Future<List<BuildPartModel>> getPartList({@required String buildId, @required bool isRecommendedBuild}) async {
+//    CollectionReference dRBuildOverview;
+//    if(isRecommendedBuild){
+//      print("recommended build");
+//      dRBuildOverview = firetoreInstance
+//          .collection("recommended_build");
+//    }else {
+//      print("complate build");
+//       dRBuildOverview = firetoreInstance
+//          .collection("completed_build/completed_build/completed_build");
+//    }
+//    List<BuildPartModel> partList = List();
+//     await dRBuildOverview
+//        .document(buildId)
+//        .collection("partList")
+//        .getDocuments()
+//        .then((value) => value.documents.forEach((part) {
+//              partList.add(BuildPartModel.from(part.data));
+//            }));
+//     print("jumlah list dalam get part list ${partList.length}");
+//     return partList;
+//  }
 }

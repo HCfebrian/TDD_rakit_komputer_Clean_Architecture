@@ -85,7 +85,7 @@ class HomeContent extends StatelessWidget {
                   onTap: () {
                     maintainFirestore.copyCollection(
                         "/completed_build/completed_build/completed_build/5QnD4BtqFpDzQIzbuRib/partList",
-                        "/completed_build/completed_build/completed_build/x5YhwZ7aFuoVlydXb8v4/partList");
+                        "/recommended_build/xfp7Ott81ZdheT05rAbZ/partList");
                     print(" firestore management executed");
                   },
                 ),

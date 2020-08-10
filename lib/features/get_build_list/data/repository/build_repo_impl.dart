@@ -33,10 +33,8 @@ class BuildRepoImpl implements BuildRepoAbst {
   @override
   Future<Either<Failure, BuildEntity>> getFeaturedBuild() async {
     try{
-      print("ini hasil featured");
       return Right(await remoteDataSource.getFeaturedBuild());
     }catch (e){
-      print(("ini hasil error getFeatured repo imp"));
       print(e);
       return Left(ExceptionToFailure.handle(e));
     }
