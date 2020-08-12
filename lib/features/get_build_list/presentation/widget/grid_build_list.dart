@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
-import 'package:rakit_komputer/features/get_build_list/presentation/widget/vertical_tile_widget.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/widget/vertical_build_tile_widget.dart';
 
 class GridBuildList extends StatelessWidget {
   final List<BuildEntity> listBuild;
@@ -20,7 +20,7 @@ class GridBuildList extends StatelessWidget {
                 (MediaQuery.of(context).size.height / 6)),
         itemCount: listBuild.length,
         itemBuilder: (BuildContext context, int index) {
-          return VerticalTile(buildEntity: listBuild[index]);
+          return VerticalBuildTile(buildEntity: listBuild[index]);
         },
       ),
     );

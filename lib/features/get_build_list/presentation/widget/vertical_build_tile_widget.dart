@@ -5,10 +5,10 @@ import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/build_detail/presentation/pages/finished_build_detail_page.dart';
 import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
 
-class VerticalTile extends StatelessWidget {
+class VerticalBuildTile extends StatelessWidget {
   final BuildEntity buildEntity;
 
-  const VerticalTile({
+  const VerticalBuildTile({
     Key key,
     @required this.buildEntity,
   }) : super(key: key);

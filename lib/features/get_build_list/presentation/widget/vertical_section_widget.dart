@@ -5,7 +5,7 @@ import 'package:rakit_komputer/features/get_build_list/presentation/bloc/complet
 import 'package:rakit_komputer/features/get_build_list/presentation/pages/build_list_page.dart';
 
 import 'featured_tile_widget.dart';
-import 'horizontal_tile_widget.dart';
+import 'horizontal_build_tile_widget.dart';
 
 class VerticalSection extends StatelessWidget {
   const VerticalSection({
@@ -77,19 +77,19 @@ class VerticalSection extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(width: 14),
                     FeaturedBuild(),
-                    HorizontalTile(
+                    HorizontalBuildTile(
                       buildEntity: state.completedBuild[0],
                     ),
-                    HorizontalTile(
+                    HorizontalBuildTile(
                       buildEntity: state.completedBuild[1],
                     ),
-                    HorizontalTile(
+                    HorizontalBuildTile(
                       buildEntity: state.completedBuild[2],
                     ),
-                    HorizontalTile(
+                    HorizontalBuildTile(
                       buildEntity: state.completedBuild[3],
                     ),
-                    HorizontalTile(
+                    HorizontalBuildTile(
                       buildEntity: state.completedBuild[4],
                     ),
                     SizedBox(width: 14),

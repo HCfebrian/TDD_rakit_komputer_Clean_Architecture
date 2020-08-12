@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:rakit_komputer/core/presentation/widget/custom_button.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/string.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/get_build_list/domain/entity/build_entity.dart';
-import 'package:rakit_komputer/features/get_build_list/domain/entity/computer_part_entity.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/widget/horizontal_part_tile_widget.dart';
 
 class BuildDetailPage extends StatelessWidget {
   final BuildEntity buildEntity;
@@ -46,7 +47,7 @@ class BuildDetailPage extends StatelessWidget {
                 ],
               ),
               Container(
-                color: Colors.white,
+                color: AppColors.backgroundColor,
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
@@ -72,6 +73,33 @@ class BuildDetailPage extends StatelessWidget {
                       Container(
                           margin: EdgeInsets.only(top: 10),
                           child: Text(CustomString.loremIpsum)),
+                      GridView.builder(
+                        itemCount: buildEntity.partList.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            childAspectRatio:
+                                (MediaQuery.of(context).size.width / 1.1) /
+                                    (MediaQuery.of(context).size.height / 6)),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return HorizontalPartTile(
+                              partEntity: buildEntity.partList[index]);
+                        },
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 24),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text("Total"),
+                            Text("put the money here")
+                          ],
+                        ),
+                      ),
+                      CustomButton(
+                          text: "Edit Component",
+                          colorBg: AppColors.secondaryElement,
+                          onPressed: () {})
                     ],
                   ),
                 ),
@@ -79,32 +107,6 @@ class BuildDetailPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ComputerPartTile extends StatelessWidget {
-  final ComputerPartEntity partEntity;
-
-  const ComputerPartTile({Key key, @required this.partEntity})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Image.network(partEntity.photoUrl),
-          Column(
-            children: <Widget>[
-              Text(partEntity.partType),
-              Text(partEntity.name),
-              Text(partEntity.rating),
-              Text(partEntity.avgPrice)
-            ],
-          )
-        ],
       ),
     );
   }

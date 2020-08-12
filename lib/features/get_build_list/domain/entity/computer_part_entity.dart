@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 
 class ComputerPartEntity {
-  final String name, partType, rating, avgPrice, photoUrl, partId;
+  final String name, partType, rating, avgPrice, picURL, partId;
 
   ComputerPartEntity(
       {
@@ -10,5 +10,5 @@ class ComputerPartEntity {
       @required this.partType,
       @required this.rating,
       @required this.avgPrice,
-      @required this.photoUrl});
+      @required this.picURL});
 }

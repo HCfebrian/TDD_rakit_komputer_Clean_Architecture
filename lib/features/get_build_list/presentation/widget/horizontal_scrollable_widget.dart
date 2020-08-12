@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build/recommended_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build_list/presentation/pages/build_list_page.dart';
-import 'package:rakit_komputer/features/get_build_list/presentation/widget/vertical_tile_widget.dart';
+import 'package:rakit_komputer/features/get_build_list/presentation/widget/vertical_build_tile_widget.dart';
 
 class HorizontalScrollableSection extends StatelessWidget {
   const HorizontalScrollableSection({
@@ -69,19 +69,19 @@ class HorizontalScrollableSection extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         SizedBox(width: 18),
-                        VerticalTile(
+                        VerticalBuildTile(
                           buildEntity: state.recommendedBuild[0],
                         ),
-                        VerticalTile(
+                        VerticalBuildTile(
                           buildEntity: state.recommendedBuild[1],
                         ),
-                        VerticalTile(
+                        VerticalBuildTile(
                           buildEntity: state.recommendedBuild[2],
                         ),
-                        VerticalTile(
+                        VerticalBuildTile(
                           buildEntity: state.recommendedBuild[3],
                         ),
-                        VerticalTile(
+                        VerticalBuildTile(
                           buildEntity: state.recommendedBuild[4],
                         ),
                         SizedBox(width: 14),
