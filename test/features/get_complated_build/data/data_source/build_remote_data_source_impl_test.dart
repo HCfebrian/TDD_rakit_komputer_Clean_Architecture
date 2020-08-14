@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rakit_komputer/core/error/auth/exception.dart';
-import 'package:rakit_komputer/features/get_build_list/data/data_source/build_remote_data_source_impl.dart';
-import 'package:rakit_komputer/features/get_build_list/data/model/computer_build_model.dart';
+import 'package:rakit_komputer/features/get_build/data/data_source/build_remote_data_source_impl.dart';
+import 'package:rakit_komputer/features/get_build/data/model/computer_build_model.dart';
 
 class MockFirestore extends Mock implements Firestore {}
 

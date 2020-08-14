@@ -14,14 +14,14 @@ import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.d
 import 'package:rakit_komputer/features/auth/domain/usecase/login.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/register.dart';
 import 'package:rakit_komputer/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:rakit_komputer/features/get_build_list/data/data_source/build_remote_data_source_abstract.dart';
-import 'package:rakit_komputer/features/get_build_list/data/data_source/build_remote_data_source_impl.dart';
-import 'package:rakit_komputer/features/get_build_list/data/repository/build_repo_impl.dart';
-import 'package:rakit_komputer/features/get_build_list/domain/repository/build_repository.dart';
-import 'package:rakit_komputer/features/get_build_list/domain/usecase/get_completed_build.dart';
-import 'package:rakit_komputer/features/get_build_list/presentation/bloc/completed_build/completed_build_bloc.dart';
-import 'package:rakit_komputer/features/get_build_list/presentation/bloc/featured_build/get_featured_build_bloc.dart';
-import 'package:rakit_komputer/features/get_build_list/presentation/bloc/recommended_build/recommended_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build/data/data_source/build_remote_data_source_abstract.dart';
+import 'package:rakit_komputer/features/get_build/data/data_source/build_remote_data_source_impl.dart';
+import 'package:rakit_komputer/features/get_build/data/repository/build_repo_impl.dart';
+import 'package:rakit_komputer/features/get_build/domain/repository/build_repository.dart';
+import 'package:rakit_komputer/features/get_build/domain/usecase/get_completed_build.dart';
+import 'package:rakit_komputer/features/get_build/presentation/bloc/completed_build/completed_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build/presentation/bloc/featured_build/get_featured_build_bloc.dart';
+import 'package:rakit_komputer/features/get_build/presentation/bloc/recommended_build/recommended_build_bloc.dart';
 
 //service locator
 final sl = GetIt.instance;

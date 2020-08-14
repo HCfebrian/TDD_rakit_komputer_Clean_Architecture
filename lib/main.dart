@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rakit_komputer/features/get_build_list/presentation/pages/home_page.dart';
-import 'package:rakit_komputer/features/get_build_list/presentation/pages/build_list_page.dart';
+import 'package:rakit_komputer/features/get_build/presentation/pages/home_page.dart';
+import 'package:rakit_komputer/features/get_build/presentation/pages/build_list_page.dart';
 
 import 'core/data/admin_util/firestore_util.dart';
 import 'injection_container.dart' as di;

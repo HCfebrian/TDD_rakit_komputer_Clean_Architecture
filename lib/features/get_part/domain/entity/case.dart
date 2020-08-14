@@ -1,0 +1,36 @@
+class Case {
+  final manufacture,
+      type,
+      color,
+      powerSupply,
+      sidePanel,
+      powerSupplyShroud,
+      frontPanelUSB,
+      motherboardFormFactor,
+      fullHeightExpansionSlot,
+      halfHeightExpansionSlot,
+      maximumVideoCardLength,
+      dimension,
+      internal25bays,
+      internal35bays,
+      volume,
+      upVote;
+
+  Case(
+      this.manufacture,
+      this.type,
+      this.color,
+      this.powerSupply,
+      this.sidePanel,
+      this.powerSupplyShroud,
+      this.frontPanelUSB,
+      this.motherboardFormFactor,
+      this.fullHeightExpansionSlot,
+      this.halfHeightExpansionSlot,
+      this.maximumVideoCardLength,
+      this.dimension,
+      this.internal25bays,
+      this.internal35bays,
+      this.volume,
+      this.upVote);
+}
