@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/psu.dart';
 import 'package:meta/meta.dart';
 
@@ -34,4 +35,23 @@ class PSUModel extends PSU {
             sataConnector: sataConnector,
             molex4pinConnector: molex4pinConnector,
             upVote: upVote);
+
+  factory PSUModel.from(DocumentSnapshot ds) {
+    return PSUModel(
+        partID: ds.documentID,
+        manufacture: ds.data["manufacture"],
+        formFactor: ds.data["formFactor"],
+        efficiencyRating: ds.data["efficiencyRating"],
+        wattage: ds.data["wattage"],
+        length: ds.data["length"],
+        modular: ds.data["modular"],
+        color: ds.data["color"],
+        type: ds.data["type"],
+        fanLess: ds.data["fanLess"],
+        epsConnector: ds.data["epsConnector"],
+        pcie62pinConnector: ds.data["pcie62pinConnector"],
+        sataConnector: ds.data["sataConnector"],
+        molex4pinConnector: ds.data["molex4pinConnector"],
+        upVote: ds.data["upVote"]);
+  }
 }

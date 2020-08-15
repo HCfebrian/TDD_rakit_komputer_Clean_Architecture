@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:rakit_komputer/core/error/failure.dart';
+import 'package:rakit_komputer/features/get_part/data/data_source/part_remote_data_abstc.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/case.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/cpu.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/cpu_cooler.dart';
@@ -12,9 +13,9 @@ import 'package:rakit_komputer/features/get_part/domain/repository/part_reposito
 import 'package:meta/meta.dart';
 
 class PartRepoImp implements PartRepoAbst{
-//  final PartRemoteDatasourceAbsct partRemoteData;
+  final PartRemoteDataSourceAbsct partRemoteData;
 
-//  PartRepoImp({@required this.partRemoteData});
+  PartRepoImp({@required this.partRemoteData});
 
   @override
   Future<Either<Failure, CPU>> getCPU(String partID) {
