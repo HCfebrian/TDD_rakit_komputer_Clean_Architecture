@@ -1,5 +1,8 @@
+import 'package:meta/meta.dart';
+
 class GraphicCard {
-  final manufacture,
+  final partID,
+      manufacture,
       chipSet,
       memory,
       memoryType,
@@ -22,25 +25,26 @@ class GraphicCard {
       upVote;
 
   GraphicCard(
-      this.manufacture,
-      this.chipSet,
-      this.memory,
-      this.memoryType,
-      this.coreClock,
-      this.boostClock,
-      this.effectiveMemClock,
-      this.interface,
-      this.color,
-      this.frameSync,
-      this.length,
-      this.tdp,
-      this.dvi,
-      this.hdmi,
-      this.miniHdmi,
-      this.displayPort,
-      this.miniDisplayPort,
-      this.expansionSlotWidth,
-      this.cooling,
-      this.externalPower,
-      this.upVote);
+      {@required this.partID,
+      @required this.manufacture,
+      @required this.chipSet,
+      @required this.memory,
+      @required this.memoryType,
+      @required this.coreClock,
+      @required this.boostClock,
+      @required this.effectiveMemClock,
+      @required this.interface,
+      @required this.color,
+      @required this.frameSync,
+      @required this.length,
+      @required this.tdp,
+      @required this.dvi,
+      @required this.hdmi,
+      @required this.miniHdmi,
+      @required this.displayPort,
+      @required this.miniDisplayPort,
+      @required this.expansionSlotWidth,
+      @required this.cooling,
+      @required this.externalPower,
+      @required this.upVote});
 }

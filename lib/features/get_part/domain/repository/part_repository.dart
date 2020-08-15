@@ -10,19 +10,19 @@ import 'package:rakit_komputer/features/get_part/domain/entity/psu.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/storage.dart';
 
 abstract class PartRepoAbst {
-  Future<Either<Failure, Case>> getCase();
+  Future<Either<Failure, Case>> getCase(String partID);
 
-  Future<Either<Failure, CPU>> getCPU();
+  Future<Either<Failure, CPU>> getCPU(String partID);
 
-  Future<Either<Failure, CPUCooler>> getCPUCooler();
+  Future<Either<Failure, CPUCooler>> getCPUCooler(String partID);
 
-  Future<Either<Failure, GraphicCard>> getGraphicCard();
+  Future<Either<Failure, GraphicCard>> getGraphicCard(String partID);
 
-  Future<Either<Failure, Memory>> getMemory();
+  Future<Either<Failure, Memory>> getMemory(String partID);
 
-  Future<Either<Failure, Motherboard>> getMotherboard();
+  Future<Either<Failure, Motherboard>> getMotherboard(String partID);
 
-  Future<Either<Failure, PSU>> getPSU();
+  Future<Either<Failure, PSU>> getPSU(String partID);
 
-  Future<Either<Failure, Storage>> getStorage();
+  Future<Either<Failure, Storage>> getStorage(String partID);
 }

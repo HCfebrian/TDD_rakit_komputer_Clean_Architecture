@@ -5,7 +5,7 @@ import 'computer_part_entity.dart';
 class BuildEntity extends Equatable {
   final String buildId, title, overallPrice, picURL, owner;
 
-   List<ComputerPartEntity> partList;
+    List<ComputerPartEntity> partList;
 
   BuildEntity({
     @required this.owner,
@@ -23,6 +23,6 @@ class BuildEntity extends Equatable {
         overallPrice,
         picURL,
         owner,
-//        partList,
+        partList,
       ];
 }

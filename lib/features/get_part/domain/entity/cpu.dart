@@ -1,5 +1,9 @@
-class CPU {
-  final manufacture,
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
+
+class CPU extends Equatable {
+  final partID,
+      manufacture,
       model,
       coreCount,
       coreClock,
@@ -14,20 +18,40 @@ class CPU {
       lithography,
       upVote;
 
-  CPU(
-    this.coreClock,
-    this.boostClock,
-    this.manufacture,
-    this.model,
-    this.coreCount,
-    this.tdp,
-    this.series,
-    this.microArchitecture,
-    this.coreFamily,
-    this.socket,
-    this.integratedGpu,
-    this.includeCooler,
-    this.lithography,
-    this.upVote,
-  );
+  CPU({
+    @required this.partID,
+    @required this.coreClock,
+    @required this.boostClock,
+    @required this.manufacture,
+    @required this.model,
+    @required this.coreCount,
+    @required this.tdp,
+    @required this.series,
+    @required this.microArchitecture,
+    @required this.coreFamily,
+    @required this.socket,
+    @required this.integratedGpu,
+    @required this.includeCooler,
+    @required this.lithography,
+    @required this.upVote,
+  });
+
+  @override
+  List<Object> get props => [
+        partID,
+        manufacture,
+        model,
+        coreCount,
+        coreClock,
+        boostClock,
+        tdp,
+        series,
+        microArchitecture,
+        coreFamily,
+        socket,
+        integratedGpu,
+        includeCooler,
+        lithography,
+        upVote
+      ];
 }

@@ -1,0 +1,51 @@
+import 'package:rakit_komputer/features/get_part/domain/entity/graphic_card.dart';
+import 'package:meta/meta.dart';
+
+class GraphicCardModel extends GraphicCard {
+  GraphicCardModel(
+      {@required partID,
+      @required manufacture,
+      @required chipSet,
+      @required memory,
+      @required memoryType,
+      @required coreClock,
+      @required boostClock,
+      @required effectiveMemClock,
+      @required interface,
+      @required color,
+      @required frameSync,
+      @required length,
+      @required tdp,
+      @required dvi,
+      @required hdmi,
+      @required miniHdmi,
+      @required displayPort,
+      @required miniDisplayPort,
+      @required expansionSlotWidth,
+      @required cooling,
+      @required externalPower,
+      @required upVote})
+      : super(
+            partID: partID,
+            manufacture: manufacture,
+            chipSet: chipSet,
+            memory: memory,
+            memoryType: memoryType,
+            coreClock: coreClock,
+            boostClock: boostClock,
+            effectiveMemClock: effectiveMemClock,
+            interface: interface,
+            color: color,
+            frameSync: frameSync,
+            length: length,
+            tdp: tdp,
+            dvi: dvi,
+            hdmi: hdmi,
+            miniHdmi: miniHdmi,
+            displayPort: displayPort,
+            miniDisplayPort: miniDisplayPort,
+            expansionSlotWidth: expansionSlotWidth,
+            cooling: cooling,
+            externalPower: externalPower,
+            upVote: upVote);
+}
