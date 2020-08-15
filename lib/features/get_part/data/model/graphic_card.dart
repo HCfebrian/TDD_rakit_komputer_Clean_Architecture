@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/graphic_card.dart';
 import 'package:meta/meta.dart';
 
@@ -48,4 +49,30 @@ class GraphicCardModel extends GraphicCard {
             cooling: cooling,
             externalPower: externalPower,
             upVote: upVote);
+
+  factory GraphicCardModel.from(DocumentSnapshot ds) {
+    return GraphicCardModel(
+        partID: ds.documentID,
+        manufacture: ds.data["manufacture"],
+        chipSet: ds.data["chipSet"],
+        memory: ds.data["memory"],
+        memoryType: ds.data["memoryType"],
+        coreClock: ds.data["coreClock"],
+        boostClock: ds.data["boostClock"],
+        effectiveMemClock: ds.data["effectiveMemClock"],
+        interface: ds.data["interface"],
+        color: ds.data["color"],
+        frameSync: ds.data["frameSync"],
+        length: ds.data["length"],
+        dvi: ds.data["dvi"],
+        hdmi: ds.data["hdmi"],
+        miniHdmi: ds.data["miniHdmi"],
+        displayPort: ds.data["displayPort"],
+        miniDisplayPort: ds.data["miniDisplayPort"],
+        expansionSlotWidth: ds.data["expansionSlotWidth"],
+        cooling: ds.data["cooling"],
+        externalPower: ds.data["externalPower"],
+        upVote: ds.data["upVote"],
+        tdp: ds.data["tdp"]);
+  }
 }

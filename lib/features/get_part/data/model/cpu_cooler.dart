@@ -30,14 +30,14 @@ class CPUCoolerModel extends CPUCooler {
   factory CPUCoolerModel.from(DocumentSnapshot ds) {
     return CPUCoolerModel(
         partID: ds.documentID,
-        manufacture: ds.data[""],
-        model: ds.data[""],
-        fanRPM: ds.data[""],
-        noiseLevel: ds.data[""],
-        color: ds.data[""],
-        cpuSocket: ds.data[""],
-        waterCooled: ds.data[""],
-        fanless: ds.data[""],
-        upVote: ds.data[""]);
+        manufacture: ds.data["manufacture"],
+        model: ds.data["model"],
+        fanRPM: ds.data["fanRPM"],
+        noiseLevel: ds.data["noiseLevel"],
+        color: ds.data["color"],
+        cpuSocket: ds.data["cpuSocket"],
+        waterCooled: ds.data["waterCooled"],
+        fanless: ds.data["fanless"],
+        upVote: ds.data["upVote"]);
   }
 }

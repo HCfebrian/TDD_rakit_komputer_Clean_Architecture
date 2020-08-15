@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/storage.dart';
 import 'package:meta/meta.dart';
 
@@ -23,4 +24,17 @@ class StorageModel extends Storage {
           nvme: nvme,
           upVote: upVote,
         );
+
+  factory StorageModel.from(DocumentSnapshot ds) {
+    return StorageModel(
+        partID: ds.documentID,
+        manufacture: ds.data["manufacture"],
+        capacity: ds.data["capacity"],
+        pricePerGB: ds.data["pricePerGB"],
+        type: ds.data["type"],
+        formFactor: ds.data["formFactor"],
+        interface: ds.data["interface"],
+        nvme: ds.data["nvme:"],
+        upVote: ds.data["upVote`"]);
+  }
 }

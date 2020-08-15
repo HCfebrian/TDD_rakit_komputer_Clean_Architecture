@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/moterboard.dart';
 import 'package:meta/meta.dart';
 
@@ -56,4 +57,34 @@ class MotherboardModel extends Motherboard {
             supportECC: supportECC,
             wirelessNetworking: wirelessNetworking,
             raidSupport: raidSupport);
+
+  factory MotherboardModel.from(DocumentSnapshot ds) {
+    return MotherboardModel(
+        partID: ds.documentID,
+        manufacture: ds.data[""],
+        model: ds.data["model"],
+        socket: ds.data["socket"],
+        chipSet: ds.data["chipSet"],
+        memoryMax: ds.data["memoryMax"],
+        memoryType: ds.data["memoryType"],
+        upVote: ds.data["upVote"],
+        formFactor: ds.data["formFactor"],
+        memorySlot: ds.data["memorySlot"],
+        memorySpeed: ds.data["memorySpeed"],
+        multiGpu: ds.data["multiGpu"],
+        pciEx16slot: ds.data["pciEx16slot"],
+        pciEx8slot: ds.data["pciEx8slot"],
+        pciEx4slot: ds.data["pciEx4slot"],
+        pciEx1slot: ds.data["pciEx1slot"],
+        m2slot: ds.data["m2slot"],
+        mSataSlot: ds.data["mSataSlot"],
+        onBoardInternet: ds.data["onBoardInternet"],
+        sata6GB: ds.data["sata6GB"],
+        onBoardVideo: ds.data["onBoardVideo"],
+        usb20: ds.data["usb20"],
+        usb32: ds.data["usb32"],
+        supportECC: ds.data["supportECC"],
+        wirelessNetworking: ds.data["wirelessNetworking"],
+        raidSupport: ds.data["raidSupport"]);
+  }
 }

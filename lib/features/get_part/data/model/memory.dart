@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/memory.dart';
 import 'package:meta/meta.dart';
 
@@ -30,4 +31,21 @@ class MemoryModel extends Memory {
             eccRegistered: eccRegistered,
             heatSpreader: heatSpreader,
             upVote: upVote);
+
+  factory MemoryModel.from(DocumentSnapshot ds) {
+    return MemoryModel(
+        partID: ds.documentID,
+        manufacture: ds.data["manufacture"],
+        formFactor: ds.data["formFactor"],
+        modules: ds.data["modules"],
+        pricePerGB: ds.data["pricePerGB"],
+        color: ds.data["color"],
+        firstWordLatency: ds.data["firstWordLatency"],
+        casLatency: ds.data["casLatency"],
+        voltage: ds.data["voltage"],
+        timing: ds.data["timing"],
+        eccRegistered: ds.data["eccRegistered"],
+        heatSpreader: ds.data["heatSpreader"],
+        upVote: ds.data["upVote"]);
+  }
 }
