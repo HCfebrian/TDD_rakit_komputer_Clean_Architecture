@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:rakit_komputer/core/error/auth/exception_handler.dart';
 import 'package:rakit_komputer/features/get_build/data/model/computer_build_model.dart';
 import 'package:rakit_komputer/features/get_build/domain/entity/build_entity.dart';
+import 'package:rakit_komputer/features/get_build/domain/entity/part_entity.dart';
 
 import 'build_remote_data_source_abstract.dart';
 
@@ -25,11 +26,6 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
         throw FirebaseException.handle(e);
       });
 
-      for (var i = 0; i < result.length; i++) {
-        result[i].partList = await getPartList(
-            buildId: result[i].buildId, isRecommendedBuild: true);
-      }
-
       return result;
     } catch (e) {
       throw FirebaseException.handle(e);
@@ -49,11 +45,6 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
         throw FirebaseException.handle(e);
       });
 
-      for (var i = 0; i < result.length; i++) {
-        result[i].partList = await getPartList(
-            buildId: result[i].buildId, isRecommendedBuild: false);
-      }
-
       return result;
     } catch (e) {
       throw FirebaseException.handle(e);
@@ -68,9 +59,6 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
 
       BuildModel result =
           BuildModel.from(await docCompletedBuild.document(buildID).get());
-
-      result.partList =
-          await getPartList(buildId: result.buildId, isRecommendedBuild: false);
 
       return result;
     } catch (e) {
@@ -118,6 +106,21 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
               partList.add(BuildPartModel.from(part.data));
             }));
     print("jumlah list dalam get part list ${partList.length}");
+    return partList;
+  }
+
+  @override
+  Future<List<BuildPartEntity>> getComputerPart(String buildID) async {
+    DocumentReference dRBuildOverview =
+        firetoreInstance.document("/completed_build_parts/build_id");
+
+    List<BuildPartModel> partList = List();
+    await dRBuildOverview
+        .collection(buildID)
+        .getDocuments()
+        .then((value) => value.documents.forEach((part) {
+              partList.add(BuildPartModel.from(part.data));
+            }));
     return partList;
   }
 }

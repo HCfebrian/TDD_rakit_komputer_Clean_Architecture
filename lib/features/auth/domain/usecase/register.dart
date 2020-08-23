@@ -5,7 +5,7 @@ import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 
 class RegisterUseCase {
-  final AuthRepository authRepository;
+  final AuthRepositoryAbst authRepository;
   RegisterUseCase({@required this.authRepository});
 
   Future<Either<Failure, User>> registerEmailAndPassword(

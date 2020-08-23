@@ -3,7 +3,6 @@ part of 'get_featured_build_bloc.dart';
 @immutable
 abstract class FeaturedBuildState extends Equatable {
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
 

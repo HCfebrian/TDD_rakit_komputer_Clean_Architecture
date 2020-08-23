@@ -2,16 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:rakit_komputer/core/values/radii.dart';
 import 'package:rakit_komputer/core/values/shadows.dart';
 import 'package:rakit_komputer/core/values/style.dart';
-import 'package:rakit_komputer/features/get_build/domain/entity/computer_part_entity.dart';
+import 'package:rakit_komputer/features/get_build/domain/entity/part_entity.dart';
 
-class HorizontalPartTile extends StatelessWidget {
-  final ComputerPartEntity partEntity;
+class HorizontalPartTile extends StatefulWidget {
+  final BuildPartEntity partEntity;
 
   const HorizontalPartTile({
     Key key,
     @required this.partEntity,
   }) : super(key: key);
 
+  @override
+  _HorizontalPartTileState createState() => _HorizontalPartTileState();
+}
+
+class _HorizontalPartTileState extends State<HorizontalPartTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,7 +37,7 @@ class HorizontalPartTile extends StatelessWidget {
               child: ClipRRect(
                   borderRadius: Radii.appTileRadius8,
                   child: Image.network(
-                    partEntity.picURL,
+                    widget.partEntity.picURL,
                     fit: BoxFit.fitWidth,
                   )),
               width: 80,
@@ -45,20 +50,20 @@ class HorizontalPartTile extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                margin:
-                    EdgeInsets.only(left: 15, top: 5, bottom: 5, right: 10),
+                margin: EdgeInsets.only(left: 15, top: 5, bottom: 5, right: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("part type",
+                    Text(
+                      "part type",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppStyle.textBlackLight14,
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      partEntity.name.toUpperCase(),
+                      widget.partEntity.name.toUpperCase(),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppStyle.textBlackSemiBold14,
@@ -72,7 +77,7 @@ class HorizontalPartTile extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: Text(
-                            partEntity.avgPrice,
+                            widget.partEntity.avgPrice,
                             style: AppStyle.textBlackBold14,
                             overflow: TextOverflow.ellipsis,
                           ),

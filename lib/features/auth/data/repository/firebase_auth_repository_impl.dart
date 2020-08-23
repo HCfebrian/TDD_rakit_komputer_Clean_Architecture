@@ -9,7 +9,7 @@ import 'package:rakit_komputer/features/auth/data/data_sources/auth_remote_data_
 import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 
-class FirebaseAuthRepositoryImpl implements AuthRepository {
+class FirebaseAuthRepositoryImpl implements AuthRepositoryAbst {
   final AuthRemoteDataSource authRemoteData;
   final NetworkInfo networkInfo;
 

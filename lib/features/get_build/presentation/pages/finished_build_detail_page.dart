@@ -4,7 +4,7 @@ import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/string.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/get_build/domain/entity/build_entity.dart';
-import 'package:rakit_komputer/features/get_build/presentation/widget/horizontal_part_tile_widget.dart';
+import 'package:rakit_komputer/features/get_build/presentation/widget/build_part_list.dart';
 
 class BuildDetailPage extends StatelessWidget {
   final BuildEntity buildEntity;
@@ -13,6 +13,8 @@ class BuildDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: AppColors.secondaryElement,
@@ -73,35 +75,29 @@ class BuildDetailPage extends StatelessWidget {
                       Container(
                           margin: EdgeInsets.only(top: 10),
                           child: Text(CustomString.loremIpsum)),
-                      GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: buildEntity.partList.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 1,
-                            childAspectRatio:
-                                (MediaQuery.of(context).size.width / 1.1) /
-                                    (MediaQuery.of(context).size.height / 6)),
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return HorizontalPartTile(
-                              partEntity: buildEntity.partList[index]);
-                        },
-                      ),
+                      BuildPartList(buildID: buildEntity.buildId,),
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 24),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text("Total", style: AppStyle.textBlackBold16,),
-                            Text("put the money here", style: AppStyle.textBlackBold16,)
+                            Text(
+                              "Total",
+                              style: AppStyle.textBlackBold16,
+                            ),
+                            Text(
+                              "put the money here",
+                              style: AppStyle.textBlackBold16,
+                            )
                           ],
                         ),
                       ),
-                        CustomButton(
-                            text: "Edit Component",
-                            colorBg: AppColors.secondaryElement,
-                            onPressed: () {},
-                        margin: EdgeInsets.only(bottom: 10),),
+                      CustomButton(
+                        text: "Edit Component",
+                        colorBg: AppColors.secondaryElement,
+                        onPressed: () {},
+                        margin: EdgeInsets.only(bottom: 10),
+                      ),
                     ],
                   ),
                 ),

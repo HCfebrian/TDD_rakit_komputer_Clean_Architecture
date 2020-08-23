@@ -19,6 +19,7 @@ import 'package:rakit_komputer/features/get_build/data/data_source/build_remote_
 import 'package:rakit_komputer/features/get_build/data/repository/build_repo_impl.dart';
 import 'package:rakit_komputer/features/get_build/domain/repository/build_repository.dart';
 import 'package:rakit_komputer/features/get_build/domain/usecase/get_completed_build.dart';
+import 'package:rakit_komputer/features/get_build/presentation/bloc/build_part/build_part_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/completed_build/completed_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/featured_build/get_featured_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/recommended_build/recommended_build_bloc.dart';
@@ -39,13 +40,14 @@ void init() {
   sl.registerFactory(() => RecommendedBuildBloc(buildUsecase: sl()));
   sl.registerFactory(() => CompletedBuildBloc(buildUsecase: sl()));
   sl.registerFactory(() => FeaturedBuildBloc(buildUsecase: sl()));
+  sl.registerFactory(() => BuildPartBloc(buildUsecase: sl()));
   //usecase
   sl.registerLazySingleton(() => LoginUseCase(authRepo: sl()));
   sl.registerLazySingleton(() => RegisterUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => BuildUsecase(buildRepository: sl()));
 
   //repo
-  sl.registerLazySingleton<AuthRepository>(() =>
+  sl.registerLazySingleton<AuthRepositoryAbst>(() =>
       FirebaseAuthRepositoryImpl(networkInfo: sl(), authRemoteData: sl()));
 
   sl.registerLazySingleton<BuildRepoAbst>(() => BuildRepoImpl(remoteDataSource: sl()));

@@ -4,6 +4,7 @@ import 'package:rakit_komputer/core/error/auth/failure_handler.dart';
 import 'package:rakit_komputer/core/error/failure.dart';
 import 'package:rakit_komputer/features/get_build/data/data_source/build_remote_data_source_abstract.dart';
 import 'package:rakit_komputer/features/get_build/domain/entity/build_entity.dart';
+import 'package:rakit_komputer/features/get_build/domain/entity/part_entity.dart';
 import 'package:rakit_komputer/features/get_build/domain/repository/build_repository.dart';
 
 class BuildRepoImpl implements BuildRepoAbst {
@@ -22,21 +23,32 @@ class BuildRepoImpl implements BuildRepoAbst {
   }
 
   @override
-  Future<Either<Failure, List<BuildEntity>>> getCompletedBuild()async {
+  Future<Either<Failure, List<BuildEntity>>> getCompletedBuild() async {
     try {
       return Right(await remoteDataSource.getCompletedBuildList());
     } catch (e) {
-    print(e);
-    return Left(ExceptionToFailure.handle(e));
-    }  }
+      print(e);
+      return Left(ExceptionToFailure.handle(e));
+    }
+  }
 
   @override
   Future<Either<Failure, BuildEntity>> getFeaturedBuild() async {
-    try{
+    try {
       return Right(await remoteDataSource.getFeaturedBuild());
-    }catch (e){
+    } catch (e) {
       print(e);
       return Left(ExceptionToFailure.handle(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<BuildPartEntity>>> getComputerPart(String buildID) async{
+    try {
+      return Right(await remoteDataSource.getComputerPart(buildID));
+    } catch (e) {
+    print(e);
+    return Left(ExceptionToFailure.handle(e));
     }
   }
 }

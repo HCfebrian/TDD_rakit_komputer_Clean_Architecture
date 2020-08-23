@@ -4,6 +4,7 @@ import 'package:rakit_komputer/core/data/admin_util/firestore_util.dart';
 import 'package:rakit_komputer/core/presentation/widget/custom_textfield.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/style.dart';
+import 'package:rakit_komputer/features/get_build/presentation/bloc/build_part/build_part_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/completed_build/completed_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/featured_build/get_featured_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/recommended_build/recommended_build_bloc.dart';
@@ -31,7 +32,8 @@ class HomePage extends StatelessWidget {
             BlocProvider<CompletedBuildBloc>(
                 create: (BuildContext context) => sl<CompletedBuildBloc>()),
             BlocProvider<FeaturedBuildBloc>(
-                create: (BuildContext context) => sl<FeaturedBuildBloc>())
+                create: (BuildContext context) => sl<FeaturedBuildBloc>()),
+
           ],
           child: HomeContent(),
         ),
@@ -53,6 +55,7 @@ class HomeContent extends StatelessWidget {
     BlocProvider.of<FeaturedBuildBloc>(context).add(GetFeaturedBuild());
     BlocProvider.of<RecommendedBuildBloc>(context).add(GetRecommendedList());
     BlocProvider.of<CompletedBuildBloc>(context).add(GetCompletedBuildList());
+
     return Container(
       child: Column(
         children: <Widget>[
@@ -86,7 +89,7 @@ class HomeContent extends StatelessWidget {
                   onTap: () {
                     maintainFirestore.copyCollection(
                         "/completed_build/completed_build/completed_build/5QnD4BtqFpDzQIzbuRib/partList",
-                        "/recommended_build/xfp7Ott81ZdheT05rAbZ/partList");
+                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ");
                     print(" firestore management executed");
                   },
                 ),

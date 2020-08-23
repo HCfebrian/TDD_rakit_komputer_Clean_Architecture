@@ -6,7 +6,7 @@ import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.d
 import 'package:rakit_komputer/features/auth/domain/usecase/login.dart';
 
 class MockFirebaseAuthRepository extends Mock
-    implements AuthRepository {}
+    implements AuthRepositoryAbst {}
 
 void main() {
   LoginUseCase loginUseCase;

@@ -194,8 +194,7 @@ void main() {
         setUpValidatePasswordLogin(toReturn: Right(tPassword));
         setLoginEmailUseCase(toAnswer: Right(tUser));
         //assert latter
-        final expected = [
-          Empty(),
+        final expected = [Empty(),
           Loading(),
           Loaded(user: tUser),
         ];

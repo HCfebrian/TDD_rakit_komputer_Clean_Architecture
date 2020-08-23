@@ -6,7 +6,7 @@ import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/register.dart';
 
-class MockFirebaseAuthRepository extends Mock implements AuthRepository {}
+class MockFirebaseAuthRepository extends Mock implements AuthRepositoryAbst {}
 
 void main() {
   MockFirebaseAuthRepository mockFirebaseAuthRepository;

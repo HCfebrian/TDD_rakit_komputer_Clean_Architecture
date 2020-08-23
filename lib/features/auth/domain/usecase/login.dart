@@ -6,7 +6,7 @@ import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 
 class LoginUseCase {
-  final AuthRepository authRepo;
+  final AuthRepositoryAbst authRepo;
 
   LoginUseCase({@required this.authRepo});
 
