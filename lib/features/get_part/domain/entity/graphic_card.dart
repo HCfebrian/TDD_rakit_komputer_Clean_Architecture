@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-class GraphicCard {
+class GraphicCardEntity {
   final partID,
       manufacture,
       chipSet,
@@ -24,7 +24,7 @@ class GraphicCard {
       externalPower,
       upVote;
 
-  GraphicCard(
+  GraphicCardEntity(
       {@required this.partID,
       @required this.manufacture,
       @required this.chipSet,

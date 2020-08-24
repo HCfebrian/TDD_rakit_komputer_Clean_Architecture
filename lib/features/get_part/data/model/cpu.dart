@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/cpu.dart';
 
-class CPUModel extends CPU {
+class CPUModel extends CPUEntity {
   CPUModel(
       {@required partID,
       @required coreClock,

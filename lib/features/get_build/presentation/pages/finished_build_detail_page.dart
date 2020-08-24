@@ -13,8 +13,6 @@ class BuildDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return MaterialApp(
       home: Scaffold(
         backgroundColor: AppColors.secondaryElement,
@@ -75,7 +73,9 @@ class BuildDetailPage extends StatelessWidget {
                       Container(
                           margin: EdgeInsets.only(top: 10),
                           child: Text(CustomString.loremIpsum)),
-                      BuildPartList(buildID: buildEntity.buildId,),
+                      BuildPartList(
+                        buildID: buildEntity.buildId,
+                      ),
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 24),
                         child: Row(

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/memory.dart';
 import 'package:meta/meta.dart';
 
-class MemoryModel extends Memory {
+class MemoryModel extends MemoryEntity {
   MemoryModel(
       {@required partID,
       @required manufacture,

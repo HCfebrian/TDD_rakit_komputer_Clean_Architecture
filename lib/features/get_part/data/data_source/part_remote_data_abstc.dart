@@ -8,11 +8,11 @@ import 'package:rakit_komputer/features/get_part/domain/entity/psu.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/storage.dart';
 
 abstract class PartRemoteDataSourceAbsct{
-  Future<CPU> getCPU(String partID);
+  Future<CPUEntity> getCPU(String partID);
   Future<Case> getCase(String partID);
   Future<CPUCooler> getCPUCooler(String partID);
-  Future<GraphicCard> getGraphicCard(String partID);
-  Future<Memory> getMemory(String partID);
+  Future<GraphicCardEntity> getGraphicCard(String partID);
+  Future<MemoryEntity> getMemory(String partID);
   Future<Motherboard> getMotherboard(String partID);
   Future<PSU> getPSU(String partID);
   Future<Storage> getStorage(String partID);

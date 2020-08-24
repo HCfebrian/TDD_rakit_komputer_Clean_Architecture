@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rakit_komputer/core/error/failure.dart';
+import 'package:rakit_komputer/core/error/firestore/failures.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/case.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/cpu.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/cpu_cooler.dart';
@@ -17,12 +18,29 @@ class PartUsecase{
   PartUsecase({@required this.partRepoAbst});
 
 
+  Future<Either<Failure, dynamic>> getComponentDetail(String partID, String component)   async {
+    switch (component){
+      case  "GraphicCard":
+        return  getGraphicCard(partID);
+        break;
+      case "Memory":
+        return getMemory(partID);
+        break;
+      case "Processor":
+        return getCPU(partID);
+        break;
+      default :
+        return Left(SomeFailure());
+    }
+  }
+
+
   Future<Either<Failure, Case>> getCase(String partID) async{
 
     return await partRepoAbst.getCase(partID);
   }
 
-  Future<Either<Failure, CPU>> getCPU(String partID) async{
+  Future<Either<Failure, CPUEntity>> getCPU(String partID) async{
 
     return await partRepoAbst.getCPU(partID);
   }
@@ -32,12 +50,12 @@ class PartUsecase{
     return await partRepoAbst.getCPUCooler(partID);
   }
 
-  Future<Either<Failure, GraphicCard>> getGraphicCard(String partID) async{
+  Future<Either<Failure, GraphicCardEntity>> getGraphicCard(String partID) async{
 
     return await partRepoAbst.getGraphicCard(partID);
   }
 
-  Future<Either<Failure, Memory>> getMemory(String partID) async{
+  Future<Either<Failure, MemoryEntity>> getMemory(String partID) async{
 
     return await partRepoAbst.getMemory(partID);
   }

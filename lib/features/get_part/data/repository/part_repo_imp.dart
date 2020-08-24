@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:meta/meta.dart';
+import 'package:rakit_komputer/core/error/auth/failure_handler.dart';
 import 'package:rakit_komputer/core/error/failure.dart';
 import 'package:rakit_komputer/features/get_part/data/data_source/part_remote_data_abstc.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/case.dart';
@@ -10,58 +12,81 @@ import 'package:rakit_komputer/features/get_part/domain/entity/moterboard.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/psu.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/storage.dart';
 import 'package:rakit_komputer/features/get_part/domain/repository/part_repository.dart';
-import 'package:meta/meta.dart';
 
-class PartRepoImp implements PartRepoAbst{
+class PartRepoImp implements PartRepoAbst {
   final PartRemoteDataSourceAbsct partRemoteData;
 
   PartRepoImp({@required this.partRemoteData});
 
   @override
-  Future<Either<Failure, CPU>> getCPU(String partID) {
-    // TODO: implement getCPU
-    throw UnimplementedError();
+  Future<Either<Failure, CPUEntity>> getCPU(String partID) async {
+    try {
+      return Right(await partRemoteData.getCPU(partID));
+    } catch (e) {
+      return Left(ExceptionToFailure.handle(e));
+    }
   }
 
   @override
-  Future<Either<Failure, CPUCooler>> getCPUCooler(String partID) {
-    // TODO: implement getCPUCooler
-    throw UnimplementedError();
+  Future<Either<Failure, CPUCooler>> getCPUCooler(String partID) async {
+    try {
+      return Right(await partRemoteData.getCPUCooler(partID));
+    } catch (e) {
+      return Left(ExceptionToFailure.handle(e));
+    }
   }
 
   @override
-  Future<Either<Failure, Case>> getCase(String partID) {
-    // TODO: implement getCase
-    throw UnimplementedError();
+  Future<Either<Failure, Case>> getCase(String partID) async {
+    try {
+      return Right(await partRemoteData.getCase(partID));
+    } catch (e) {
+      return Left(ExceptionToFailure.handle(e));
+    }
   }
 
   @override
-  Future<Either<Failure, GraphicCard>> getGraphicCard(String partID) {
-    // TODO: implement getGraphicCard
-    throw UnimplementedError();
+  Future<Either<Failure, GraphicCardEntity>> getGraphicCard(String partID) async {
+    try {
+      return Right(await partRemoteData.getGraphicCard(partID));
+    } catch (e) {
+      return Left(ExceptionToFailure.handle(e));
+    }
   }
 
   @override
-  Future<Either<Failure, Memory>> getMemory(String partID) {
-    // TODO: implement getMemory
-    throw UnimplementedError();
+  Future<Either<Failure, MemoryEntity>> getMemory(String partID) async {
+    try {
+      return Right(await partRemoteData.getMemory(partID));
+    } catch (e) {
+      return Left(ExceptionToFailure.handle(e));
+    }
   }
 
   @override
-  Future<Either<Failure, Motherboard>> getMotherboard(String partID) {
-    // TODO: implement getMotherboard
-    throw UnimplementedError();
+  Future<Either<Failure, Motherboard>> getMotherboard(String partID) async {
+    try {
+      return Right(await partRemoteData.getMotherboard(partID));
+    } catch (e) {
+      return Left(ExceptionToFailure.handle(e));
+    }
   }
 
   @override
-  Future<Either<Failure, PSU>> getPSU(String partID) {
-    // TODO: implement getPSU
-    throw UnimplementedError();
+  Future<Either<Failure, PSU>> getPSU(String partID) async {
+    try {
+      return Right(await partRemoteData.getPSU(partID));
+    } catch (e) {
+      return Left(ExceptionToFailure.handle(e));
+    }
   }
 
   @override
-  Future<Either<Failure, Storage>> getStorage(String partID) {
-    // TODO: implement getStorage
-    throw UnimplementedError();
+  Future<Either<Failure, Storage>> getStorage(String partID) async {
+    try {
+      return Right(await partRemoteData.getStorage(partID));
+    } catch (e) {
+      return Left(ExceptionToFailure.handle(e));
+    }
   }
 }

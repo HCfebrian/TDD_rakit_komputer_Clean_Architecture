@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-class Memory extends Equatable {
+class MemoryEntity extends Equatable {
   final partID,
       manufacture,
       formFactor,
@@ -16,7 +16,7 @@ class Memory extends Equatable {
       heatSpreader,
       upVote;
 
-  Memory(
+  MemoryEntity(
       {@required this.partID,
       @required this.manufacture,
       @required this.formFactor,

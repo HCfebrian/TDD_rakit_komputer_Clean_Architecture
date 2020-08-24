@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-class CPU extends Equatable {
+class CPUEntity extends Equatable {
   final partID,
       manufacture,
       model,
@@ -18,7 +18,7 @@ class CPU extends Equatable {
       lithography,
       upVote;
 
-  CPU({
+  CPUEntity({
     @required this.partID,
     @required this.coreClock,
     @required this.boostClock,

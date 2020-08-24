@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/graphic_card.dart';
 import 'package:meta/meta.dart';
 
-class GraphicCardModel extends GraphicCard {
+class GraphicCardModel extends GraphicCardEntity {
   GraphicCardModel(
       {@required partID,
       @required manufacture,

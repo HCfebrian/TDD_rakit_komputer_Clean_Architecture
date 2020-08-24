@@ -12,13 +12,13 @@ import 'package:rakit_komputer/features/get_part/domain/entity/storage.dart';
 abstract class PartRepoAbst {
   Future<Either<Failure, Case>> getCase(String partID);
 
-  Future<Either<Failure, CPU>> getCPU(String partID);
+  Future<Either<Failure, CPUEntity>> getCPU(String partID);
 
   Future<Either<Failure, CPUCooler>> getCPUCooler(String partID);
 
-  Future<Either<Failure, GraphicCard>> getGraphicCard(String partID);
+  Future<Either<Failure, GraphicCardEntity>> getGraphicCard(String partID);
 
-  Future<Either<Failure, Memory>> getMemory(String partID);
+  Future<Either<Failure, MemoryEntity>> getMemory(String partID);
 
   Future<Either<Failure, Motherboard>> getMotherboard(String partID);
 

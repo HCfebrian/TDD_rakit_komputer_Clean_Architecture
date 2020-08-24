@@ -25,9 +25,10 @@ class PartRemoteDataSourceImpl extends PartRemoteDataSourceAbsct {
   PartRemoteDataSourceImpl({@required this.firestoreInstance});
 
   @override
-  Future<CPU> getCPU(String partID) async {
+  Future<CPUEntity> getCPU(String partID) async {
     try {
-      final refPart = firestoreInstance.collection("part_data/CPU/CPUs");
+      final refPart =
+          firestoreInstance.collection("part_data/processor/processors");
       final ds = await refPart.document(partID).get();
       return CPUModel.from(ds);
     } catch (e) {
@@ -39,7 +40,8 @@ class PartRemoteDataSourceImpl extends PartRemoteDataSourceAbsct {
   @override
   Future<CPUCooler> getCPUCooler(String partID) async {
     try {
-      final refPart = firestoreInstance.collection("part_data/CPUCooler/CPUCoolers");
+      final refPart =
+          firestoreInstance.collection("part_data/cpu_cooler/cpu_coolers");
       final ds = await refPart.document(partID).get();
       return CPUCoolerModel.from(ds);
     } catch (e) {
@@ -51,7 +53,7 @@ class PartRemoteDataSourceImpl extends PartRemoteDataSourceAbsct {
   @override
   Future<Case> getCase(String partID) async {
     try {
-      final refPart = firestoreInstance.collection("part_data/Case/Cases");
+      final refPart = firestoreInstance.collection("part_data/case/cases");
       final ds = await refPart.document(partID).get();
       return CaseModel.from(ds);
     } catch (e) {
@@ -61,9 +63,9 @@ class PartRemoteDataSourceImpl extends PartRemoteDataSourceAbsct {
   }
 
   @override
-  Future<GraphicCard> getGraphicCard(String partID) async {
+  Future<GraphicCardEntity> getGraphicCard(String partID) async {
     try {
-      final refPart = firestoreInstance.collection("part_data/GraphicCard/GraphicCards");
+      final refPart = firestoreInstance.collection("part_data/gpu/gpus");
       final ds = await refPart.document(partID).get();
       return GraphicCardModel.from(ds);
     } catch (e) {
@@ -73,9 +75,9 @@ class PartRemoteDataSourceImpl extends PartRemoteDataSourceAbsct {
   }
 
   @override
-  Future<Memory> getMemory(String partID) async {
+  Future<MemoryEntity> getMemory(String partID) async {
     try {
-      final refPart = firestoreInstance.collection("part_data/Memory/Memories");
+      final refPart = firestoreInstance.collection("part_data/memory/memories");
       final ds = await refPart.document(partID).get();
       return MemoryModel.from(ds);
     } catch (e) {
@@ -87,7 +89,8 @@ class PartRemoteDataSourceImpl extends PartRemoteDataSourceAbsct {
   @override
   Future<Motherboard> getMotherboard(String partID) async {
     try {
-      final refPart = firestoreInstance.collection("part_data/MotherBoard/Motherboards");
+      final refPart =
+          firestoreInstance.collection("part_data/motherboard/motherboards");
       final ds = await refPart.document(partID).get();
       return MotherboardModel.from(ds);
     } catch (e) {
@@ -99,7 +102,7 @@ class PartRemoteDataSourceImpl extends PartRemoteDataSourceAbsct {
   @override
   Future<PSU> getPSU(String partID) async {
     try {
-      final refPart = firestoreInstance.collection("part_data/PSU/PSUs");
+      final refPart = firestoreInstance.collection("part_data/psu/psus");
       final ds = await refPart.document(partID).get();
       return PSUModel.from(ds);
     } catch (e) {
@@ -111,7 +114,7 @@ class PartRemoteDataSourceImpl extends PartRemoteDataSourceAbsct {
   @override
   Future<Storage> getStorage(String partID) async {
     try {
-      final refPart = firestoreInstance.collection("part_data/Storage/Storage");
+      final refPart = firestoreInstance.collection("part_data/storage/storage");
       final ds = await refPart.document(partID).get();
       return StorageModel.from(ds);
     } catch (e) {
