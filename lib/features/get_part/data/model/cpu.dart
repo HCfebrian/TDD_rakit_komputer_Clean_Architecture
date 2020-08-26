@@ -3,39 +3,6 @@ import 'package:meta/meta.dart';
 import 'package:rakit_komputer/features/get_part/domain/entity/cpu.dart';
 
 class CPUModel extends CPUEntity {
-  CPUModel(
-      {@required partID,
-      @required coreClock,
-      @required boostClock,
-      @required manufacture,
-      @required model,
-      @required coreCount,
-      @required tdp,
-      @required series,
-      @required microArchitecture,
-      @required coreFamily,
-      @required socket,
-      @required integratedGpu,
-      @required includeCooler,
-      @required lithography,
-      @required upVote})
-      : super(
-            partID: partID,
-            coreClock: coreClock,
-            boostClock: boostClock,
-            manufacture: manufacture,
-            model: model,
-            coreCount: coreCount,
-            tdp: tdp,
-            series: series,
-            microArchitecture: microArchitecture,
-            coreFamily: coreFamily,
-            socket: socket,
-            integratedGpu: integratedGpu,
-            includeCooler: includeCooler,
-            lithography: lithography,
-            upVote: upVote);
-
   factory CPUModel.from(DocumentSnapshot ds) {
     return CPUModel(
         partID: ds.documentID,
@@ -52,6 +19,43 @@ class CPUModel extends CPUEntity {
         integratedGpu: ds.data["integratedGpu"],
         includeCooler: ds.data["includeCooler"],
         lithography: ds.data["lithography"],
-        upVote: ds.data["upVote"]);
+        upVote: ds.data["upVote"],
+        photoURL: ds.data["photoURL"]);
   }
+
+  CPUModel(
+      {@required partID,
+      @required boostClock,
+      @required coreClock,
+      @required coreCount,
+      @required coreFamily,
+      @required integratedGpu,
+      @required includeCooler,
+      @required lithography,
+      @required manufacture,
+      @required microArchitecture,
+      @required model,
+      @required tdp,
+      @required series,
+      @required photoURL,
+      @required socket,
+      @required upVote})
+      : super(
+          partID: partID,
+          coreClock: coreClock,
+          boostClock: boostClock,
+          manufacture: manufacture,
+          model: model,
+          coreCount: coreCount,
+          tdp: tdp,
+          series: series,
+          microArchitecture: microArchitecture,
+          coreFamily: coreFamily,
+          socket: socket,
+          integratedGpu: integratedGpu,
+          includeCooler: includeCooler,
+          lithography: lithography,
+          photoURL: photoURL,
+          upVote: upVote,
+        );
 }

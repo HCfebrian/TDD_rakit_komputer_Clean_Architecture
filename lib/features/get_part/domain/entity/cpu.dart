@@ -16,7 +16,8 @@ class CPUEntity extends Equatable {
       integratedGpu,
       includeCooler,
       lithography,
-      upVote;
+      upVote,
+      photoURL;
 
   CPUEntity({
     @required this.partID,
@@ -34,6 +35,7 @@ class CPUEntity extends Equatable {
     @required this.includeCooler,
     @required this.lithography,
     @required this.upVote,
+    @required this.photoURL,
   });
 
   @override
@@ -52,6 +54,7 @@ class CPUEntity extends Equatable {
         integratedGpu,
         includeCooler,
         lithography,
-        upVote
+        upVote,
+        photoURL
       ];
 }
