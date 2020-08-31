@@ -56,11 +56,12 @@ class _HorizontalPartTileState extends State<HorizontalPartTile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "part type",
+                      widget.partEntity.partType.toUpperCase(),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppStyle.textBlackLight14,
+                      style: AppStyle.textBlackLight12,
                       textAlign: TextAlign.left,
+
                     ),
                     Text(
                       widget.partEntity.name.toUpperCase(),

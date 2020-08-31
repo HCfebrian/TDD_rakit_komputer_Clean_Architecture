@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 
 class CPUEntity extends Equatable {
   final partID,
+      name,
       manufacture,
       model,
       coreCount,
@@ -21,6 +22,7 @@ class CPUEntity extends Equatable {
 
   CPUEntity({
     @required this.partID,
+    @required this.name,
     @required this.coreClock,
     @required this.boostClock,
     @required this.manufacture,
@@ -41,6 +43,7 @@ class CPUEntity extends Equatable {
   @override
   List<Object> get props => [
         partID,
+        name,
         manufacture,
         model,
         coreCount,

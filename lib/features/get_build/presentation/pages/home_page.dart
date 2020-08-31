@@ -4,7 +4,6 @@ import 'package:rakit_komputer/core/data/admin_util/firestore_util.dart';
 import 'package:rakit_komputer/core/presentation/widget/custom_textfield.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/style.dart';
-import 'package:rakit_komputer/features/get_build/presentation/bloc/build_part/build_part_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/completed_build/completed_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/featured_build/get_featured_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/recommended_build/recommended_build_bloc.dart';
@@ -88,8 +87,42 @@ class HomeContent extends StatelessWidget {
                   child: Text("updateHere"),
                   onTap: () {
                     maintainFirestore.copyCollection(
-                        "/completed_build/completed_build/completed_build/5QnD4BtqFpDzQIzbuRib/partList",
-                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ");
+                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
+                        "/completed_build_parts/build_id/5QnD4BtqFpDzQIzbuRib"
+                    );
+                    maintainFirestore.copyCollection(
+                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
+                        "/completed_build_parts/build_id/Mq0InkfJS9C233qIM6xq"
+                    );
+                    maintainFirestore.copyCollection(
+                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
+                      "/completed_build_parts/build_id/UQeqPA1KfOOOOHDCNDNJ"
+                    );
+                    maintainFirestore.copyCollection(
+                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
+                      "/completed_build_parts/build_id/awXBeQVzsPlouiQdj2e1"
+                    );
+                    maintainFirestore.copyCollection(
+                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
+                        "/completed_build_parts/build_id/cilwtqW0nFFnaQNScKYd"
+                    );
+                    maintainFirestore.copyCollection(
+                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
+                        "/completed_build_parts/build_id/d9SGavkFz7CgZW560eWb"
+                    );
+                    maintainFirestore.copyCollection(
+                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
+                        "/completed_build_parts/build_id/hzzpQ8K5AyZ6pOocQVgJ"
+                    );
+                    maintainFirestore.copyCollection(
+                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
+                        "/completed_build_parts/build_id/x5YhwZ7aFuoVlydXb8v4"
+                    );
+                    maintainFirestore.copyCollection(
+                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
+                        "/completed_build_parts/build_id/yz5GZ3mPkqP5S38X6TZ7"
+                    );
+
                     print(" firestore management executed");
                   },
                 ),

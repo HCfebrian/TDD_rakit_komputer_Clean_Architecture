@@ -23,6 +23,12 @@ import 'package:rakit_komputer/features/get_build/presentation/bloc/build_part/b
 import 'package:rakit_komputer/features/get_build/presentation/bloc/completed_build/completed_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/featured_build/get_featured_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/recommended_build/recommended_build_bloc.dart';
+import 'package:rakit_komputer/features/get_part/data/data_source/part_remote_data_abstc.dart';
+import 'package:rakit_komputer/features/get_part/data/data_source/part_remote_data_imp.dart';
+import 'package:rakit_komputer/features/get_part/data/repository/part_repo_imp.dart';
+import 'package:rakit_komputer/features/get_part/domain/repository/part_repository.dart';
+import 'package:rakit_komputer/features/get_part/domain/usecase/get_component_part.dart';
+import 'package:rakit_komputer/features/get_part/presentation/bloc/part_detail/part_detail_bloc.dart';
 
 //service locator
 final sl = GetIt.instance;
@@ -41,21 +47,26 @@ void init() {
   sl.registerFactory(() => CompletedBuildBloc(buildUsecase: sl()));
   sl.registerFactory(() => FeaturedBuildBloc(buildUsecase: sl()));
   sl.registerFactory(() => BuildPartBloc(buildUsecase: sl()));
+  sl.registerFactory(() => PartDetailBloc(partUsecase: sl()));
   //usecase
   sl.registerLazySingleton(() => LoginUseCase(authRepo: sl()));
   sl.registerLazySingleton(() => RegisterUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => BuildUsecase(buildRepository: sl()));
+  sl.registerLazySingleton(() => PartUsecase( partRepoAbst: sl()));
 
   //repo
   sl.registerLazySingleton<AuthRepositoryAbst>(() =>
       FirebaseAuthRepositoryImpl(networkInfo: sl(), authRemoteData: sl()));
 
   sl.registerLazySingleton<BuildRepoAbst>(() => BuildRepoImpl(remoteDataSource: sl()));
+  sl.registerLazySingleton<PartRepoAbst>(() => PartRepoImp(partRemoteData:  sl()));
+
   //data
   sl.registerLazySingleton<AuthRemoteDataSource>(() =>
       FirebaseAuthRemoteDataSourceImpl(firebaseAuth: sl(), googleSignIn: sl()));
 
   sl.registerLazySingleton<BuildRemoteDataSourceAbstc>(() => BuildRemoteDataSourceImpl(firetoreInstance: sl()));
+  sl.registerLazySingleton<PartRemoteDataSourceAbsct>(() => PartRemoteDataSourceImpl( firestoreInstance:sl()));
 // Core
   //presentation
   //util

@@ -1,4 +1,3 @@
-import 'package:rakit_komputer/features/get_build/data/model/computer_build_model.dart';
 import 'package:rakit_komputer/features/get_build/domain/entity/build_entity.dart';
 import 'package:rakit_komputer/features/get_build/domain/entity/part_entity.dart';
 

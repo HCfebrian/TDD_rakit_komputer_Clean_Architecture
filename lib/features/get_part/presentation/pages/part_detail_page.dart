@@ -1,10 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:rakit_komputer/core/values/colors.dart';
-import 'package:rakit_komputer/core/values/style.dart';
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rakit_komputer/core/values/colors.dart';
+import 'package:rakit_komputer/core/values/style.dart';
+import 'package:rakit_komputer/features/get_part/domain/entity/cpu.dart';
+import 'package:rakit_komputer/features/get_part/presentation/bloc/part_detail/part_detail_bloc.dart';
+
+import '../../../../injection_container.dart';
+
 class PartDetailPage extends StatefulWidget {
+  final partID, partType;
+
+  const PartDetailPage(
+      {Key key, @required this.partID, @required this.partType})
+      : super(key: key);
+
   @override
   _PartDetailPageState createState() => _PartDetailPageState();
 }
@@ -12,319 +24,99 @@ class PartDetailPage extends StatefulWidget {
 class _PartDetailPageState extends State<PartDetailPage> {
   @override
   Widget build(BuildContext context) {
-    return SliverContent();
+    return BlocProvider<PartDetailBloc>(
+      create: (BuildContext context) => sl<PartDetailBloc>(),
+      child: Scaffold(
+        body: SliverContent(partType: widget.partType, partID: widget.partID),
+      ),
+    );
   }
 }
 
 class SliverContent extends StatelessWidget {
+  final partID, partType;
+
   const SliverContent({
     Key key,
+    this.partID,
+    this.partType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            leading: Icon(Icons.arrow_back_ios),
-            title: Text("Graphic Card"),
-            centerTitle: true,
-            pinned: true,
-            backgroundColor: AppColors.secondaryElement,
-            expandedHeight: 200,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                "https://image.shutterstock.com/z/stock-photo-mountains-during-sunset-beautiful-natural-landscape-in-the-summer-time-407021107.jpg",
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          ),
-          SliverPersistentHeader(
-            delegate: _SliverAppBarDelegate(
-                minHeight: 70, maxHeight: 70, child: buildRow(context)),
-            pinned: true,
-          ),
-          SliverFixedExtentList(
-            itemExtent: 50,
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-              return _buildSubSpec(index);
-            }, childCount: 13),
-          ),
-        ],
-      ),
-    );
-  }
-}
+    BlocProvider.of<PartDetailBloc>(context)
+        .add(GetPartEvent(partID: partID, partType: partType));
 
-class ScaffoldWithoutSliver extends StatelessWidget {
-  const ScaffoldWithoutSliver({
-    Key key,
-  }) : super(key: key);
+    return BlocBuilder<PartDetailBloc, PartDetailState>(
+        builder: (context, state) {
+      if (state is PartDetailInitial) {
+        return Text("initial");
+      }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios),
-        title: Text("GPU"),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: <Widget>[
-          Container(
-            color: AppColors.secondaryElement,
-            height: 200,
-            child: Image.network(
-                "https://image.shutterstock.com/z/stock-photo-mountains-during-sunset-beautiful-natural-landscape-in-the-summer-time-407021107.jpg"),
-          ),
-          Expanded(
-            child: Container(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Container(
-                  margin: EdgeInsets.only(top: 24, left: 24, right: 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      buildRow(context),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.star,
-                            color: AppColors.secondaryElement,
-                            size: 15,
-                          ),
-                          SizedBox(
-                            width: 3,
-                          ),
-                          Text(
-                            "4.5",
-                            style: AppStyle.textBlackBold14,
-                          ),
-                          SizedBox(
-                            width: 3,
-                          ),
-                          Text(
-                            "(300 votes)",
-                            style: AppStyle.textBlackLight12,
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Text(
-                        "Spesifikasi",
-                        style: AppStyle.textBlackBold16,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 2,
-                        color: AppColors.secondaryElement,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Manufacture",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Model",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Core Count",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Core Clock",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Boost Clock",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "TDP",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Series",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Microarchitecture",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Core Family",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Socket",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Integrated Graphic",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Include Cooler",
-                        style: AppStyle.textBlackLight14,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      _buildSubSpec(1),
-                    ],
-                  ),
+      if (state is PartDetailLoading) {
+        return Text("Loading");
+      }
+
+      if (state is PartDetailError) {
+        return Text("Error");
+      }
+
+      if (state is PartDetailCPULoaded) {
+        return CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              leading: Icon(Icons.arrow_back_ios),
+              title: Text("CPU"),
+              centerTitle: true,
+              pinned: true,
+              backgroundColor: AppColors.secondaryElement,
+              expandedHeight: 200,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.network(
+                  state.cpu.photoURL,
+                  fit: BoxFit.fitWidth,
                 ),
               ),
             ),
-          )
-        ],
-      ),
-    );
+            SliverPersistentHeader(
+              delegate: _SliverAppBarDelegate(
+                  minHeight: 70,
+                  maxHeight: 70,
+                  child: buildRow(context, state.cpu)),
+              pinned: true,
+            ),
+            SliverFixedExtentList(
+              itemExtent: 50,
+              delegate:
+                  SliverChildBuilderDelegate((BuildContext context, int index) {
+                return _buildSubSpec(index, state.cpu);
+              }, childCount: 13),
+            ),
+          ],
+        );
+      }
+      return Text("empty");
+    });
   }
 }
 
-Widget _buildSubSpec(int index) {
+Widget _buildSubSpec(int index, CPUEntity cpuEntity) {
   return Container(
     margin: EdgeInsets.symmetric(horizontal: 20),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
-              "Lithography",
+              indexToSubCategory(index),
               style: AppStyle.textBlackLight14,
             ),
-            Center(child: Text("7 nm")),
+            Center(child: Text(indexToCPUSpec(index, cpuEntity))),
           ],
         ),
         SizedBox(
@@ -339,7 +131,7 @@ Widget _buildSubSpec(int index) {
   );
 }
 
-Widget buildRow(BuildContext context) {
+Widget buildRow(BuildContext context, dynamic partDetail) {
   return Container(
     color: Colors.white,
     margin: EdgeInsets.symmetric(horizontal: 20),
@@ -351,7 +143,7 @@ Widget buildRow(BuildContext context) {
         Container(
           width: (MediaQuery.of(context).size.width * 0.4),
           child: Text(
-            "Geforce GTX 1080 Ti",
+            partDetail.title,
             style: AppStyle.textBlackSemiBold22,
             maxLines: 2,
           ),
@@ -368,15 +160,67 @@ Widget buildRow(BuildContext context) {
   );
 }
 
-String indexToSubSpec(int index){
-  switch(index){
-    case 1:
+String indexToSubCategory(int index) {
+  switch (index) {
+    case 0:
       return "Manufacture";
-    case 2:
+    case 1:
       return "Model";
+    case 2:
+      return "Core Count";
     case 3:
+      return "Core Clock";
+    case 4:
+      return "Boost Clock";
+    case 5:
+      return "TDP";
+    case 6:
+      return "Series";
+    case 7:
+      return "Micro Architecture";
+    case 8:
+      return "Core Family";
+    case 9:
+      return "Socket";
+    case 10:
+      return "Integrated Graphic";
+    case 11:
+      return "Include Cooler";
+    case 12:
+      return "Lithography";
+    default:
+      return "unknown spec";
+  }
+}
 
-
+dynamic indexToCPUSpec(int index, CPUEntity cpuEntity) {
+  switch (index) {
+    case 0:
+      return cpuEntity.manufacture;
+    case 1:
+      return cpuEntity.model;
+    case 2:
+      return cpuEntity.coreCount;
+    case 3:
+      return cpuEntity.coreClock;
+    case 4:
+      return cpuEntity.boostClock;
+    case 5:
+      return cpuEntity.tdp;
+    case 6:
+      return cpuEntity.series;
+    case 7:
+      return cpuEntity.microArchitecture;
+    case 8:
+      return cpuEntity.coreFamily;
+    case 9:
+      return cpuEntity.socket;
+    case 10:
+      return cpuEntity.integratedGpu;
+    case 11:
+      return cpuEntity.includeCooler;
+    case 12:
+      return cpuEntity.lithography;
   }
 }
 

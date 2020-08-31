@@ -13,23 +13,23 @@ class PartDetailLoading extends PartDetailState{
   
 }
 
-class CPULoaded extends PartDetailState{
+class PartDetailCPULoaded extends PartDetailState{
   final CPUEntity cpu;
 
-  CPULoaded({@required this.cpu});
+  PartDetailCPULoaded({@required this.cpu});
 }
 
-class GPULoaded extends PartDetailState{
+class PartDetailGPULoaded extends PartDetailState{
   final GraphicCardEntity gpu;
 
-  GPULoaded({@required this.gpu}); 
+  PartDetailGPULoaded({@required this.gpu}); 
   
 }
 
-class MemoryLoaded extends PartDetailState{
+class PartDetailMemoryLoaded extends PartDetailState{
   final MemoryEntity memory;
 
-  MemoryLoaded({@required this.memory});
+  PartDetailMemoryLoaded({@required this.memory});
 }
 
 class PartDetailError extends PartDetailState{

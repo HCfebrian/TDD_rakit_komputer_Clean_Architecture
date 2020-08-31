@@ -86,29 +86,6 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
     }
   }
 
-  Future<List<BuildPartModel>> getPartList(
-      {@required String buildId, @required bool isRecommendedBuild}) async {
-    CollectionReference dRBuildOverview;
-    if (isRecommendedBuild) {
-      print("recommended build");
-      dRBuildOverview = firetoreInstance.collection("recommended_build");
-    } else {
-      print("complate build");
-      dRBuildOverview = firetoreInstance
-          .collection("completed_build/completed_build/completed_build");
-    }
-    List<BuildPartModel> partList = List();
-    await dRBuildOverview
-        .document(buildId)
-        .collection("partList")
-        .getDocuments()
-        .then((value) => value.documents.forEach((part) {
-              partList.add(BuildPartModel.from(part.data));
-            }));
-    print("jumlah list dalam get part list ${partList.length}");
-    return partList;
-  }
-
   @override
   Future<List<BuildPartEntity>> getComputerPart(String buildID) async {
     DocumentReference dRBuildOverview =

@@ -13,10 +13,10 @@ part 'part_detail_event.dart';
 part 'part_detail_state.dart';
 
 class PartDetailBloc extends Bloc<PartDetailEvent, PartDetailState> {
-  final PartUsecase usecase;
+  final PartUsecase partUsecase;
 
-  PartDetailBloc({@required this.usecase})
-      : assert(usecase != null),
+  PartDetailBloc({@required this.partUsecase})
+      : assert(partUsecase != null),
         super(PartDetailInitial());
 
   @override
@@ -26,17 +26,19 @@ class PartDetailBloc extends Bloc<PartDetailEvent, PartDetailState> {
     if(event is GetPartEvent){
       switch(event.partType){
         case "gpu":
-          final failureOrData = await usecase.getGraphicCard(event.partID);
-          yield failureOrData.fold((failure) => PartDetailError(), (partData) => GPULoaded(gpu: partData));
+          final failureOrData = await partUsecase.getGraphicCard(event.partID);
+          yield failureOrData.fold((failure) => PartDetailError(), (partData) => PartDetailGPULoaded(gpu: partData));
           break;
         case "cpu":
-          final failureOrData = await usecase.getCPU(event.partID);
-          yield failureOrData.fold((failure) => PartDetailError(), (partData) => CPULoaded(cpu: partData));
+          final failureOrData = await partUsecase.getCPU(event.partID);
+          yield failureOrData.fold((failure) => PartDetailError(), (partData) => PartDetailCPULoaded(cpu: partData));
           break;
         case "memory":
-          final failureOrData = await usecase.getMemory(event.partID);
-          yield failureOrData.fold((failure) => PartDetailError(), (partData) => MemoryLoaded(memory: partData));
+          final failureOrData = await partUsecase.getMemory(event.partID);
+          yield failureOrData.fold((failure) => PartDetailError(), (partData) => PartDetailMemoryLoaded(memory: partData));
           break;
+        default:
+          print("type not found");
       }
     }
   }

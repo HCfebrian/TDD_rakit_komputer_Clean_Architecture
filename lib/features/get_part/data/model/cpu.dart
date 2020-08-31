@@ -7,6 +7,7 @@ class CPUModel extends CPUEntity {
     return CPUModel(
         partID: ds.documentID,
         coreClock: ds.data["coreClock"],
+        name: ds.data["name"],
         boostClock: ds.data["boostClock"],
         manufacture: ds.data["manufacture"],
         model: ds.data["model"],
@@ -25,6 +26,7 @@ class CPUModel extends CPUEntity {
 
   CPUModel(
       {@required partID,
+      @required name,
       @required boostClock,
       @required coreClock,
       @required coreCount,
@@ -42,6 +44,7 @@ class CPUModel extends CPUEntity {
       @required upVote})
       : super(
           partID: partID,
+          name: name,
           coreClock: coreClock,
           boostClock: boostClock,
           manufacture: manufacture,

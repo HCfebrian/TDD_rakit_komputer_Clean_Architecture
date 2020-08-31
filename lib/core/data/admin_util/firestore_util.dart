@@ -37,7 +37,7 @@ class MaintainFirestore {
     firestore.document(where).setData(ds.data);
   }
 
-  void copyDocument(String from, String to) async {
+  void  copyDocument(String from, String to) async {
     final ds = await firestore.document(from).get();
     firestore.document(to).setData(ds.data);
   }

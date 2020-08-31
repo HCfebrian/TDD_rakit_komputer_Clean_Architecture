@@ -73,6 +73,7 @@ class FirestoreException {
         return UndefinedException();
         break;
       default:
+        print(e);
         print(" handled UNDEFINE_EXCEPTION");
         return UndefinedException();
     }

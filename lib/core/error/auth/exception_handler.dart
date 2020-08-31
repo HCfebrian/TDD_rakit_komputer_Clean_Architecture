@@ -40,6 +40,7 @@ class FirebaseException {
         return EmailAlreadyExistException();
 //        errorMessage = "An undefined Error happened.";
       default:
+        print(e);
         print(" handled UNDEFINE_EXCEPTION");
         return UndefinedException();
     }

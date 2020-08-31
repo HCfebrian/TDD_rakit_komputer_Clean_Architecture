@@ -44,6 +44,7 @@ class ExceptionToFailure{
       case ServerException:
         return ServerFailure();
       default:
+        print(e);
         print(" handled UNDEFINE_EXCEPTION");
         return UndefinedFailure();
     }

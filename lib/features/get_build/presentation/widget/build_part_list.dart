@@ -17,13 +17,7 @@ class BuildPartList extends StatefulWidget {
 }
 
 class _BuildPartListState extends State<BuildPartList> {
-  BuildPartBloc bloc;
 
-  @override
-  void dispose() {
-    super.dispose();
-    bloc.close();
-  }
 
   @override
   Widget build(BuildContext context) {

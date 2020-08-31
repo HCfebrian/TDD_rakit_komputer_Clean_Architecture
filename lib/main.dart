@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      home: PartDetailPage(),
+      home: PartDetailPage(partType: "cpu", partID: "cpu123",),
     );
   }
 }
