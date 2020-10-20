@@ -6,22 +6,22 @@ class CPUModel extends CPUEntity {
   factory CPUModel.from(DocumentSnapshot ds) {
     return CPUModel(
         partID: ds.documentID,
-        coreClock: ds.data["coreClock"],
+        coreClock: ds.data["core_clock"],
         name: ds.data["name"],
-        boostClock: ds.data["boostClock"],
+        boostClock: ds.data["boost_clock"],
         manufacture: ds.data["manufacture"],
         model: ds.data["model"],
-        coreCount: ds.data["coreCount"],
+        coreCount: ds.data["core_count"],
         tdp: ds.data["tdp"],
         series: ds.data["series"],
-        microArchitecture: ds.data["microArchitecture"],
-        coreFamily: ds.data["coreFamily"],
+        microArchitecture: ds.data["micro_architecture"],
+        coreFamily: ds.data["core_family"],
         socket: ds.data["socket"],
-        integratedGpu: ds.data["integratedGpu"],
-        includeCooler: ds.data["includeCooler"],
+        integratedGpu: ds.data["integrated_gpu"],
+        includeCooler: ds.data["include_cooler"],
         lithography: ds.data["lithography"],
-        upVote: ds.data["upVote"],
-        photoURL: ds.data["photoURL"]);
+        upVote: ds.data["upvote"],
+        photoURL: ds.data["photo_url"]);
   }
 
   CPUModel(

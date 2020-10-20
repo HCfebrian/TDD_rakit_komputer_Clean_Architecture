@@ -7,8 +7,6 @@ import 'package:rakit_komputer/core/network/netword_info.dart';
 import 'package:rakit_komputer/core/presentation/util/email_validation.dart';
 import 'package:rakit_komputer/core/presentation/util/password_validation.dart';
 import 'package:rakit_komputer/core/presentation/util/username_validation.dart';
-import 'package:rakit_komputer/features/auth/data/data_sources/auth_remote_data_source.dart';
-import 'package:rakit_komputer/features/auth/data/data_sources/firebase_auth_datasource_impl.dart';
 import 'package:rakit_komputer/features/auth/data/repository/firebase_auth_repository_impl.dart';
 import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/login.dart';
@@ -29,6 +27,9 @@ import 'package:rakit_komputer/features/get_part/data/repository/part_repo_imp.d
 import 'package:rakit_komputer/features/get_part/domain/repository/part_repository.dart';
 import 'package:rakit_komputer/features/get_part/domain/usecase/get_component_part.dart';
 import 'package:rakit_komputer/features/get_part/presentation/bloc/part_detail/part_detail_bloc.dart';
+
+import 'features/auth/data/data_sources/auth_remote_data_source.dart';
+import 'features/auth/data/data_sources/firebase_auth_datasource_impl.dart';
 
 //service locator
 final sl = GetIt.instance;

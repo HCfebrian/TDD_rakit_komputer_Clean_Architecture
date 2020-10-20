@@ -11,6 +11,7 @@ import 'package:rakit_komputer/features/auth/presentation/widget/btn_google.dart
 import 'package:rakit_komputer/features/auth/presentation/widget/btn_login.dart';
 import 'package:rakit_komputer/features/auth/presentation/widget/form_email.dart';
 import 'package:rakit_komputer/features/auth/presentation/widget/form_password.dart';
+import 'package:rakit_komputer/features/get_build/presentation/pages/home_page.dart';
 import 'package:rakit_komputer/injection_container.dart';
 
 class LoginPage extends StatelessWidget {
@@ -38,6 +39,7 @@ class MyForm extends StatelessWidget {
       listener: (context, state) {
         if (state is Loaded) {
           Scaffold.of(context).hideCurrentSnackBar();
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>HomePage()));
         } else if (state is Loading) {
           Scaffold.of(context).showSnackBar(SnackBar(
             content: Text("Validating..."),

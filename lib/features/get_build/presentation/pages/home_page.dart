@@ -63,7 +63,7 @@ class HomeContent extends StatelessWidget {
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(left: 24, right: 24, top: 26, bottom: 5),
               child: Text(
-                "hi, Username",
+                "Hi.",
                 style: AppStyle.textBlackLight14,
               )),
           Container(
@@ -80,53 +80,6 @@ class HomeContent extends StatelessWidget {
               hintText: "Search",
             ),
           ),
-          Center(
-              child: Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                child: GestureDetector(
-                  child: Text("updateHere"),
-                  onTap: () {
-                    maintainFirestore.copyCollection(
-                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
-                        "/completed_build_parts/build_id/5QnD4BtqFpDzQIzbuRib"
-                    );
-                    maintainFirestore.copyCollection(
-                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
-                        "/completed_build_parts/build_id/Mq0InkfJS9C233qIM6xq"
-                    );
-                    maintainFirestore.copyCollection(
-                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
-                      "/completed_build_parts/build_id/UQeqPA1KfOOOOHDCNDNJ"
-                    );
-                    maintainFirestore.copyCollection(
-                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
-                      "/completed_build_parts/build_id/awXBeQVzsPlouiQdj2e1"
-                    );
-                    maintainFirestore.copyCollection(
-                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
-                        "/completed_build_parts/build_id/cilwtqW0nFFnaQNScKYd"
-                    );
-                    maintainFirestore.copyCollection(
-                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
-                        "/completed_build_parts/build_id/d9SGavkFz7CgZW560eWb"
-                    );
-                    maintainFirestore.copyCollection(
-                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
-                        "/completed_build_parts/build_id/hzzpQ8K5AyZ6pOocQVgJ"
-                    );
-                    maintainFirestore.copyCollection(
-                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
-                        "/completed_build_parts/build_id/x5YhwZ7aFuoVlydXb8v4"
-                    );
-                    maintainFirestore.copyCollection(
-                        "/completed_build_parts/build_id/xfp7Ott81ZdheT05rAbZ",
-                        "/completed_build_parts/build_id/yz5GZ3mPkqP5S38X6TZ7"
-                    );
-
-                    print(" firestore management executed");
-                  },
-                ),
-              )),
           SizedBox(
             height: 16,
           ),

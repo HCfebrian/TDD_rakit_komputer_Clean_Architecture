@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rakit_komputer/core/error/failure.dart';
-import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
+import 'package:rakit_komputer/core/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/repository/auth_repository.dart';
 
 class RegisterUseCase {

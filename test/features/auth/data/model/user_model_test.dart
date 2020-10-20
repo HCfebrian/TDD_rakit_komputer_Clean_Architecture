@@ -2,8 +2,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rakit_komputer/features/auth/data/model/user_model.dart';
-import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
+import 'package:rakit_komputer/core/data/model/user_model.dart';
+import 'package:rakit_komputer/core/domain/entity/user.dart';
 
 
 class MockFirebaseUser extends Mock implements FirebaseUser {

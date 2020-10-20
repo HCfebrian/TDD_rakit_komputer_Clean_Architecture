@@ -8,6 +8,18 @@ class AppStyle {
     fontSize: 14,
     fontFamily: "Inter"
   );
+  static const TextStyle textWhiteBold18 = TextStyle(
+      color: Color.fromARGB(255, 255, 255, 255),
+      fontWeight: FontWeight.w600,
+      fontSize: 18,
+      fontFamily: "Inter"
+  );
+  static const TextStyle textWhiteBold22 = TextStyle(
+      color: Color.fromARGB(255, 255, 255, 255),
+      fontWeight: FontWeight.w600,
+      fontSize: 22,
+      fontFamily: "Inter"
+  );
   static const TextStyle textWhite12 = TextStyle(
       color: Color.fromARGB(255, 255, 255, 255),
       fontWeight: FontWeight.w400,
@@ -67,6 +79,8 @@ class AppStyle {
   static const TextStyle textBlackLight14 = TextStyle(
           color: AppColors.primaryText,
       fontSize: 14,
+      height: 1.5,
+      letterSpacing: 0.5,
       fontWeight: FontWeight.w300,
       fontFamily: "Inter-SemiBold"
   );

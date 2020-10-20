@@ -5,7 +5,7 @@ import 'package:matcher/matcher.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rakit_komputer/core/error/auth/exception.dart';
 import 'package:rakit_komputer/features/auth/data/data_sources/firebase_auth_datasource_impl.dart';
-import 'package:rakit_komputer/features/auth/data/model/user_model.dart';
+import 'package:rakit_komputer/core/data/model/user_model.dart';
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
 

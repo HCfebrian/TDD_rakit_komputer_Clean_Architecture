@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
+import 'package:rakit_komputer/core/domain/entity/user.dart';
 import 'package:meta/meta.dart';
 
 class UserModel extends User {

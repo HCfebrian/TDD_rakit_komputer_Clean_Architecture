@@ -8,7 +8,7 @@ import 'package:rakit_komputer/core/error/auth/failures.dart';
 import 'package:rakit_komputer/core/presentation/util/email_validation.dart';
 import 'package:rakit_komputer/core/presentation/util/password_validation.dart';
 import 'package:rakit_komputer/core/presentation/util/username_validation.dart';
-import 'package:rakit_komputer/features/auth/domain/entity/user.dart';
+import 'package:rakit_komputer/core/domain/entity/user.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/login.dart';
 import 'package:rakit_komputer/features/auth/domain/usecase/register.dart';
 

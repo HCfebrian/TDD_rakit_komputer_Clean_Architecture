@@ -44,7 +44,7 @@ class BoardingScreenTemplate extends StatelessWidget {
               Container(
                 width: 0.7 * width,
                 child: Text(
-                  CustomString.loremIpsum,
+                  desc,
                   textAlign: TextAlign.center,
                   style: AppStyle.textBlackLight14,
                 ),
@@ -88,7 +88,7 @@ class BoardingScreen1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return BoardingScreenTemplate(
         title: "Find Recomended PC",
-        desc: CustomString.loremIpsum,
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         icon: "assets/images/IconBoarding1.png",
         dotIcon: "assets/images/dotIndicator1.png",
         nextFunction: () => Navigator.of(context)
@@ -103,7 +103,7 @@ class BoardingScreen2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return BoardingScreenTemplate(
         title: "Find Recomended PC",
-        desc: CustomString.loremIpsum,
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         icon: "assets/images/iconBoardingScreen2.png",
         dotIcon: "assets/images/dotIndicator1.png",
         nextFunction: () => Navigator.of(context)
@@ -118,7 +118,7 @@ class BoardingScreen3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return BoardingScreenTemplate(
       title: "Find Recomended PC",
-      desc: CustomString.loremIpsum,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       icon: "assets/images/iconBoardingscreen3.png",
       dotIcon: "assets/images/dotIndicator1.png",
       nextFunction: () => Navigator.of(context).pushAndRemoveUntil(
