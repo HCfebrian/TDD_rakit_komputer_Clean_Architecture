@@ -20,4 +20,6 @@ const String OPERATION_NOT_ALLOWED_MESSAGE ="Operation Not Allowed";
 
 const String SOME_FAILURE_MESSAGE = "Failure for testing purpose";
 
+const String fontRoboto = "Roboto";
+
 

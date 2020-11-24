@@ -27,7 +27,7 @@ class PasswordConfirm extends StatelessWidget {
               CustomTextField(
                 controller: tfPasswordController,
                 obSecure: true,
-                border: Border.all(color: AppColors.secondaryElement, width: 1),
+                border: Border.all(color: AppColors.primaryColor, width: 1),
                 margin: EdgeInsets.symmetric(vertical: 5),
                 hintText: "Password",
               ),
@@ -35,7 +35,7 @@ class PasswordConfirm extends StatelessWidget {
                 controller: tfConfirmController,
                 obSecure: true,
                 border:
-                Border.all(color: AppColors.secondaryElement, width: 1),
+                Border.all(color: AppColors.primaryColor, width: 1),
                 margin: EdgeInsets.symmetric(vertical: 5),
                 hintText: "Confirm Password",
               ),

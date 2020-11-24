@@ -39,12 +39,15 @@ class MyForm extends StatelessWidget {
       listener: (context, state) {
         if (state is Loaded) {
           Scaffold.of(context).hideCurrentSnackBar();
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>HomePage()));
-        } else if (state is Loading) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => HomePage()));
+        }
+        if (state is Loading) {
           Scaffold.of(context).showSnackBar(SnackBar(
             content: Text("Validating..."),
           ));
-        } else if (state is Error) {
+        }
+        if (state is Error) {
           Scaffold.of(context).hideCurrentSnackBar();
         }
       },

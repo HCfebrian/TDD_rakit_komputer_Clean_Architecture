@@ -27,6 +27,12 @@ import 'package:rakit_komputer/features/get_part/data/repository/part_repo_imp.d
 import 'package:rakit_komputer/features/get_part/domain/repository/part_repository.dart';
 import 'package:rakit_komputer/features/get_part/domain/usecase/get_component_part.dart';
 import 'package:rakit_komputer/features/get_part/presentation/bloc/part_detail/part_detail_bloc.dart';
+import 'package:rakit_komputer/features/get_profile/data/data_source/profile_remote_data_abst.dart';
+import 'package:rakit_komputer/features/get_profile/data/data_source/profile_remote_data_impl.dart';
+import 'package:rakit_komputer/features/get_profile/data/repository/profile_repo_impl.dart';
+import 'package:rakit_komputer/features/get_profile/domain/repository/profile_repo.dart';
+import 'package:rakit_komputer/features/get_profile/domain/usecase/profile_usecase.dart';
+import 'package:rakit_komputer/features/get_profile/presentation/bloc/profile/bloc_profile_bloc.dart';
 
 import 'features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'features/auth/data/data_sources/firebase_auth_datasource_impl.dart';
@@ -49,11 +55,13 @@ void init() {
   sl.registerFactory(() => FeaturedBuildBloc(buildUsecase: sl()));
   sl.registerFactory(() => BuildPartBloc(buildUsecase: sl()));
   sl.registerFactory(() => PartDetailBloc(partUsecase: sl()));
+  sl.registerFactory(() => ProfileBloc(profileUsecase: sl()));
   //usecase
   sl.registerLazySingleton(() => LoginUseCase(authRepo: sl()));
   sl.registerLazySingleton(() => RegisterUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => BuildUsecase(buildRepository: sl()));
   sl.registerLazySingleton(() => PartUsecase( partRepoAbst: sl()));
+  sl.registerLazySingleton(() => ProfileUsecase(profileRepo: sl()));
 
   //repo
   sl.registerLazySingleton<AuthRepositoryAbst>(() =>
@@ -61,6 +69,7 @@ void init() {
 
   sl.registerLazySingleton<BuildRepoAbst>(() => BuildRepoImpl(remoteDataSource: sl()));
   sl.registerLazySingleton<PartRepoAbst>(() => PartRepoImp(partRemoteData:  sl()));
+  sl.registerLazySingleton<ProfileRepoAbst>(() => ProfileRepoImpl(profileRemoteData: sl()));
 
   //data
   sl.registerLazySingleton<AuthRemoteDataSource>(() =>
@@ -68,6 +77,8 @@ void init() {
 
   sl.registerLazySingleton<BuildRemoteDataSourceAbstc>(() => BuildRemoteDataSourceImpl(firetoreInstance: sl()));
   sl.registerLazySingleton<PartRemoteDataSourceAbsct>(() => PartRemoteDataSourceImpl( firestoreInstance:sl()));
+  sl.registerLazySingleton<ProfileRemoteDataSourceAbsct>(() => ProfileRemoteDataSourceImpl(firestoreInstance: sl()));
+
 // Core
   //presentation
   //util
@@ -79,7 +90,6 @@ void init() {
       () => NetworkInfoImpl(dataConnectionChecker: sl()));
 
 // External dependency
-
   sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   sl.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn());
   sl.registerLazySingleton(() => DataConnectionChecker());

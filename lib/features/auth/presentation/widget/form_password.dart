@@ -25,7 +25,7 @@ class PasswordField extends StatelessWidget {
                   controller: passwordController,
                   obSecure: true,
                   border:
-                      Border.all(color: AppColors.secondaryElement, width: 1),
+                      Border.all(color: AppColors.primaryColor, width: 1),
                   hintText: "Password",
                   margin: EdgeInsets.symmetric(vertical: 5)),
                  Text(

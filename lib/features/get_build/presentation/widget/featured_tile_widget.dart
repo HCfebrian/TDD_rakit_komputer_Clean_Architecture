@@ -6,7 +6,7 @@ import 'package:rakit_komputer/core/values/radii.dart';
 import 'package:rakit_komputer/core/values/shadows.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/featured_build/get_featured_build_bloc.dart';
-import 'package:rakit_komputer/features/get_build/presentation/pages/finished_build_detail_page.dart';
+import 'package:rakit_komputer/features/get_build/presentation/pages/complated_build_detail_page.dart';
 
 class FeaturedBuild extends StatelessWidget {
   @override
@@ -27,7 +27,7 @@ class FeaturedBuild extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 24),
             decoration: BoxDecoration(
-              color: AppColors.secondaryElement,
+              color: AppColors.primaryColor,
               borderRadius: Radii.appTileRadius8,
               boxShadow: [
                 Shadows.primaryShadow,
@@ -40,7 +40,7 @@ class FeaturedBuild extends StatelessWidget {
                     Container(
                       height: 40,
                       decoration: BoxDecoration(
-                        color: AppColors.secondaryElement,
+                        color: AppColors.primaryColor,
                         borderRadius: Radii.topLeftRightRadius20,
                         boxShadow: [
                           Shadows.primaryShadow,

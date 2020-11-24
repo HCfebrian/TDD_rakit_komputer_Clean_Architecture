@@ -18,7 +18,7 @@ class GoogleButton extends StatelessWidget {
       margin: margin,
       child: RaisedButton(
         elevation: 5,
-        color: AppColors.secondaryElement,
+        color: AppColors.primaryColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

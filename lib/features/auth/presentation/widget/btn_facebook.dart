@@ -16,7 +16,7 @@ class FacebookButton extends StatelessWidget {
       margin: margin,
       child: RaisedButton(
         elevation: 5,
-        color: AppColors.accentElement,
+        color: AppColors.secondaryColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

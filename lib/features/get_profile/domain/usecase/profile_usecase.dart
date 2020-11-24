@@ -10,7 +10,7 @@ class ProfileUsecase {
 
   ProfileUsecase({@required this.profileRepo});
 
-  Future<Either<Failure, User>> getCase() async{
+  Future<Either<Failure, User>> getUser() async{
     return await profileRepo.getUser();
   }
 
@@ -18,4 +18,6 @@ class ProfileUsecase {
   Future<Either<Failure, List<BuildEntity>>> getProfileBuilds() async{
     return await profileRepo.getUserBuild();
   }
+  
+  
 }

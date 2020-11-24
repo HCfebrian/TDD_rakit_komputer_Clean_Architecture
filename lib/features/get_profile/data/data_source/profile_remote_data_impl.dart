@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:rakit_komputer/core/domain/entity/user.dart';
 import 'package:rakit_komputer/core/error/auth/exception_handler.dart';
 import 'package:rakit_komputer/core/data/model/user_model.dart';
@@ -10,7 +11,7 @@ import 'package:rakit_komputer/features/get_profile/data/data_source/profile_rem
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceAbsct {
   final Firestore firestoreInstance;
 
-  ProfileRemoteDataSourceImpl({this.firestoreInstance});
+  ProfileRemoteDataSourceImpl({@required this.firestoreInstance});
 
   @override
   Future<User> getProfile() async {
@@ -30,7 +31,6 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceAbsct {
       FirebaseUser user = await FirebaseAuth.instance.currentUser();
       final collectionUserBuildID =
           firestoreInstance.collection("/users/${user.uid}/builds/");
-
       collectionUserBuildID.getDocuments().then(
           (value) => value.documents.forEach((element) {
                 final buildDocument = firestoreInstance.document(
@@ -39,7 +39,6 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceAbsct {
               }), onError: (e) {
         throw FirebaseException.handle(e);
       });
-
     } catch (e) {
       print("error get profile $e");
       throw FirebaseException.handle(e);

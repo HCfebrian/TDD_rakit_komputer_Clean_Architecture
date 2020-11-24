@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rakit_komputer/core/values/radii.dart';
 import 'package:rakit_komputer/core/values/shadows.dart';
 import 'package:rakit_komputer/core/values/style.dart';
-import 'package:rakit_komputer/features/get_build/presentation/pages/finished_build_detail_page.dart';
+import 'package:rakit_komputer/features/get_build/presentation/pages/complated_build_detail_page.dart';
 import 'package:rakit_komputer/features/get_build/domain/entity/build_entity.dart';
 
 class VerticalBuildTile extends StatelessWidget {

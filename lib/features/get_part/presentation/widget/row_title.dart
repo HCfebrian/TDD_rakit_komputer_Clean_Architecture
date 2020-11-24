@@ -12,7 +12,7 @@ Widget buildRow(BuildContext context, dynamic partDetail) {
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: Radii.appTileRadius8,
-        color: AppColors.primaryText,
+        color: AppColors.accentColor,
 
       ),
       padding: EdgeInsets.symmetric(horizontal:20, vertical: 10),

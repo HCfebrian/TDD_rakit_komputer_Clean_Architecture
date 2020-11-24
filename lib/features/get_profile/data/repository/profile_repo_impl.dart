@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:rakit_komputer/core/domain/entity/user.dart';
 import 'package:rakit_komputer/core/error/auth/failure_handler.dart';
 import 'package:rakit_komputer/core/error/failure.dart';
@@ -9,13 +10,15 @@ import 'package:rakit_komputer/features/get_profile/domain/repository/profile_re
 class ProfileRepoImpl implements ProfileRepoAbst{
   final ProfileRemoteDataSourceAbsct profileRemoteData;
 
-  ProfileRepoImpl({this.profileRemoteData});
+  ProfileRepoImpl({@required this.profileRemoteData});
 
 
   @override
   Future<Either<Failure, User>> getUser() async{
     try{
-      return Right(await profileRemoteData.getProfile());
+      final result =await profileRemoteData.getProfile();
+      print("displayname " + result.displayName);
+      return Right(result);
     }catch(e){
       return Left(ExceptionToFailure.handle(e));
     }

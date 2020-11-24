@@ -69,7 +69,7 @@ class SliverContent extends StatelessWidget {
               title: Text("CPU"),
               centerTitle: true,
               pinned: true,
-              backgroundColor: AppColors.secondaryElement,
+              backgroundColor: AppColors.primaryColor,
               expandedHeight: 200,
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.network(

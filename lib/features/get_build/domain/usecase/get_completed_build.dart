@@ -9,7 +9,6 @@ class BuildUsecase {
   final BuildRepoAbst buildRepository;
   BuildUsecase({@required this.buildRepository});
   Future<Either<Failure, List<BuildEntity>>> getRecommendedBuild() async{
-
     return await buildRepository.getRecommendedBuild();
   }
 

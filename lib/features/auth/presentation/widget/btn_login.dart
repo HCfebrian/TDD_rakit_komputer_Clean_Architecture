@@ -19,7 +19,7 @@ class LoginButton extends StatelessWidget {
     return CustomButton(
       margin: EdgeInsets.symmetric(vertical: 5),
       text: "Login",
-      colorBg: AppColors.secondaryElement,
+      colorBg: AppColors.primaryColor,
       onPressed: () {
         BlocProvider.of<AuthBloc>(context).add(LoginEmailPassword(
             password: passwordController.text, email: emailController.text));

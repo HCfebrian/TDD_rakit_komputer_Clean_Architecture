@@ -22,7 +22,7 @@ class OrDecoration extends StatelessWidget {
             child: Text(
               "Or",
               style:
-                  TextStyle(fontFamily: "Inter", color: AppColors.primaryText),
+                  TextStyle(fontFamily: "Inter", color: AppColors.accentColor),
             ),
           )
         ],

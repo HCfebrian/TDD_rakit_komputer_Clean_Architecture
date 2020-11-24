@@ -31,7 +31,7 @@ class CustomTextField extends StatelessWidget {
       padding: EdgeInsets.only(left: 20, right: 10),
       decoration: BoxDecoration(
         border: border,
-        color: AppColors.primaryElement,
+        color: Colors.white,
         borderRadius: Radii.appFormRadius,
         boxShadow: [
           Shadows.primaryShadow,
@@ -50,7 +50,7 @@ class CustomTextField extends StatelessWidget {
                 border: InputBorder.none,
               ),
               style: TextStyle(
-                color: AppColors.primaryText,
+                color: AppColors.accentColor,
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w400,
                 fontSize: 14,

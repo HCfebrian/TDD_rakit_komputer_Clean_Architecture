@@ -26,7 +26,7 @@ class _LogoPageState extends State<LogoPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: AppColors.secondaryElement,
+        backgroundColor: AppColors.primaryColor,
         body: Container(
           alignment: Alignment.center,
           child: Column(

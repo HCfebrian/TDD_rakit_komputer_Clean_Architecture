@@ -21,6 +21,20 @@ class BuildListPage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: AppColors.backgroundColor,
+        appBar: AppBar(
+            centerTitle: true,
+            elevation: 0,
+            backgroundColor: AppColors.backgroundColor,
+            leading: IconButton(
+              color: AppColors.accentColor,
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            title: Text(
+                isRecommendedBuild ? "Recommended Build" : "Completed Build",
+                style: AppStyle.textBlackSemiBold22)),
         body: MultiBlocProvider(
           providers: [
             BlocProvider<CompletedBuildBloc>(
@@ -55,28 +69,12 @@ class ListBuildContent extends StatelessWidget {
       BlocProvider.of<CompletedBuildBloc>(context).add(GetCompletedBuildList());
     }
     return Container(
-      margin: EdgeInsets.only(left: 24, right: 24, top: 24),
+      margin: EdgeInsets.only(
+        left: 24,
+        right: 24,
+      ),
       child: Column(
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(bottom: 20),
-            child: Stack(
-              children: <Widget>[
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Icon(Icons.arrow_back_ios)),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    isRecommendedBuild
-                        ? "Recommended Build"
-                        : "Completed Build",
-                    style: AppStyle.textBlackSemiBold22,
-                  ),
-                )
-              ],
-            ),
-          ),
           Container(
             margin: EdgeInsets.only(bottom: 15),
             child: Row(
@@ -101,7 +99,7 @@ class ListBuildContent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               FilterBubble(
-                color: AppColors.secondaryElement,
+                color: AppColors.primaryColor,
                 text: "All",
               ),
               FilterBubble(

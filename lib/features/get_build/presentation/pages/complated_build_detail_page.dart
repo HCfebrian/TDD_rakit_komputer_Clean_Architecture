@@ -15,7 +15,7 @@ class BuildDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          backgroundColor: AppColors.secondaryElement,
+          backgroundColor: AppColors.primaryColor,
           body: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -95,7 +95,7 @@ class BuildDetailPage extends StatelessWidget {
                           ),
                           CustomButton(
                             text: "Edit Component",
-                            colorBg: AppColors.secondaryElement,
+                            colorBg: AppColors.primaryColor,
                             onPressed: () {},
                             margin: EdgeInsets.only(bottom: 10),
                           ),

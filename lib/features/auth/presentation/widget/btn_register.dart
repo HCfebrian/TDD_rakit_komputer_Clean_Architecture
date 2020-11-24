@@ -23,7 +23,7 @@ class RegisterButton extends StatelessWidget {
     return CustomButton(
       margin: EdgeInsets.symmetric(vertical: 5),
       text: "Register",
-      colorBg: AppColors.secondaryElement,
+      colorBg: AppColors.primaryColor,
       onPressed: () {
         BlocProvider.of<AuthBloc>(context).add(RegisterEmailPassword(
             password: passwordController.text,

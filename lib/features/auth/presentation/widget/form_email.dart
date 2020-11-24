@@ -25,7 +25,7 @@ class EmailInput extends StatelessWidget {
                   CustomTextField(
                     controller: controllerEmail,
                     border:
-                    Border.all(color: AppColors.secondaryElement, width: 1),
+                    Border.all(color: AppColors.primaryColor, width: 1),
                     margin: EdgeInsets.only(top: 10, bottom: 5),
                     keyboardType: TextInputType.emailAddress,
                   ),
