@@ -19,15 +19,13 @@ import '../../../../injection_container.dart';
 class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: AppColors.backgroundColor,
-          body: BlocProvider(
-            create: (BuildContext context) => sl<AuthBloc>(),
-            child: RegisterForm(),
-          )),
-    );
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: AppColors.backgroundColor,
+        body: BlocProvider(
+          create: (BuildContext context) => sl<AuthBloc>(),
+          child: RegisterForm(),
+        ));
   }
 }
 
@@ -43,11 +41,15 @@ class RegisterForm extends StatelessWidget {
       listener: (context, state) {
         if (state is Loaded) {
           Scaffold.of(context).hideCurrentSnackBar();
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>HomePage()));
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => HomePage()));
         } else if (state is Loading) {
           Scaffold.of(context).showSnackBar(
-            SnackBar(content: Text("Validating..."),),);
-        } else if (state is Error){
+            SnackBar(
+              content: Text("Validating..."),
+            ),
+          );
+        } else if (state is Error) {
           Scaffold.of(context).hideCurrentSnackBar();
         }
       },
@@ -58,21 +60,23 @@ class RegisterForm extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(top: 28, bottom: 10),
+                margin: EdgeInsets.only(top: 48, bottom: 10),
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Text("Skip", style: AppStyle.textRedRegular14),
+                  child: Text("Skip",
+                      style: AppStyle.button(AppColors.primaryColor)),
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
+                margin: EdgeInsets.symmetric(vertical: 20),
                 child: Text(
-                  "Register",
-                  style: AppStyle.textBlackSemiBold22,
+                  "Sign Up",
+                  style: AppStyle.heading1(AppColors.accentColor),
                 ),
               ),
-              GoogleButton(),
+              GoogleButton(margin: EdgeInsets.only(bottom: 10),),
               FacebookButton(
+                margin: EdgeInsets.only(bottom: 10),
                 onPressed: () {},
               ),
               OrDecoration(
@@ -82,7 +86,9 @@ class RegisterForm extends StatelessWidget {
               EmailInput(
                 controllerEmail: tfEmailController,
               ),
-              PasswordConfirm(tfPasswordController: tfPasswordController, tfConfirmController: tfConfirmController),
+              PasswordConfirm(
+                  tfPasswordController: tfPasswordController,
+                  tfConfirmController: tfConfirmController),
               RegisterButton(
                 emailController: tfEmailController,
                 passwordController: tfPasswordController,
@@ -97,17 +103,16 @@ class RegisterForm extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "Sudah Punya Akun?",
-                      style: AppStyle.textBlackLight14,
+                      style: AppStyle.heading3(AppColors.accentColor),
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) =>
-                                LoginPage()));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => LoginPage()));
                       },
                       child: Text(
                         "Login",
-                        style: AppStyle.textRedRegular14,
+                        style: AppStyle.button(AppColors.primaryColor),
                       ),
                     )
                   ],

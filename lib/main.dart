@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rakit_komputer/core/error/auth/failures.dart';
+import 'package:flutter/services.dart';
 import 'package:rakit_komputer/features/auth/presentation/page/logo_page.dart';
-import 'package:rakit_komputer/features/get_build/presentation/pages/home_page.dart';
 
-import 'features/get_profile/presentation/page/profile_page.dart';
 import 'injection_container.dart' as di;
+import 'injection_container.dart';
 
 void main() {
   di.init();
@@ -19,9 +18,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-      home: LogoPage(),
-    );
+      debugShowCheckedModeBanner: false,
+        home: AnnotatedRegion<SystemUiOverlayStyle>(
+            value: SystemUiOverlayStyle(
+              statusBarColor: Colors.transparent,
+              statusBarIconBrightness: Brightness.dark,
+            ),
+            child: LogoPage(mAuth: sl(),)));
   }
 }

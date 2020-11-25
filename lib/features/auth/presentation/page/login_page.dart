@@ -17,15 +17,13 @@ import 'package:rakit_komputer/injection_container.dart';
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: AppColors.backgroundColor,
-          body: BlocProvider(
-            create: (BuildContext context) => sl<AuthBloc>(),
-            child: MyForm(),
-          )),
-    );
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: AppColors.backgroundColor,
+        body: BlocProvider(
+          create: (BuildContext context) => sl<AuthBloc>(),
+          child: MyForm(),
+        ));
   }
 }
 
@@ -55,9 +53,10 @@ class MyForm extends StatelessWidget {
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 24),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(top: 28, bottom: 10),
+                margin: EdgeInsets.only(top: 48, bottom: 10),
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
                   onTap: () {
@@ -65,20 +64,21 @@ class MyForm extends StatelessWidget {
                   },
                   child: Text(
                     "Skip",
-                    style: AppStyle.textRedRegular14,
+                    style: AppStyle.button(AppColors.primaryColor),
                   ),
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
+                margin: EdgeInsets.symmetric(vertical: 20),
                 alignment: Alignment.center,
                 child: Text(
                   "Login",
-                  style: AppStyle.textBlackSemiBold22,
+                  style: AppStyle.heading1(AppColors.accentColor),
                 ),
               ),
-              GoogleButton(),
+              GoogleButton(margin: EdgeInsets.only(bottom: 10),),
               FacebookButton(
+                margin: EdgeInsets.only(bottom: 10),
                 onPressed: () {},
               ),
               OrDecoration(
@@ -98,7 +98,7 @@ class MyForm extends StatelessWidget {
                 alignment: Alignment.bottomLeft,
                 child: Text(
                   "Lupa Password",
-                  style: AppStyle.textBlackLight14,
+                  style: AppStyle.heading3(AppColors.accentColor),
                 ),
               ),
               SizedBox(height: 10),
@@ -108,16 +108,16 @@ class MyForm extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "Belum punya akun?",
-                      style: AppStyle.textBlackLight14,
+                      style: AppStyle.heading3(AppColors.accentColor),
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => RegisterPage()));
                       },
                       child: Text(
                         "Register",
-                        style: AppStyle.textRedRegular14,
+                        style: AppStyle.button(AppColors.primaryColor),
                       ),
                     ),
                   ],

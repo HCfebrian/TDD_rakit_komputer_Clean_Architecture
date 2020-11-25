@@ -17,7 +17,7 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomButton(
-      margin: EdgeInsets.symmetric(vertical: 5),
+      margin: EdgeInsets.symmetric(vertical: 10),
       text: "Login",
       colorBg: AppColors.primaryColor,
       onPressed: () {

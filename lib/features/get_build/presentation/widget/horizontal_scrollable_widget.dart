@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rakit_komputer/core/values/colors.dart';
 import 'package:rakit_komputer/core/values/style.dart';
 import 'package:rakit_komputer/features/get_build/presentation/bloc/recommended_build/recommended_build_bloc.dart';
 import 'package:rakit_komputer/features/get_build/presentation/pages/build_list_page.dart';
@@ -24,8 +25,8 @@ class HorizontalScrollableSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  "Rekomendasi PC",
-                  style: AppStyle.textBlackBold16,
+                  "Recommended PC",
+                  style: AppStyle.heading3(AppColors.accentColor),
                   textAlign: TextAlign.left,
                 ),
                 GestureDetector(
@@ -40,8 +41,8 @@ class HorizontalScrollableSection extends StatelessWidget {
                     );
                   },
                   child: Text(
-                    "See Others",
-                    style: AppStyle.textRedRegular14,
+                    "See More",
+                    style: AppStyle.heading3(AppColors.primaryColor),
                     textAlign: TextAlign.left,
                   ),
                 ),

@@ -27,13 +27,7 @@ class HomePage extends StatelessWidget {
           BlocProvider<FeaturedBuildBloc>(
               create: (BuildContext context) => sl<FeaturedBuildBloc>()),
         ],
-        child: MaterialApp(
-          home: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
-              statusBarIconBrightness: Brightness.dark,
-            ),
-            child: Scaffold(
+        child:Scaffold(
               resizeToAvoidBottomInset: false,
               floatingActionButton: Container(child: AppFAB()),
               backgroundColor: AppColors.backgroundColor,
@@ -65,8 +59,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ));
+          );
   }
 }
 
@@ -89,17 +82,17 @@ class HomeContent extends StatelessWidget {
         children: <Widget>[
           Container(
               alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(left: 24, right: 24, top: 26, bottom: 5),
+              margin: EdgeInsets.only(left: 24, right: 24, top: 28, bottom: 5),
               child: Text(
                 "Hi.",
-                style: AppStyle.textBlackLight14,
+                style: AppStyle.headingReguler(Colors.grey),
               )),
           Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(left: 24, right: 24, bottom: 10),
               child: Text(
                 "Build your PC Now",
-                style: AppStyle.textBlackSemiBold22,
+                style: AppStyle.heading1(AppColors.accentColor),
               )),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 24),

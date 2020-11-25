@@ -21,8 +21,8 @@ class RegisterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomButton(
-      margin: EdgeInsets.symmetric(vertical: 5),
-      text: "Register",
+      margin: EdgeInsets.symmetric(vertical: 10),
+      text: "Signup",
       colorBg: AppColors.primaryColor,
       onPressed: () {
         BlocProvider.of<AuthBloc>(context).add(RegisterEmailPassword(

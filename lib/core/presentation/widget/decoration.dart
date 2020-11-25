@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rakit_komputer/core/values/colors.dart';
+import 'package:rakit_komputer/core/values/style.dart';
 
 class OrDecoration extends StatelessWidget {
   final margin;
@@ -21,8 +22,7 @@ class OrDecoration extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               "Or",
-              style:
-                  TextStyle(fontFamily: "Inter", color: AppColors.accentColor),
+              style: AppStyle.button(AppColors.accentColor),
             ),
           )
         ],

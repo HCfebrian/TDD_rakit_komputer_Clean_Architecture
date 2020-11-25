@@ -14,6 +14,7 @@ class FacebookButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
+      height: 44,
       child: RaisedButton(
         elevation: 5,
         color: AppColors.secondaryColor,

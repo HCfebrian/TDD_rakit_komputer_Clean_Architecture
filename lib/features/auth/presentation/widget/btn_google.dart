@@ -15,6 +15,7 @@ class GoogleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 44,
       margin: margin,
       child: RaisedButton(
         elevation: 5,
