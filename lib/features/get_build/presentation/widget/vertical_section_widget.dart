@@ -55,7 +55,7 @@ class VerticalSection extends StatelessWidget {
           BlocBuilder<CompletedBuildBloc, CompletedBuildState>(
             buildWhen: (p, n) => true,
             builder: (context, state) {
-              if (state is CompletedBuildLoading) {
+              if (state is CompletedBuildLoadingInit) {
                 return Column(
                   children: <Widget>[
                     SizedBox(width: 14),

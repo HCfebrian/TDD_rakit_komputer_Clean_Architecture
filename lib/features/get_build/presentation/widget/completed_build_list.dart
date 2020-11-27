@@ -11,7 +11,7 @@ class CompletedBuildList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CompletedBuildBloc, CompletedBuildState>(
       builder: (context, state) {
-        if (state is CompletedBuildLoading) {
+        if (state is CompletedBuildLoadingInit) {
           return Column(
             children: <Widget>[
               SizedBox(width: 14),

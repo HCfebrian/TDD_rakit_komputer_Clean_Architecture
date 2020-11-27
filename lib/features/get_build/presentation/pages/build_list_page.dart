@@ -19,8 +19,7 @@ class BuildListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     ScrollController controller = ScrollController();
 
-    return MaterialApp(
-      home: Scaffold(
+    return  Scaffold(
         backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
             centerTitle: true,
@@ -49,8 +48,7 @@ class BuildListPage extends StatelessWidget {
             isRecommendedBuild: isRecommendedBuild,
           ),
         ),
-      ),
-    );
+      );
   }
 }
 

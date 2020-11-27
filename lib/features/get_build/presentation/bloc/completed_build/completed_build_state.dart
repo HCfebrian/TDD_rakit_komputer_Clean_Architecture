@@ -9,14 +9,13 @@ abstract class CompletedBuildState extends Equatable {
 
 class CompletedBuildEmpty extends CompletedBuildState {}
 
-class CompletedBuildLoading extends CompletedBuildState {}
+class CompletedBuildLoadingInit extends CompletedBuildState {}
 
 class CompletedBuildError extends CompletedBuildState {
   final String message;
 
   CompletedBuildError({@required this.message});
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }
 

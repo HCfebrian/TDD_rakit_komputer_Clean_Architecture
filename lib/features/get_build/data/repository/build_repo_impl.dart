@@ -23,7 +23,7 @@ class BuildRepoImpl implements BuildRepoAbst {
   }
 
   @override
-  Future<Either<Failure, List<BuildEntity>>> getCompletedBuild() async {
+  Future<Either<Failure, List<BuildEntity>>> getCompletedBuildInit() async {
     try {
       return Right(await remoteDataSource.getCompletedBuildList());
     } catch (e) {
@@ -51,4 +51,18 @@ class BuildRepoImpl implements BuildRepoAbst {
     return Left(ExceptionToFailure.handle(e));
     }
   }
+
+  @override
+  Future<Either<Failure, List<BuildEntity>>> getCompletedBuildMore(int startFrom) async {
+    try {
+      return Right(await remoteDataSource.getCompletedBuildList());
+    } catch (e) {
+    print(e);
+    return Left(ExceptionToFailure.handle(e));
+    }
+  }
+
+
+
+
 }
