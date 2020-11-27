@@ -34,17 +34,5 @@ class GridBuildList extends StatelessWidget {
         ],
       ),
     );
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: (MediaQuery.of(context).size.width / 4) /
-                (MediaQuery.of(context).size.height / 4.2)),
-        itemCount: listBuild.length,
-        itemBuilder: (BuildContext context, int index) {
-          return VerticalBuildTile(buildEntity: listBuild[index]);
-        },
-      ),
-    );
   }
 }

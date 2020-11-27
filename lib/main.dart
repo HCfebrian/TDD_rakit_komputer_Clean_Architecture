@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rakit_komputer/features/auth/presentation/page/logo_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'injection_container.dart' as di;
 import 'injection_container.dart';
