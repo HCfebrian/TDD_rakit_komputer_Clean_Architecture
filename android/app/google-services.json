@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "55341755094",
+    "firebase_url": "https://rakit-komputer-d40fe.firebaseio.com",
+    "project_id": "rakit-komputer-d40fe",
+    "storage_bucket": "rakit-komputer-d40fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55341755094:android:c67667e2be74505fe17777",
+        "android_client_info": {
+          "package_name": "com.underdog.rakit_komputer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "55341755094-39janr38rbtqjudg4bsjuc37036on8la.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.underdog.rakit_komputer",
+            "certificate_hash": "e3cdab6f22a099c8ae000488e96df381131d9007"
+          }
+        },
+        {
+          "client_id": "55341755094-75djfe8jv6jqemtqutvqr6g2hsb02rk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSLebaSdmbRPEcKUBSZlO_sar6cqSxsh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "55341755094-75djfe8jv6jqemtqutvqr6g2hsb02rk9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
