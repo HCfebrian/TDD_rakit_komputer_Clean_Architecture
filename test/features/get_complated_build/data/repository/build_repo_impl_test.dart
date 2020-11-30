@@ -8,52 +8,35 @@ import 'package:rakit_komputer/features/get_build/data/data_source/build_remote_
 import 'package:rakit_komputer/features/get_build/data/model/computer_build_model.dart';
 import 'package:rakit_komputer/features/get_build/data/repository/build_repo_impl.dart';
 
-class MockBuildRemoteDataSource extends Mock implements BuildRemoteDataSourceAbstc{}
+class MockBuildRemoteDataSource extends Mock
+    implements BuildRemoteDataSourceAbstc {}
 
-main(){
+main() {
   MockBuildRemoteDataSource mockBuildRemoteDataSource;
   BuildRepoImpl buildRepoImpl;
-  final BuildModel tBuild = BuildModel(buildId: "1234", title: "test build", overallPrice: "2000", picURL: "facebook.com", owner: "mamat");
-  final List<BuildModel>tBuildList = [tBuild,tBuild,tBuild];
+  final BuildModel tBuild = BuildModel(
+      buildId: "1234",
+      title: "test build",
+      overallPrice: "2000",
+      picURL: "facebook.com",
+      owner: "mamat",
+      cpu: "Ryzen 5 5600X",
+      gpu: "Geforce RTX 3900");
+  final List<BuildModel> tBuildList = [tBuild, tBuild, tBuild];
 
-  setUp((){
+  setUp(() {
     mockBuildRemoteDataSource = MockBuildRemoteDataSource();
     buildRepoImpl = BuildRepoImpl(remoteDataSource: mockBuildRemoteDataSource);
   });
 
   test(
-      "should return listBuildEntity when succeed",
-      () async {
-        //arrange
-        when(mockBuildRemoteDataSource.getRecommendedBuildList()).thenAnswer((realInvocation) async => tBuildList);
-        //act
-        final result =  await buildRepoImpl.getRecommendedBuild();
-        //assert
-        expect(result, equals(Right(tBuildList)));
-      },
-    );
-
-
-  //TODO: change exception to something  concrete
-  test(
-      "should return failure when some exception happened on data source",
-      () async {
-        //arrange
-        when(mockBuildRemoteDataSource.getRecommendedBuildList()).thenThrow(SomeException());
-        //act
-        final result = await buildRepoImpl.getRecommendedBuild();
-        //assert
-        expect(result, Left(UndefinedFailure()));
-      },
-    );
-
-  test(
-    "should return list Completed Build Entity when succeed",
-        () async {
+    "should return listBuildEntity when succeed",
+    () async {
       //arrange
-      when(mockBuildRemoteDataSource.getCompletedBuildList()).thenAnswer((realInvocation) async => tBuildList);
+      when(mockBuildRemoteDataSource.getRecommendedBuildList())
+          .thenAnswer((realInvocation) async => tBuildList);
       //act
-      final result =  await buildRepoImpl.getCompletedBuildInit();
+      final result = await buildRepoImpl.getRecommendedBuild();
       //assert
       expect(result, equals(Right(tBuildList)));
     },
@@ -62,40 +45,68 @@ main(){
   //TODO: change exception to something  concrete
   test(
     "should return failure when some exception happened on data source",
-        () async {
+    () async {
       //arrange
-      when(mockBuildRemoteDataSource.getCompletedBuildList()).thenThrow(SomeException());
+      when(mockBuildRemoteDataSource.getRecommendedBuildList())
+          .thenThrow(SomeException());
+      //act
+      final result = await buildRepoImpl.getRecommendedBuild();
+      //assert
+      expect(result, Left(UndefinedFailure()));
+    },
+  );
+
+  test(
+    "should return list Completed Build Entity when succeed",
+    () async {
+      //arrange
+      when(mockBuildRemoteDataSource.getCompletedBuildListInit())
+          .thenAnswer((realInvocation) async => tBuildList);
+      //act
+      final result = await buildRepoImpl.getCompletedBuildInit();
+      //assert
+      expect(result, equals(Right(tBuildList)));
+    },
+  );
+
+  //TODO: change exception to something  concrete
+  test(
+    "should return failure when some exception happened on data source",
+    () async {
+      //arrange
+      when(mockBuildRemoteDataSource.getCompletedBuildListInit())
+          .thenThrow(SomeException());
       //act
       final result = await buildRepoImpl.getCompletedBuildInit();
       //assert
       expect(result, Left(UndefinedFailure()));
     },
   );
-  
+
   test(
-      "should should get fetured Build",
-      () async {
-        //arrange
-        when(mockBuildRemoteDataSource.getFeaturedBuild()).thenAnswer((realInvocation) async => tBuild);
-        //act
-        final result = await buildRepoImpl.getFeaturedBuild();
-        //assert
-        expect(result, Right(tBuild));
-      },
-    );
+    "should should get fetured Build",
+    () async {
+      //arrange
+      when(mockBuildRemoteDataSource.getFeaturedBuild())
+          .thenAnswer((realInvocation) async => tBuild);
+      //act
+      final result = await buildRepoImpl.getFeaturedBuild();
+      //assert
+      expect(result, Right(tBuild));
+    },
+  );
 
   //TODO: change exception to something  concrete
   test(
     "should return failure when some exception happened on data source",
-        () async {
+    () async {
       //arrange
-      when(mockBuildRemoteDataSource.getFeaturedBuild()).thenThrow(SomeException());
+      when(mockBuildRemoteDataSource.getFeaturedBuild())
+          .thenThrow(SomeException());
       //act
       final result = await buildRepoImpl.getFeaturedBuild();
       //assert
       expect(result, Left(UndefinedFailure()));
     },
   );
-
-
 }

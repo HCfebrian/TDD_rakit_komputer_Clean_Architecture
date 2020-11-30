@@ -17,7 +17,10 @@ void main() {
       buildId: "abc",
       title: "Pc Dewa",
       overallPrice: "20000000",
-      picURL: "facebook.com", owner: "bahlul", cpu: null);
+      picURL: "facebook.com",
+      owner: "bahlul",
+      cpu: "Ryzen 5 5600X",
+      gpu: "Geforce RTX 3900");
   final List<BuildEntity> tBuildList = [tBuildEntity, tBuildEntity];
 
   setUp(() {
@@ -63,7 +66,4 @@ void main() {
       },
     );
   });
-
-
-
 }

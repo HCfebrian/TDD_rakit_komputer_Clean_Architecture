@@ -32,23 +32,6 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
     }
   }
 
-  @override
-  Future<List<BuildModel>> getCompletedBuildList() async {
-    try {
-      List<BuildModel> result = List();
-      final dRBuildOverview = firetoreInstance
-          .collection("completed_build/completed_build/completed_build");
-      await dRBuildOverview.limit(10).getDocuments().then(
-          (value) => value.documents.forEach((ds) {
-                result.add(BuildModel.from(ds));
-              }), onError: (e) {
-        throw FirebaseException.handle(e);
-      });
-      return result;
-    } catch (e) {
-      throw FirebaseException.handle(e);
-    }
-  }
 
   @override
   Future<BuildEntity> getCompletedBuild(String buildID) async {
@@ -83,6 +66,8 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
     }
   }
 
+
+
   @override
   Future<List<BuildPartEntity>> getComputerPart(String buildID) async {
     DocumentReference dRBuildOverview =
@@ -97,4 +82,39 @@ class BuildRemoteDataSourceImpl implements BuildRemoteDataSourceAbstc {
             }));
     return partList;
   }
+
+  @override
+  Future<List<BuildModel>> getCompletedBuildListInit() async {
+    try {
+      List<BuildModel> result = List();
+      final dRBuildOverview = firetoreInstance
+          .collection("completed_build/completed_build/completed_build");
+      await dRBuildOverview.limit(10).getDocuments().then(
+              (value) => value.documents.forEach((ds) {
+            result.add(BuildModel.from(ds));
+          }), onError: (e) {
+        throw FirebaseException.handle(e);
+      });
+      return result;
+    } catch (e) {
+      throw FirebaseException.handle(e);
+    }
+  }
+
+  @override
+  Future<List<BuildEntity>> getCompletedBuildMore(int startFrom) async{
+    try {
+      List<BuildModel> result = List();
+      final dRBuildOverview = firetoreInstance
+          .collection("completed_build/completed_build/completed_build");
+      await dRBuildOverview.limit(10).getDocuments().then(
+              (value) => value.documents.forEach((ds) {
+            result.add(BuildModel.from(ds));
+          }), onError: (e) {
+        throw FirebaseException.handle(e);
+      });
+      return result;
+    } catch (e) {
+      throw FirebaseException.handle(e);
+    }  }
 }

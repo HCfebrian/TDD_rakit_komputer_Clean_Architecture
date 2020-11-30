@@ -12,7 +12,9 @@ class MockBuildRepository extends Mock implements BuildRepoAbst{}
 void main(){
   MockBuildRepository mockBuildRepository;
   BuildUsecase buildUsecase;
-  final BuildEntity tPcBuild = BuildEntity(buildId: "123", title: "BUILD 1", overallPrice: "2000", picURL: "facebook.com", owner: "febri");
+  final BuildEntity tPcBuild = BuildEntity(buildId: "123", title: "BUILD 1", overallPrice: "2000", picURL: "facebook.com", owner: "febri",
+      cpu: "Ryzen 5 5600X",
+      gpu: "Geforce RTX 3900");
   final List<BuildEntity> tListBuild = [tPcBuild,tPcBuild,tPcBuild,tPcBuild];
   setUp((){
     mockBuildRepository = MockBuildRepository();
@@ -61,7 +63,7 @@ void main(){
       //arrange
       when(mockBuildRepository.getCompletedBuildInit()).thenAnswer((realInvocation) async => Left(SomeFailure()));
       //act
-      final result = await buildUsecase.getCompletedBuild();
+      final result = await buildUsecase.getCompletedBuildInit();
       //assert
       expect(result, Left(SomeFailure()));
     },

@@ -17,7 +17,9 @@ void main(){
       buildId: "abc",
       title: "Pc Dewa",
       overallPrice: "20000000",
-      picURL: "facebook.com", owner: "bahlul");
+      picURL: "facebook.com", owner: "bahlul",
+      cpu: "Ryzen 5 5600X",
+      gpu: "Geforce RTX 3900");
   final List<BuildEntity> tBuildList = [tBuildEntity, tBuildEntity];
 
   setUp(() {
@@ -29,7 +31,7 @@ void main(){
       "should emmit [Loading, Loaded] when getRecommendedList is succeed",
           () async {
         //arrange
-        when(usecase.getCompletedBuild())
+        when(usecase.getCompletedBuildInit())
             .thenAnswer((realInvocation) async => Right(tBuildList));
         //assert later
         final expected = [
@@ -47,7 +49,7 @@ void main(){
       "should emil [Loading, Error] when getRecommendedList is failed",
           () async {
         //arrange
-        when(usecase.getCompletedBuild())
+        when(usecase.getCompletedBuildInit())
             .thenAnswer((realInvocation) async => Left(SomeFailure()));
         //assert later
         final expected = [

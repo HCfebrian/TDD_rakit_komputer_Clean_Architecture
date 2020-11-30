@@ -105,7 +105,7 @@ void main() {
             .thenAnswer((realInvocation) async => mockQuerySnap);
         //act
         final result =
-        await buildRemoteDataSourceImpl.getCompletedBuildList();
+        await buildRemoteDataSourceImpl.getCompletedBuildListInit();
         //assert
         expect(result, isA<List<BuildModel>>());
         expect(result.isNotEmpty, true);
@@ -120,7 +120,7 @@ void main() {
         when(mockFirestore.collection(any)).thenReturn(mockCollectionRef);
         when(mockCollectionRef.getDocuments()).thenThrow(SomeException());
         //act
-        final call = buildRemoteDataSourceImpl.getCompletedBuildList;
+        final call = buildRemoteDataSourceImpl.getCompletedBuildListInit;
         //assert
         expect(() => call(), throwsA(TypeMatcher<UndefinedException>()));
       },

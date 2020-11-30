@@ -24,7 +24,7 @@ class CompletedBuildBloc
   ) async* {
     if (event is GetInitCompletedBuildList) {
       yield CompletedBuildLoadingInit();
-      final failureOrBuildList = await buildUsecase.getCompletedBuild();
+      final failureOrBuildList = await buildUsecase.getCompletedBuildInit();
       yield failureOrBuildList.fold(
           (failure) => CompletedBuildError(message: failure.message),
           (completedBuildList) =>

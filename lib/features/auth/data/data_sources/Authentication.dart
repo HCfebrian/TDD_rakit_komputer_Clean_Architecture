@@ -11,7 +11,7 @@ class Authenticate{
     final FacebookLoginResult result = await fbLogin.logIn(["email"]);
     final String token = result.accessToken.token;
     final response = await http.get(
-        'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
+        'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=$token');
     final profile = jsonDecode(response.body);
     print(profile);
     return profile;
